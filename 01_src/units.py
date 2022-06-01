@@ -1,90 +1,109 @@
-class CType_Territory:
-    type_TERRITORY_LAND = 0
-    type_TERRITORY_SEA  = 1
-    type_TERRITORY_END  = 2
-    
-    d_Str = {
-        type_TERRITORY_LAND : "Land",
-        type_TERRITORY_SEA  : "Sea",
-        type_TERRITORY_END  :  None
-    }
+class CT:
+    s_Str = {}
 
-    def get_type(self, t_type:int) -> str:
+    @staticmethod
+    def get_str(t_type:int) -> str:
         try:
-            return self.d_Str[t_type]
+            return CT.d_Str[t_type]
         except:
             return None
     
-class CType_Unit:
-    type_Unit_Infantary          = 0
-    type_Unit_MechInfantary      = 1
-    type_Unit_Tank               = 2
-    type_Unit_Artillery          = 3
-    type_Unit_AAA                = 4
-    type_Unit_Fighter            = 5
-    type_Unit_TacticalBomber     = 6
-    type_Unit_StraticalBomer     = 7
-    type_Unit_Cargo              = 8
-    type_Unit_Submarine          = 9
-    type_Unit_Destroyer          = 10
-    type_Unit_Cruiser            = 11
-    type_Unit_BattleShip         = 12
-    type_Unit_Carrier            = 13
-    
-    
-    
-    
-    def get_type(self, t_type:int) -> str:
-        
-        if t_type >= self.type_TERRITORY_LAND:
-            return "Land"
 
-        if t_type >= self.type_TERRITORY_SEA:
-            return "Sea"
-        
-        return None
-    
+class CTTerritory(CT):
+    TERRITORY_LAND = 0
+    TERRITORY_SEA  = 1
+    TERRITORY_END  = 2
 
-
-class CType:
-    type_TERRITORY = 0
-    type_UNIT      = 1
-    type_IPC       = 2
-    type_END       = 3
+    STR_TERRITORY_LAND = "Land"
+    STR_TERRITORY_SEA  = "Sea"
     
+    d_Str = {
+        TERRITORY_LAND : STR_TERRITORY_LAND,
+        TERRITORY_SEA  : STR_TERRITORY_SEA,
+        TERRITORY_END  :  None
+    }
+
+    
+class CTUnit(CT):
+    INFANTARY          = 0
+    MECH_INFANTARY     = 1
+    TANK               = 2
+    ARTILLERY          = 3
+    AAA                = 4
+    FIGHTER            = 5
+    TACTICAL_BOMBER    = 6
+    STRATICAL_BOMBER   = 7
+    CARGO              = 8
+    SUBMARINE          = 9
+    DESTROYER          = 10
+    CRUISER            = 11
+    BATTLESHIP         = 12
+    CARRIER            = 13
+    
+    STR_INFANTARY          = "Infantary"
+    STR_MECH_INFANTARY     = "Mech-Infantary"
+    STR_TANK               = "Tank"
+    STR_ARTILLERY          = "Artillery"
+    STR_AAA                = "AAA"
+    STR_FIGHTER            = "Fighter"
+    STR_TACTICAL_BOMBER    = "Tactical-Bomber"
+    STR_STRATICAL_BOMBER   = "Stratical-Bomber"
+    STR_CARGO              = "Cargo"
+    STR_SUBMARINE          = "Submarine"
+    STR_DESTROYER          = "Destroyer"
+    STR_CRUISER            = "Cruiser"
+    STR_BATTLESHIP         = "Battelship"
+    STR_CARRIER            = "Carrier"
+    
+    d_Str = {
+        INFANTARY          : STR_INFANTARY,
+        MECH_INFANTARY     : STR_MECH_INFANTARY,
+        TANK               : STR_TANK,
+        ARTILLERY          : STR_ARTILLERY,
+        AAA                : STR_AAA,
+        FIGHTER            : STR_FIGHTER,
+        TACTICAL_BOMBER    : STR_TACTICAL_BOMBER,
+        STRATICAL_BOMBER   : STR_STRATICAL_BOMBER,
+        CARGO              : STR_CARGO,
+        SUBMARINE          : STR_SUBMARINE,
+        DESTROYER          : STR_DESTROYER,
+        CRUISER            : STR_CRUISER,
+        BATTLESHIP         : STR_BATTLESHIP,
+        CARRIER            : STR_CARRIER
+    }
+
+    
+class CTClass(CT):
+    TERRITORY = 0
+    UNIT      = 1
+    IPC       = 2
+    
+    STR_TERRITORY = "Territory"
+    STR_UNIT      = "Unit"
+    STR_IPC       = "IPC"
+    
+    d_Str = {
+        TERRITORY : STR_TERRITORY,
+        UNIT      : STR_UNIT,
+        IPC       : STR_IPC        
+    }
+
     @staticmethod
-    def get_type(t_type:int) -> str:
-        
-        if t_type >= CType.type_TERRITORY:
-            return "Territory"
+    def get_sub_str(t_type:int, t_subtype:int) -> str:
+        if t_type >= CT.TERRITORY:
+            return CTTerritory.get_str(t_subtype)
 
-        if t_type >= CType.type_UNIT:
-            return "Unit"
+        if t_type >= CT.UNIT:
+            return CTUnit.get_str(t_subtype)
 
-        if t_type >= CType.type_IPC:
-            return "IPC"
-        
-        return None
-    
-    @staticmethod
-    def get_sub_type(t_type:int, t_subtype:int) -> str:
-        if t_type >= CType.type_TERRITORY:
-            return CType_Territory.get_type(t_subtype)
-
-        if t_type >= CType.type_UNIT:
-            return "Unit"
-
-        if t_type >= CType.type_IPC:
-            return "IPC"
-        
         return None
         
 
 class CItem:
-    def __init__(self, s_name:str, t_type:CType, t_subtype) -> None:
+    def __init__(self, s_name:str, t_type:CT, t_subtype) -> None:
         self.s_name = s_name
 
-        if CType.get_type(t_type) != None:
+        if CT.get_str(t_type) != None:
             self.t_type = t_type
         else:
             self.t_type = None
@@ -94,6 +113,6 @@ class CItem:
 
 # test 
 if __name__ == "__main__":
-    print (f"{CType.type_TERRITORY}")
-    print (f"{CType.get_type(CType.type_TERRITORY)}")
+    print (f"{CTClass.TERRITORY}")
+    print (f"{CTClass.get_str(CTClass.TERRITORY)}")
     
