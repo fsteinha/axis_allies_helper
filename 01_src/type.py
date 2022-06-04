@@ -1,118 +1,98 @@
-class CT:
-    s_Str = {}
+
+class CType():
+    
+    C_TERRITORY         = 0
+    C_UNIT              = 1
+    C_IPC               = 2
+
+    T_LAND              = 10
+    T_SEA               = 11
+    
+    U_INFANTARY          = 100
+    U_MECH_INFANTARY     = 101
+    U_TANK               = 102
+    U_ARTILLERY          = 103
+    U_AAA                = 104
+    U_FIGHTER            = 105
+    U_T_BOMBER           = 106
+    U_S_BOMBER           = 107
+    U_CARGO              = 108
+    U_SUBMARINE          = 109
+    U_DESTROYER          = 110
+    U_CRUISER            = 111
+    U_BATTLESHIP         = 112
+    U_CARRIER            = 113
+
+    STR_C_TERRITORY = "Territory"
+    STR_C_UNIT      = "Unit"
+    STR_C_IPC      = "IPC"
+
+    STR_T_LAND = "Land"
+    STR_T_SEA  = "Sea"
+
+    STR_U_INFANTARY          = "Infantary"
+    STR_U_MECH_INFANTARY     = "Mech-Infantary"
+    STR_U_TANK               = "U_TANK"
+    STR_U_ARTILLERY          = "U_ARTILLERY"
+    STR_U_AAA                = "U_AAA"
+    STR_U_FIGHTER            = "U_FIGHTER"
+    STR_U_T_BOMBER           = "Tactical-Bomber"
+    STR_U_S_BOMBER           = "Stratical-Bomber"
+    STR_U_CARGO              = "U_CARGO"
+    STR_U_SUBMARINE          = "U_SUBMARINE"
+    STR_U_DESTROYER          = "U_DESTROYER"
+    STR_U_CRUISER            = "U_CRUISER"
+    STR_U_BATTLESHIP         = "Battelship"
+    STR_U_CARRIER            = "U_CARRIER"
+    
+    d_Str = {
+        C_TERRITORY          : STR_C_TERRITORY,
+        C_UNIT               : STR_C_UNIT,
+        C_IPC                : STR_C_IPC,        
+
+        T_LAND               : STR_T_LAND,
+        T_SEA                : STR_T_SEA,
+        
+        U_INFANTARY          : STR_U_INFANTARY,
+        U_MECH_INFANTARY     : STR_U_MECH_INFANTARY,
+        U_TANK               : STR_U_TANK,
+        U_ARTILLERY          : STR_U_ARTILLERY,
+        U_AAA                : STR_U_AAA,
+        U_FIGHTER            : STR_U_FIGHTER,
+        U_T_BOMBER           : STR_U_T_BOMBER,
+        U_S_BOMBER           : STR_U_S_BOMBER,
+        U_CARGO              : STR_U_CARGO,
+        U_SUBMARINE          : STR_U_SUBMARINE,
+        U_DESTROYER          : STR_U_DESTROYER,
+        U_CRUISER            : STR_U_CRUISER,
+        U_BATTLESHIP         : STR_U_BATTLESHIP,
+        U_CARRIER            : STR_U_CARRIER
+    }
+    
+    @staticmethod
+    def get_str(t_type:int) -> str:
+        try:
+            return CType.d_Str[t_type]
+        except:
+            return None
+    
+class CTClass():
+    
+    
+    d_Str = {
+    }
 
     @staticmethod
     def get_str(t_type:int) -> str:
         try:
-            return CT.d_Str[t_type]
+            return CTClass.d_Str[t_type]
         except:
             return None
-    
-
-class CTTerritory(CT):
-    TERRITORY_LAND = 0
-    TERRITORY_SEA  = 1
-    TERRITORY_END  = 2
-
-    STR_TERRITORY_LAND = "Land"
-    STR_TERRITORY_SEA  = "Sea"
-    
-    d_Str = {
-        TERRITORY_LAND : STR_TERRITORY_LAND,
-        TERRITORY_SEA  : STR_TERRITORY_SEA,
-        TERRITORY_END  :  None
-    }
-
-    
-class CTUnit(CT):
-    INFANTARY          = 0
-    MECH_INFANTARY     = 1
-    TANK               = 2
-    ARTILLERY          = 3
-    AAA                = 4
-    FIGHTER            = 5
-    TACTICAL_BOMBER    = 6
-    STRATICAL_BOMBER   = 7
-    CARGO              = 8
-    SUBMARINE          = 9
-    DESTROYER          = 10
-    CRUISER            = 11
-    BATTLESHIP         = 12
-    CARRIER            = 13
-    
-    STR_INFANTARY          = "Infantary"
-    STR_MECH_INFANTARY     = "Mech-Infantary"
-    STR_TANK               = "Tank"
-    STR_ARTILLERY          = "Artillery"
-    STR_AAA                = "AAA"
-    STR_FIGHTER            = "Fighter"
-    STR_TACTICAL_BOMBER    = "Tactical-Bomber"
-    STR_STRATICAL_BOMBER   = "Stratical-Bomber"
-    STR_CARGO              = "Cargo"
-    STR_SUBMARINE          = "Submarine"
-    STR_DESTROYER          = "Destroyer"
-    STR_CRUISER            = "Cruiser"
-    STR_BATTLESHIP         = "Battelship"
-    STR_CARRIER            = "Carrier"
-    
-    d_Str = {
-        INFANTARY          : STR_INFANTARY,
-        MECH_INFANTARY     : STR_MECH_INFANTARY,
-        TANK               : STR_TANK,
-        ARTILLERY          : STR_ARTILLERY,
-        AAA                : STR_AAA,
-        FIGHTER            : STR_FIGHTER,
-        TACTICAL_BOMBER    : STR_TACTICAL_BOMBER,
-        STRATICAL_BOMBER   : STR_STRATICAL_BOMBER,
-        CARGO              : STR_CARGO,
-        SUBMARINE          : STR_SUBMARINE,
-        DESTROYER          : STR_DESTROYER,
-        CRUISER            : STR_CRUISER,
-        BATTLESHIP         : STR_BATTLESHIP,
-        CARRIER            : STR_CARRIER
-    }
-
-    
-class CTClass(CT):
-    TERRITORY = 0
-    UNIT      = 1
-    IPC       = 2
-    
-    STR_TERRITORY = "Territory"
-    STR_UNIT      = "Unit"
-    STR_IPC       = "IPC"
-    
-    d_Str = {
-        TERRITORY : STR_TERRITORY,
-        UNIT      : STR_UNIT,
-        IPC       : STR_IPC        
-    }
-
-    @staticmethod
-    def get_sub_str(t_type:int, t_subtype:int) -> str:
-        if t_type >= CT.TERRITORY:
-            return CTTerritory.get_str(t_subtype)
-
-        if t_type >= CT.UNIT:
-            return CTUnit.get_str(t_subtype)
-
-        return None
         
-
-class CItem:
-    def __init__(self, s_name:str, t_type:CT, t_subtype) -> None:
-        self.s_name = s_name
-
-        if CT.get_str(t_type) != None:
-            self.t_type = t_type
-        else:
-            self.t_type = None
-
-        pass
-
 
 # test 
 if __name__ == "__main__":
     print (f"{CTClass.TERRITORY}")
     print (f"{CTClass.get_str(CTClass.TERRITORY)}")
+    print (f"{CTTerritory.get_str(CTTerritory.TERRITORY_LAND)}")
     
