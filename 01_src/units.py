@@ -99,6 +99,26 @@ class CAAUnit(CAAItem):
             self.i_count = 1 
         pass
 
+    def add(self, i_add):
+        if (i_add >= 0):
+            self.i_count = self.i_count + i_add 
+
+    def sub(self, i_sub):
+        if (i_sub >= 0):
+            self.i_count = self.i_count - i_sub
+            if (self.i_count < 0):
+                self.i_count = 0
+            
+
+    def reset_count(self, i_count:int) -> None:
+        if (i_count >= 0):
+            self.i_count = i_count
+        else:
+            self.i_count = 0
+    
+    
+        
+
 ##############################################################################
 class CAAInf(CAAUnit):
     def __init__(self, aa_nation:CAANation, i_count = 1) -> None:
@@ -201,14 +221,48 @@ def test_nation(s_name:string, aa_alliance:int):
     print(caa.info())    
 
 ##############################################################################
-def sub_test_unit(caau, aa_nation:CAANation, i_count):
+def sub_test_unit(caau:CAAUnit, aa_nation:CAANation, i_count):
     assert(type(caau.get_nation()) == CAANation)
     caan = caau.get_nation()
     sub_test_nation(caan, aa_nation.get_name(), CType.type(aa_nation.get_alliance()))
+    
     if (i_count > 0):
         assert caau.get_count() == i_count, f"{caa.get_count()} != {i_count}"
     else:
         assert caau.get_count() == 1, f"i_count should be 1"
+    
+    if (i_count > 0):
+        caau.sub(i_count)
+        assert caau.get_count() == 0, f"{caau.get_count()} != 0"
+        caau.add(i_count)
+        assert caau.get_count() == i_count
+        caau.add(i_count)
+        assert caau.get_count() == 2 * i_count
+        caau.sub(3*i_count)
+        assert caau.get_count() == 0
+    elif (i_count <= 0):
+        i_temp_count =  caau.get_count()
+        caau.sub(i_count)
+        assert caau.get_count() == i_temp_count
+        caau.add(i_count)
+        assert caau.get_count() == i_temp_count
+        caau.add(i_count)
+        assert caau.get_count() == i_temp_count
+        caau.sub(3*i_count)
+        assert caau.get_count() == i_temp_count
+    
+    caau.reset_count(i_count)       
+    if (i_count >= 0):
+        assert caau.get_count() == i_count
+    else:
+        assert caau.get_count() == 0
+
+
+        
+        
+    
+    
+    
 
 ##############################################################################
 def test_inf(aa_nation, i_count):
@@ -347,7 +401,9 @@ if __name__ == "__main__":
     test_inf(caan_germany, 1)
     test_inf(caan_japan, 0)
     test_inf(caan_gb_europe, 10)
+    test_inf(caan_gb_europe, -10)
     
+
     test_mech_inf(caan_germany, 1)
     test_mech_inf(caan_japan, 0)
     test_mech_inf(caan_gb_europe, 10)
