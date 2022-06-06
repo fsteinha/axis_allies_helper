@@ -7,6 +7,7 @@ class CType():
     C_NATION            = 3
     C_ALLIANCE          = 4
     C_FACILITY          = 5
+    C_REGION            = 6
 
     T_LAND              = 10
     T_SEA               = 11
@@ -34,44 +35,62 @@ class CType():
     F_AIR_BASE          = 302
     F_NAVAL_BASE        = 303
     
+    R_EUROPE            =400
+    R_ASIA_FAR_EAST     =401
+    R_NORDAMERICA       =402
+    R_SOUTHAMERICA      =403
+    R_AFRICA            =404
+    R_PACIFIC           =405
+    R_ASIA_MIDDLE_EAST  =406
+    
+    
     NA                  = 1000    
       
     d_Str = {
-        C_TERRITORY     : "Territory",
-        C_UNIT          : "Unit",
-        C_IPC           : "IPC",
-        C_NATION        : "Nation",
-        C_ALLIANCE      : "Alliance",
-        C_FACILITY      : "Facility",
+        C_TERRITORY        : "Territory",
+        C_UNIT             : "Unit",
+        C_IPC              : "IPC",
+        C_NATION           : "Nation",
+        C_ALLIANCE         : "Alliance",
+        C_FACILITY         : "Facility",
+        C_REGION           : "Region",
 
 
-        T_LAND          : "Land",
-        T_SEA           : "Sea",
+        T_LAND             : "Land",
+        T_SEA              : "Sea",
+           
+        U_INFANTARY        : "Infantary",
+        U_MECH_INFANTARY   : "Mech-Infantary",
+        U_TANK             : "Tank",
+        U_ARTILLERY        : "Artillery",
+        U_AAA              : "AAA",
+        U_FIGHTER          : "Fighter",
+        U_T_BOMBER         : "Tactical-Bomber",
+        U_S_BOMBER         : "Stratic-Bomber",
+        U_CARGO            : "Cargo",
+        U_SUBMARINE        : "Submarine",
+        U_DESTROYER        : "Destroyer",
+        U_CRUISER          : "Cruiser",
+        U_BATTLESHIP       : "Battelship",
+        U_CARRIER          : "Carrier",
+
+        A_AXIS             : "Axis",
+        A_ALLIES           : "Allies",
+   
+        F_MAJOR_FACTORY    : "Major factory",
+        F_MINOR_FACTORY    : "Minor factory",
+        F_AIR_BASE         : "Air base",
+        F_NAVAL_BASE       : "Naval base",
+   
+        R_EUROPE           : "Europe",
+        R_ASIA_FAR_EAST    : "Asia far east",
+        R_NORDAMERICA      : "North america",
+        R_SOUTHAMERICA     : "South america",
+        R_AFRICA           : "Africa",
+        R_PACIFIC          : "Pacific",
+        R_ASIA_MIDDLE_EAST : "Asia middle east",
         
-        U_INFANTARY     : "Infantary",
-        U_MECH_INFANTARY: "Mech-Infantary",
-        U_TANK          : "Tank",
-        U_ARTILLERY     : "Artillery",
-        U_AAA           : "AAA",
-        U_FIGHTER       : "Fighter",
-        U_T_BOMBER      : "Tactical-Bomber",
-        U_S_BOMBER      : "Stratic-Bomber",
-        U_CARGO         : "Cargo",
-        U_SUBMARINE     : "Submarine",
-        U_DESTROYER     : "Destroyer",
-        U_CRUISER       : "Cruier",
-        U_BATTLESHIP    : "Battelship",
-        U_CARRIER       : "Carrier",
-
-        A_AXIS          : "Axis",
-        A_ALLIES        : "Allies",
-
-        F_MAJOR_FACTORY : "Major factory",
-        F_MINOR_FACTORY : "Minor factory",
-        F_AIR_BASE      : "Air base",
-        F_NAVAL_BASE    : "Naval base",
-
-        NA              : "N/A"
+        NA                 : "N/A"
     }
     
     @staticmethod
