@@ -1,5 +1,6 @@
 import string
 from  aa_type import CType
+from  aa_rules import *
 
 ##############################################################################
 class CAAItem():
@@ -120,90 +121,101 @@ class CAAUnit(CAAItem):
         
 
 ##############################################################################
-class CAAInf(CAAUnit):
+class CAAU_Inf(CAAUnit):
     def __init__(self, aa_nation:CAANation, i_count = 1) -> None:
         super().__init__(CType.U_INFANTARY, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAAMechInf(CAAUnit):
+class CAAU_MechInf(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_MECH_INFANTARY, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAATank(CAAUnit):
+class CAAU_Tank(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_TANK, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAAAri(CAAUnit):
+class CAAU_Ari(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_ARTILLERY, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAAAAA(CAAUnit):
+class CAAU_AAA(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_AAA, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAAFigther(CAAUnit):
+class CAAU_Figther(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_FIGHTER, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAATBomb(CAAUnit):
+class CAAU_TBomb(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_T_BOMBER, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAASBomb(CAAUnit):
+class CAAU_SBomb(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_S_BOMBER, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAASubmarine(CAAUnit):
+class CAAU_Submarine(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_SUBMARINE, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAADestroyer(CAAUnit):
+class CAAU_Destroyer(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_DESTROYER, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAACruiser(CAAUnit):
+class CAAU_Cruiser(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_CRUISER, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAABattleship(CAAUnit):
+class CAAU_Battleship(CAAUnit):
     def __init__(self,  aa_nation, i_count = 1) -> None:
         super().__init__(CType.U_BATTLESHIP, aa_nation, i_count)
         pass
 
 ##############################################################################
-class CAACarrier(CAAUnit):
-    def __init__(self,  aa_nation, l_aa_units:list = None, aa_allowed_units = [CType.C_UNIT_AIR], i_max_units = 2) -> None:
+class CAAU_Carrier(CAAUnit):
+    def __init__(self,  aa_nation, c_rules:CAAR_Carrier, l_aa_units:list = None) -> None:
         super().__init__(CType.U_CARRIER, aa_nation, i_count = 1)
+        self.c_rules = c_rules
         self.l_aa_units = l_aa_units
-        self.a
         pass
 
-    def add_unit(aa_unit:CType) -> bool:
-        if CType.get_sub_class(aa_unit) == CType.C_UNIT_AIR:
-
+    def add_unit(self, aa_unit:CType) -> bool:
+        if self.c_rules.check_add(self.l_aa_units, aa_unit) == False:
+            return False
+        
+        self.l_aa_units.append(aa_unit)
+        return True
+    
+    def sub_unit(self, aa_unit:CType) -> bool:
+        if self.c_rules.check_sub(self.l_aa_units, aa_unit) == False:
+            return False
+        
+        self.l_aa_units.remove(aa_unit)
+        return True
+        
 ##############################################################################
-class CAACargo(CAAUnit):
+class CAAU_Cargo(CAAUnit):
     def __init__(self,  aa_nation, i_count:int = 1, l_aa_units:list = None) -> None:
         super().__init__(CType.U_CARGO, aa_nation, i_count)
         self.l_aa_units = l_aa_units
@@ -270,91 +282,91 @@ def sub_test_unit(caau:CAAUnit, aa_nation:CAANation, i_count):
 
 ##############################################################################
 def test_inf(aa_nation, i_count):
-    caa = CAAInf(aa_nation, i_count)
+    caa = CAAU_Inf(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_INFANTARY))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_mech_inf(aa_nation, i_count):
-    caa = CAAMechInf(aa_nation, i_count)
+    caa = CAAU_MechInf(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_MECH_INFANTARY))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_tank(aa_nation, i_count):
-    caa = CAATank(aa_nation, i_count)
+    caa = CAAU_Tank(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_TANK))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_ari(aa_nation, i_count):
-    caa = CAAAri(aa_nation, i_count)
+    caa = CAAU_Ari(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_ARTILLERY))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_aaa(aa_nation, i_count):
-    caa = CAAAAA(aa_nation, i_count)
+    caa = CAAU_AAA(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_AAA))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_fighter(aa_nation, i_count):
-    caa = CAAFigther(aa_nation, i_count)
+    caa = CAAU_Figther(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_FIGHTER))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_tbomb(aa_nation, i_count):
-    caa = CAATBomb(aa_nation, i_count)
+    caa = CAAU_TBomb(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_T_BOMBER))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_sbomb(aa_nation, i_count):
-    caa = CAASBomb(aa_nation, i_count)
+    caa = CAAU_SBomb(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_S_BOMBER))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_submarine(aa_nation, i_count):
-    caa = CAASubmarine(aa_nation, i_count)
+    caa = CAAU_Submarine(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_SUBMARINE))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_destroyer(aa_nation, i_count):
-    caa = CAADestroyer(aa_nation, i_count)
+    caa = CAAU_Destroyer(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_DESTROYER))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_cruiser(aa_nation, i_count):
-    caa = CAACruiser(aa_nation, i_count)
+    caa = CAAU_Cruiser(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_CRUISER))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_battleship(aa_nation, i_count):
-    caa = CAABattleship(aa_nation, i_count)
+    caa = CAAU_Battleship(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_BATTLESHIP))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
 
 ##############################################################################
 def test_carrier(aa_nation, l_aa_units):
-    caa = CAACarrier(aa_nation, i_count)
+    caa = CAAU_Carrier(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_BATTLESHIP))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
