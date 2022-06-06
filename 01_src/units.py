@@ -407,46 +407,62 @@ if __name__ == "__main__":
     test_mech_inf(caan_germany, 1)
     test_mech_inf(caan_japan, 0)
     test_mech_inf(caan_gb_europe, 10)
+    test_mech_inf(caan_gb_europe, -10)
+    
     
     test_tank(caan_germany, 1)
     test_tank(caan_japan, 0)
     test_tank(caan_gb_europe, 10)
+    test_tank(caan_gb_europe, -10)
  
     test_ari(caan_germany, 1)
     test_ari(caan_japan, 0)
     test_ari(caan_gb_europe, 10)
+    test_ari(caan_gb_europe, -10)
 
     test_aaa(caan_germany, 1)
     test_aaa(caan_japan, 0)
     test_aaa(caan_gb_europe, 10)
+    test_aaa(caan_gb_europe, -10)
 
     test_fighter(caan_germany, 1)
     test_fighter(caan_japan, 0)
     test_fighter(caan_gb_europe, 10)
+    test_fighter(caan_gb_europe, -10)
 
     test_tbomb(caan_germany, 1)
     test_tbomb(caan_japan, 0)
     test_tbomb(caan_gb_europe, 10)
+    test_tbomb(caan_gb_europe, -10)
  
     test_sbomb(caan_germany, 1)
     test_sbomb(caan_japan, 0)
     test_sbomb(caan_gb_europe, 10)
+    test_sbomb(caan_gb_europe, -10)
 
     test_submarine(caan_germany, 1)
     test_submarine(caan_japan, 0)
     test_submarine(caan_gb_europe, 10)
+    test_submarine(caan_gb_europe, -10)
 
     test_destroyer(caan_germany, 1)
     test_destroyer(caan_japan, 0)
     test_destroyer(caan_gb_europe, 10)
+    test_destroyer(caan_gb_europe, -10)
 
     test_cruiser(caan_germany, 1)
     test_cruiser(caan_japan, 0)
     test_cruiser(caan_gb_europe, 10)
+    test_cruiser(caan_gb_europe, -10)
 
     test_battleship(caan_germany, 1)
     test_battleship(caan_japan, 0)
     test_battleship(caan_gb_europe, 10)
+    test_battleship(caan_gb_europe, -10)
+
+    #TBD CARRIER
+    #tbd CARGO
+
 
     test_land("Western Germany",CType.R_EUROPE, caan_germany,10,[])
     test_land("Japan",CType.R_ASIA_FAR_EAST, caan_japan,10,[])
