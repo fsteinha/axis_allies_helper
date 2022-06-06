@@ -193,10 +193,14 @@ class CAABattleship(CAAUnit):
 
 ##############################################################################
 class CAACarrier(CAAUnit):
-    def __init__(self,  aa_nation, i_count:int = 1, l_aa_units:list = None) -> None:
-        super().__init__(CType.U_CARRIER, aa_nation, i_count)
+    def __init__(self,  aa_nation, l_aa_units:list = None, aa_allowed_units = [CType.C_UNIT_AIR], i_max_units = 2) -> None:
+        super().__init__(CType.U_CARRIER, aa_nation, i_count = 1)
         self.l_aa_units = l_aa_units
+        self.a
         pass
+
+    def add_unit(aa_unit:CType) -> bool:
+        if CType.get_sub_class(aa_unit) == CType.C_UNIT_AIR:
 
 ##############################################################################
 class CAACargo(CAAUnit):
@@ -347,6 +351,14 @@ def test_battleship(aa_nation, i_count):
     assert(caa.get_type() == CType.str(CType.U_BATTLESHIP))
     sub_test_unit(caa, aa_nation, i_count)
     print(caa.info())    
+
+##############################################################################
+def test_carrier(aa_nation, l_aa_units):
+    caa = CAACarrier(aa_nation, i_count)
+    assert(caa.get_type() == CType.str(CType.U_BATTLESHIP))
+    sub_test_unit(caa, aa_nation, i_count)
+    print(caa.info())    
+
 '''
 ##############################################################################
 class CAACarrier(CAAUnit):
