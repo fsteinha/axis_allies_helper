@@ -69,13 +69,13 @@ def sub_test_unit(caau:CAAUnit, aa_nation:CAANation, i_count):
 
 ##############################################################################
 def test_container(*args):
-    try:
+    #try:
         caacon = CAAUnitContainer(*args)
         print(caacon.info())    
 
-    except:
-        print ("ERROR")
-        pass
+    #except:
+    #    print ("ERROR")
+    #    pass
     
 
 
@@ -293,6 +293,7 @@ if __name__ == "__main__":
 
 
     test_container(CAAU_Inf(caan_germany, 1))
+    test_container(CAAU_Inf(caan_germany, 10), CAAU_Inf(caan_japan, 1))
 '''    
     caar = CAAR_Carrier()
     test_carrier(caan_germany, caar)
