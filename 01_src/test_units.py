@@ -1,23 +1,45 @@
 from aa_units import *
+from aa_type import *
+import inspect
 
+##############################################################################
+# debug out
+##############################################################################
+def test_header(s_func_name: str, info):
+    print ( "############################################################")
+    print (f"   Test {s_func_name}")
+    for arg in info[0]:
+        print (f"    {arg} = {info[3][arg]}")
+    print ()    
+    pass
+
+def sub_test_header(s_func_name: str, info):
+    print (f"       Sub Test {s_func_name}")
+    for arg in info[0]:
+        print (f"       {arg} = {info[3][arg]}")
+    print ()    
+    pass
 
 ##############################################################################
 # Tests
 ##############################################################################
 
 def sub_test_nation(caan, s_name:str, aa_alliance:int):
+    sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     assert(caan.get_name() == s_name)
     assert(caan.get_type() == CType.str(CType.C_NATION))
     assert(caan.get_alliance() == CType.str(aa_alliance))
     
 ##############################################################################
 def test_nation(s_name:str, aa_alliance:int):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAANation(s_name, aa_alliance)
     sub_test_nation(caa, s_name, aa_alliance)
     print(caa.info())    
 
 ##############################################################################
 def sub_test_unit(caau:CAAUnit, aa_nation:CAANation, i_count):
+    sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     assert(type(caau.get_nation()) == CAANation)
     caan = caau.get_nation()
     sub_test_nation(caan, aa_nation.get_name(), CType.type(aa_nation.get_alliance()))
@@ -69,9 +91,10 @@ def sub_test_unit(caau:CAAUnit, aa_nation:CAANation, i_count):
 
 ##############################################################################
 def test_container(*args):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     #try:
-        caacon = CAAUnitContainer(*args)
-        print(caacon.info())    
+    caacon = CAAUnitContainer(*args)
+    print(caacon.info())    
 
     #except:
     #    print ("ERROR")
@@ -87,6 +110,7 @@ def test_container(*args):
 
 ##############################################################################
 def test_inf(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Inf(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_INFANTARY))
     sub_test_unit(caa, aa_nation, i_count)
@@ -94,6 +118,7 @@ def test_inf(aa_nation, i_count):
 
 ##############################################################################
 def test_mech_inf(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_MechInf(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_MECH_INFANTARY))
     sub_test_unit(caa, aa_nation, i_count)
@@ -101,6 +126,7 @@ def test_mech_inf(aa_nation, i_count):
 
 ##############################################################################
 def test_tank(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Tank(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_TANK))
     sub_test_unit(caa, aa_nation, i_count)
@@ -108,6 +134,7 @@ def test_tank(aa_nation, i_count):
 
 ##############################################################################
 def test_ari(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Ari(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_ARTILLERY))
     sub_test_unit(caa, aa_nation, i_count)
@@ -115,6 +142,7 @@ def test_ari(aa_nation, i_count):
 
 ##############################################################################
 def test_aaa(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_AAA(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_AAA))
     sub_test_unit(caa, aa_nation, i_count)
@@ -122,6 +150,7 @@ def test_aaa(aa_nation, i_count):
 
 ##############################################################################
 def test_fighter(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Figther(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_FIGHTER))
     sub_test_unit(caa, aa_nation, i_count)
@@ -129,6 +158,7 @@ def test_fighter(aa_nation, i_count):
 
 ##############################################################################
 def test_tbomb(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_TBomb(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_T_BOMBER))
     sub_test_unit(caa, aa_nation, i_count)
@@ -136,6 +166,7 @@ def test_tbomb(aa_nation, i_count):
 
 ##############################################################################
 def test_sbomb(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_SBomb(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_S_BOMBER))
     sub_test_unit(caa, aa_nation, i_count)
@@ -143,6 +174,7 @@ def test_sbomb(aa_nation, i_count):
 
 ##############################################################################
 def test_submarine(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Submarine(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_SUBMARINE))
     sub_test_unit(caa, aa_nation, i_count)
@@ -150,6 +182,7 @@ def test_submarine(aa_nation, i_count):
 
 ##############################################################################
 def test_destroyer(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Destroyer(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_DESTROYER))
     sub_test_unit(caa, aa_nation, i_count)
@@ -157,6 +190,7 @@ def test_destroyer(aa_nation, i_count):
 
 ##############################################################################
 def test_cruiser(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Cruiser(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_CRUISER))
     sub_test_unit(caa, aa_nation, i_count)
@@ -164,6 +198,7 @@ def test_cruiser(aa_nation, i_count):
 
 ##############################################################################
 def test_battleship(aa_nation, i_count):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Battleship(aa_nation, i_count)
     assert(caa.get_type() == CType.str(CType.U_BATTLESHIP))
     sub_test_unit(caa, aa_nation, i_count)
@@ -171,6 +206,7 @@ def test_battleship(aa_nation, i_count):
 
 ##############################################################################
 def test_carrier(aa_nation, aa_rules_carrier:CAAR_Carrier, l_aa_units = None):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAU_Carrier(aa_nation,aa_rules_carrier,l_aa_units)
     assert(caa.get_type() == CType.str(CType.U_CARRIER))
     #Carrier must be test with i_count == None
@@ -194,8 +230,44 @@ class CAACargo(CAAUnit):
         pass
 '''
 
+def sub_test_facillity(caaf:CAAFacillity):
+    sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    assert caaf.get_count() == 1, f"Precondition error count is {caaf.get_count()}"
+    caaf.add(1)
+    assert caaf.get_count() == 1
+    caaf.sub(10)
+    assert caaf.get_count() == -9
+    caaf.add(20)
+    assert caaf.get_count() == 1
+    print(caaf.info())
+    
+def test_major():
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caaf = CAAF_Major()
+    assert (caaf.get_type() == CType.str(CType.F_MAJOR_FACTORY))
+    sub_test_facillity(caaf)
+    
+def test_minor():
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caaf = CAAF_Minor()
+    assert (caaf.get_type() == CType.str(CType.F_MINOR_FACTORY))
+    sub_test_facillity(caaf)
+    
+def test_airbase():
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caaf = CAAF_AirBase()
+    assert (caaf.get_type() == CType.str(CType.F_AIR_BASE))
+    sub_test_facillity(caaf)
+
+def test_navalbase():
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caaf = CAAF_NavalBase()
+    assert (caaf.get_type() == CType.str(CType.F_NAVAL_BASE))
+    sub_test_facillity(caaf)
+
 
 def test_land(s_name:str, aa_region:int, aa_nation:CAANation, aa_ipc:int, l_aa_units:list):
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAALand(s_name,aa_region, aa_nation, aa_ipc, l_aa_units)
     assert caa.get_name() == s_name
     assert caa.get_region() == CType.str(aa_region)  
@@ -291,10 +363,14 @@ if __name__ == "__main__":
     test_battleship(caan_gb_europe, 10)
     test_battleship(caan_gb_europe, -10)
 
+    test_major()
+    test_minor()
+    test_airbase()
+    test_navalbase()
 
     test_container(CAAU_Inf(caan_germany, 1))
-    test_container(CAAU_Inf(caan_germany, 10), CAAU_Inf(caan_japan, 1))
-'''    
+    test_container(CAAU_Inf(caan_germany, 10), CAAU_Inf(caan_japan, 1),CAAU_TBomb(caan_japan, 3))
+    '''    
     caar = CAAR_Carrier()
     test_carrier(caan_germany, caar)
     test_carrier(caan_japan, caar)
@@ -310,4 +386,5 @@ if __name__ == "__main__":
     test_land("Western Germany",CType.R_EUROPE, caan_germany,10,[])
     test_land("Japan",CType.R_ASIA_FAR_EAST, caan_japan,10,[])
     test_land("Egypt",CType.R_AFRICA, caan_gb_europe,10,[])
-'''
+    '''
+    

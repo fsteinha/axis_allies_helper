@@ -1,4 +1,5 @@
 from copy import deepcopy
+from sqlite3 import SQLITE_TRANSACTION
 from  aa_type import CType
 from  aa_rules import *
 from tabulate import tabulate
@@ -14,7 +15,9 @@ class CAAItem():
             self.aa_type = aa_type
 
     def get_name(self) -> str:
-        return self.s_name
+        if ('s_name' in dir(self)):
+            return self.s_name
+        return None
 
     def get_region(self) -> str:
         if ('aa_region' in dir(self)):
@@ -27,14 +30,17 @@ class CAAItem():
     def get_nation(self):
         if (type(self) == CAANation):
             return self
-        else:
+        elif ('aa_nation' in dir(self)):
             return self.aa_nation
+        
+        return None
         
     def get_alliance(self) -> str:
         if ('aa_alliance' in dir(self)):
             return CType.str(self.aa_alliance)
-
-        return self.aa_nation.get_alliance()
+        elif ('aa_nation' in dir(self)):
+            return self.aa_nation.get_alliance()
+        return None
 
     def get_ipc(self) -> int:
         if ('aa_ipc' in dir(self)):
@@ -58,11 +64,15 @@ class CAAItem():
 
 
     def info(self):
+        s_nation = None
+        if (self.get_nation()) != None:
+            s_nation = self.get_nation().s_name
+        
         return f'''
 Name    : {self.get_name()}
 Region  : {self.get_region()}
 Type    : {self.get_type()}
-Nation  : {self.get_nation().s_name}
+Nation  : {s_nation}
 Alliance: {self.get_alliance()}
 IPC     : {self.get_ipc()}
 Units   : {self.get_units()}
@@ -129,7 +139,33 @@ class CAAUnit(CAAItem):
                 self.i_count = i_count
             else:
                 self.i_count = 0
-    
+
+##############################################################################
+class CAAFacillity(CAAItem):
+    def __init__(self, aa_type:int) -> None:
+        super().__init__(CType.str(aa_type), aa_type)        
+        self.i_count = 1
+
+    def add(self, i_add):
+        if (self.i_count != None) and (self.i_count < 1):
+            if (i_add >= 0):
+                self.i_count = self.i_count + i_add 
+        
+        if (self.i_count > 1):
+            self.i_count = 1
+
+    def sub(self, i_sub):
+        if self.i_count != None:
+            if (i_sub >= 0):
+                self.i_count = self.i_count - i_sub
+            
+    def reset_count(self, i_count:int) -> None:
+        if self.i_count != None:
+            if (i_count >= 0):
+                self.i_count = i_count
+            else:
+                self.i_count = 0
+
 ##############################################################################
 class CAAUnitContainer():
     def __init__(self, *args) -> None:
@@ -280,4 +316,28 @@ class CAAU_Cargo(CAAUnit):
 
 if __name__ == "__main__":
     raise Exception ("Not executable")
-    
+
+
+##############################################################################
+class CAAF_Major(CAAFacillity):
+    def __init__(self) -> None:
+        super().__init__(CType.F_MAJOR_FACTORY)
+        pass
+
+##############################################################################
+class CAAF_Minor(CAAFacillity):
+    def __init__(self) -> None:
+        super().__init__(CType.F_MINOR_FACTORY)
+        pass
+
+##############################################################################
+class CAAF_AirBase(CAAFacillity):
+    def __init__(self) -> None:
+        super().__init__(CType.F_AIR_BASE)
+        pass
+
+##############################################################################
+class CAAF_NavalBase(CAAFacillity):
+    def __init__(self) -> None:
+        super().__init__(CType.F_NAVAL_BASE)
+        pass
