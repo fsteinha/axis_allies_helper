@@ -186,21 +186,27 @@ class CAAUnitContainer():
             return True
         return False
 
-    def sub(self, t_unit_type:int, i_sub:int) -> CAAUnit:
-        if t_unit_type in self.d_aa_units:
-            unit = self.d_aa_units[t_unit_type]
-            new_unit = deepcopy(self.d_aa_units[t_unit_type])
-            if unit.get_count() > i_sub: 
-                unit.sub(i_sub)
-                new_unit.reset_count(i_sub)
-                return new_unit
-            else:
-                del(self.d_aa_units[t_unit_type])
-                return None
-        return None
-        pass
+    def sub(self, unit) -> bool:
+        if issubclass(type(unit), CAAUnit):
+            key_unit = None
+            key_nation = None 
+            if (unit.get_type() in self.d_aa_units):
+                key_unit = unit.get_type()
+            if (key_unit != None) and \
+               (unit.get_nation().get_name() in self.d_aa_units[key_unit]):
+                    key_nation = unit.get_nation().get_name()
+            if (key_unit != None) and (key_nation != None):
+                self.d_aa_units[key_unit][key_nation].sub(unit.get_count())
+                if self.d_aa_units[key_unit][key_nation].get_count() == 0:
+                    del(self.d_aa_units[key_unit][key_nation])
+                    #print (self.d_aa_units[key_unit][key_nation])
+                    if self.d_aa_units[key_unit] == None:
+                        del(self.d_aa_units[key_unit])
 
-    def get_container(self):
+            return True
+        return False
+
+    def get_container(self) -> list:
         return self.d_aa_units
     
     def info(self):
@@ -208,7 +214,7 @@ class CAAUnitContainer():
         for s_unit in self.d_aa_units:
             for  s_nation in self.d_aa_units[s_unit]:
                 l_tab.append([s_unit, s_nation, self.d_aa_units[s_unit][s_nation].get_count()])
-        return tabulate(l_tab, headers="firstrow")
+        return tabulate(l_tab, headers="firstrow", tablefmt="grid")
         pass
 
         

@@ -90,24 +90,75 @@ def sub_test_unit(caau:CAAUnit, aa_nation:CAANation, i_count):
 
 
 ##############################################################################
-def test_container(*args):
+def test_container_init(*args):
     test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
-    #try:
-    caacon = CAAUnitContainer(*args)
-    print(caacon.info())    
+    try:
+        caacon = CAAUnitContainer(*args)
+        print(caacon.info())    
 
-    #except:
-    #    print ("ERROR")
-    #    pass
+    except:
+        print ("ERROR")
+        pass  
     
+##############################################################################
+def test_container_add():
+    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caan_germany = CAANation("Germany", CType.A_AXIS)
+    caan_nordpol = CAANation("Nordpol", CType.A_ALLIES)
+    
+    print ("... init")
+    caacon = CAAUnitContainer(CAAU_Inf(caan_germany, 1))
+    d_cont = caacon.get_container()
+    print(caacon.info())  
+    assert d_cont[CType.str(CType.U_INFANTARY)][caan_germany.get_name()].get_count() == 1
+    
+    print ("... add Inf Germany 1")
+    caacon.add(CAAU_Inf(caan_germany, 1)) 
+    d_cont = caacon.get_container()
+    print(caacon.info())  
+    assert d_cont[CType.str(CType.U_INFANTARY)][caan_germany.get_name()].get_count()  == 2
+    
+    print ("... add AAA Germany 1")
+    caacon.add(CAAU_AAA(caan_germany, 1)) 
+    d_cont = caacon.get_container()
+    print(caacon.info())  
+    assert d_cont[CType.str(CType.U_AAA)][caan_germany.get_name()].get_count()  == 1
+    
+    print ("... add AAA Nordpol 1")
+    caacon.add(CAAU_AAA(caan_nordpol, 1)) 
+    d_cont = caacon.get_container()
+    print(caacon.info())  
+    assert d_cont[CType.str(CType.U_AAA)][caan_nordpol.get_name()].get_count()  == 1
+    
+    print ("... add AAA Nordpol 10")
+    caacon.add(CAAU_AAA(caan_nordpol, 10)) 
+    d_cont = caacon.get_container()
+    print (d_cont)
+    print(caacon.info())  
+    assert d_cont[CType.str(CType.U_AAA)][caan_nordpol.get_name()].get_count()  == 11
+    
+    print ("... sub AAA Nordpol 1")
+    caacon.sub(CAAU_AAA(caan_nordpol, 1)) 
+    d_cont = caacon.get_container()
+    print (d_cont)
+    print(caacon.info())  
+    assert d_cont[CType.str(CType.U_AAA)][caan_nordpol.get_name()].get_count()  == 10
 
-
-        
-        
+    print ("... sub AAA Nordpol 20 - no unit in ")
+    caacon.sub(CAAU_AAA(caan_nordpol, 20)) 
+    d_cont = caacon.get_container()
+    print (d_cont)
+    print(caacon.info())  
+    assert caan_nordpol.get_name() not in d_cont[CType.str(CType.U_AAA)], print (d_cont[CType.str(CType.U_AAA)])
+    
+    print ("... sub AAA Nordpol 20 again - no unit in ")
+    caacon.sub(CAAU_AAA(caan_nordpol, 20)) 
+    d_cont = caacon.get_container()
+    print (d_cont)
+    print(caacon.info())  
+    assert caan_nordpol.get_name() not in d_cont[CType.str(CType.U_AAA)], print (d_cont[CType.str(CType.U_AAA)])
     
     
-    
-
 ##############################################################################
 def test_inf(aa_nation, i_count):
     test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
@@ -368,8 +419,9 @@ if __name__ == "__main__":
     test_airbase()
     test_navalbase()
 
-    test_container(CAAU_Inf(caan_germany, 1))
-    test_container(CAAU_Inf(caan_germany, 10), CAAU_Inf(caan_japan, 1),CAAU_TBomb(caan_japan, 3))
+    test_container_init(CAAU_Inf(caan_germany, 1))
+    test_container_init(CAAU_Inf(caan_germany, 10), CAAU_Inf(caan_japan, 1),CAAU_TBomb(caan_japan, 3))
+    test_container_add()
     '''    
     caar = CAAR_Carrier()
     test_carrier(caan_germany, caar)
