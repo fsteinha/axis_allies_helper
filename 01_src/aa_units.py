@@ -1,7 +1,6 @@
 from copy import deepcopy
-from sqlite3 import SQLITE_TRANSACTION
-from  aa_type import CType
-from  aa_rules import *
+from aa_type import CType
+from aa_rules import *
 from tabulate import tabulate
 
 ##############################################################################
@@ -208,6 +207,18 @@ class CAAUnitContainer():
 
     def get_container(self) -> list:
         return self.d_aa_units
+
+    def get_unit_count(self, t_type:int = None, s_nation:str = None) -> int:
+        i_count = 0
+        for unit in self.d_aa_units:
+            if t_type == None or CType.str(t_type) == unit:
+                for aa_nation in self.d_aa_units[unit]:
+                    if s_nation == None or s_nation == aa_nation:
+                        i_count = i_count + self.d_aa_units[unit][aa_nation].get_count()
+                 
+        return i_count
+
+
     
     def info(self):
         l_tab = [['Unit', 'Nation' 'Count']]
