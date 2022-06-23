@@ -22,6 +22,6 @@ def sub_test_header(s_func_name: str, info):
 def sub_test_nation(caan, s_name:str, aa_alliance:int):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     assert(caan.get_name() == s_name)
-    assert(caan.get_type() == CType.str(CType.C_NATION))
-    assert(caan.get_alliance() == CType.str(aa_alliance))
+    assert(caan.get_type() == CType.C_NATION)
+    assert(caan.get_alliance() == aa_alliance)
     

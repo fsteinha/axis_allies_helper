@@ -32,14 +32,14 @@ class CAAUnitContainer():
                (unit.get_nation().get_name() in self.d_aa_units[key_unit]):
                     key_nation = unit.get_nation().get_name()
             if (key_unit != None) and (key_nation != None):
+                print (key_nation)
                 self.d_aa_units[key_unit][key_nation].sub(unit.get_count())
                 if self.d_aa_units[key_unit][key_nation].get_count() == 0:
                     del(self.d_aa_units[key_unit][key_nation])
                     #print (self.d_aa_units[key_unit][key_nation])
                     if self.d_aa_units[key_unit] == None:
                         del(self.d_aa_units[key_unit])
-
-            return True
+                return True
         return False
 
     def get_container(self) -> list:
@@ -48,7 +48,7 @@ class CAAUnitContainer():
     def get_unit_count(self, t_type:int = None, s_nation:str = None) -> int:
         i_count = 0
         for unit in self.d_aa_units:
-            if t_type == None or CType.str(t_type) == unit:
+            if t_type == None or t_type == unit:
                 for aa_nation in self.d_aa_units[unit]:
                     if s_nation == None or s_nation == aa_nation:
                         i_count = i_count + self.d_aa_units[unit][aa_nation].get_count()
@@ -57,9 +57,9 @@ class CAAUnitContainer():
     
     def info(self):
         l_tab = [['Unit', 'Nation' 'Count']]
-        for s_unit in self.d_aa_units:
-            for  s_nation in self.d_aa_units[s_unit]:
-                l_tab.append([s_unit, s_nation, self.d_aa_units[s_unit][s_nation].get_count()])
+        for t_unit in self.d_aa_units:
+            for  s_nation in self.d_aa_units[t_unit]:
+                l_tab.append([CType.str(t_unit), s_nation, self.d_aa_units[t_unit][s_nation].get_count()])
         return tabulate(l_tab, headers="firstrow", tablefmt="grid")
         pass
 

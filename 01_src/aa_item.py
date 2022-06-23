@@ -17,11 +17,11 @@ class CAAItem():
 
     def get_region(self) -> str:
         if ('aa_region' in dir(self)):
-            return CType.str(self.aa_region)
+            return self.aa_region
         return CType.na()
 
     def get_type(self) -> str:
-        return CType.str(self.aa_type)
+        return self.aa_type
 
     def get_nation(self):
         if ('aa_nation' in dir(self)):
@@ -30,7 +30,7 @@ class CAAItem():
         
     def get_alliance(self) -> str:
         if ('aa_alliance' in dir(self)):
-            return CType.str(self.aa_alliance)
+            return self.aa_alliance
         elif ('aa_nation' in dir(self)):
             return self.aa_nation.get_alliance()
         return None
@@ -69,9 +69,9 @@ class CAAItem():
         return f'''
 Name    : {self.get_name()}
 Region  : {self.get_region()}
-Type    : {self.get_type()}
+Type    : {CType.str(self.get_type())}
 Nation  : {s_nation}
-Alliance: {self.get_alliance()}
+Alliance: {CType.str(self.get_alliance())}
 IPC     : {self.get_ipc()}
 Units   : {s_container}
 Count   : {self.get_count()}

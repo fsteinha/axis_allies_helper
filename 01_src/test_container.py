@@ -27,7 +27,7 @@ def test_container_add_sub():
     caacon = CAAUnitContainer(CAAU_Inf(caan_germany, 1))
     d_cont = caacon.get_container()
     print(caacon.info())  
-    assert d_cont[CType.str(CType.U_INFANTARY)][caan_germany.get_name()].get_count() == 1
+    assert d_cont[CType.U_INFANTARY][caan_germany.get_name()].get_count() == 1
     assert caacon.get_unit_count() == 1, f"caacon.get_unit_count() returns {caacon.get_unit_count()}"
     assert caacon.get_unit_count(CType.U_INFANTARY) == 1
     assert caacon.get_unit_count(CType.U_AAA) == 0
@@ -42,7 +42,7 @@ def test_container_add_sub():
     caacon.add(CAAU_Inf(caan_germany, 1)) 
     d_cont = caacon.get_container()
     print(caacon.info())  
-    assert d_cont[CType.str(CType.U_INFANTARY)][caan_germany.get_name()].get_count()  == 2
+    assert d_cont[CType.U_INFANTARY][caan_germany.get_name()].get_count()  == 2
     assert caacon.get_unit_count() == 2
     assert caacon.get_unit_count(CType.U_INFANTARY) == 2
     assert caacon.get_unit_count(CType.U_AAA) == 0
@@ -56,7 +56,7 @@ def test_container_add_sub():
     caacon.add(CAAU_AAA(caan_germany, 1)) 
     d_cont = caacon.get_container()
     print(caacon.info())  
-    assert d_cont[CType.str(CType.U_AAA)][caan_germany.get_name()].get_count()  == 1
+    assert d_cont[CType.U_AAA][caan_germany.get_name()].get_count()  == 1
     assert caacon.get_unit_count() == 3
     assert caacon.get_unit_count(CType.U_INFANTARY) == 2
     assert caacon.get_unit_count(CType.U_AAA) == 1
@@ -70,7 +70,7 @@ def test_container_add_sub():
     caacon.add(CAAU_AAA(caan_nordpol, 1)) 
     d_cont = caacon.get_container()
     print(caacon.info())  
-    assert d_cont[CType.str(CType.U_AAA)][caan_nordpol.get_name()].get_count()  == 1
+    assert d_cont[CType.U_AAA][caan_nordpol.get_name()].get_count()  == 1
     assert caacon.get_unit_count() == 4
     assert caacon.get_unit_count(CType.U_INFANTARY) == 2
     assert caacon.get_unit_count(CType.U_AAA) == 2
@@ -85,7 +85,7 @@ def test_container_add_sub():
     d_cont = caacon.get_container()
     print (d_cont)
     print(caacon.info())  
-    assert d_cont[CType.str(CType.U_AAA)][caan_nordpol.get_name()].get_count()  == 11
+    assert d_cont[CType.U_AAA][caan_nordpol.get_name()].get_count()  == 11
     assert caacon.get_unit_count() == 14
     assert caacon.get_unit_count(CType.U_INFANTARY) == 2
     assert caacon.get_unit_count(CType.U_AAA) == 12
@@ -101,7 +101,7 @@ def test_container_add_sub():
     d_cont = caacon.get_container()
     print (d_cont)
     print(caacon.info())  
-    assert d_cont[CType.str(CType.U_AAA)][caan_nordpol.get_name()].get_count()  == 10
+    assert d_cont[CType.U_AAA][caan_nordpol.get_name()].get_count()  == 10
     assert caacon.get_unit_count() == 13
     assert caacon.get_unit_count(CType.U_INFANTARY) == 2
     assert caacon.get_unit_count(CType.U_AAA) == 11
@@ -116,7 +116,7 @@ def test_container_add_sub():
     d_cont = caacon.get_container()
     print (d_cont)
     print(caacon.info())  
-    assert caan_nordpol.get_name() not in d_cont[CType.str(CType.U_AAA)], print (d_cont[CType.str(CType.U_AAA)])
+    assert caan_nordpol.get_name() not in d_cont[CType.U_AAA], print (d_cont[CType.U_AAA])
     assert caacon.get_unit_count() == 3, f"caacon.get_unit_count() returns {caacon.get_unit_count()}"
     assert caacon.get_unit_count(CType.U_INFANTARY) == 2
     assert caacon.get_unit_count(CType.U_AAA) == 1
@@ -131,7 +131,7 @@ def test_container_add_sub():
     d_cont = caacon.get_container()
     print (d_cont)
     print(caacon.info())  
-    assert caan_nordpol.get_name() not in d_cont[CType.str(CType.U_AAA)], print (d_cont[CType.str(CType.U_AAA)])
+    assert caan_nordpol.get_name() not in d_cont[CType.U_AAA], print (d_cont[CType.U_AAA])
     assert caacon.get_unit_count() == 3
     assert caacon.get_unit_count(CType.U_INFANTARY) == 2
     assert caacon.get_unit_count(CType.U_AAA) == 1
