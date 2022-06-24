@@ -220,35 +220,40 @@ def test_cargo():
     caan_japan = CAANation("Japan", CType.A_AXIS)
     caar = CAAR_Cargo()
     caac = CAAU_Cargo(caan_germany,caar,None)
-    assert(caac.get_type() == CType.U_CARRIER)
+    assert caac.get_type() == CType.U_CARGO
+    assert caac.get_name() == CType.str(CType.U_CARGO)
     #Carrier must be test with i_count == None
     sub_test_unit(caac, caan_germany, None)
     assert caac.add_unit(CAAU_AAA(caan_germany)) == False
     assert caac.get_unit_count() == 0
-    assert caac.add_unit(CAAU_Figther(caan_germany)) == True
+    assert caac.add_unit(CAAU_Inf(caan_germany)) == True
     assert caac.get_unit_count() == 1
-    assert caac.add_unit(CAAU_Figther(caan_germany)) == True
+    assert caac.add_unit(CAAU_Tank(caan_germany)) == True
     assert caac.get_unit_count() == 2
+    assert caac.add_unit(CAAU_Tank(caan_germany)) == False
+    assert caac.get_unit_count() == 2
+    assert caac.sub_unit(CAAU_Tank(caan_germany)) == True
+    assert caac.get_unit_count() == 1
+    assert caac.sub_unit(CAAU_Tank(caan_germany)) == False
+    assert caac.get_unit_count() == 1
+    assert caac.sub_unit(CAAU_Inf(caan_japan)) == False
+    assert caac.get_unit_count() == 1
+    assert caac.sub_unit(CAAU_Inf(caan_germany)) == True
+    assert caac.get_unit_count() == 0
+    assert caac.add_unit(CAAU_MechInf(caan_japan)) == True
+    assert caac.get_unit_count() == 1
     assert caac.add_unit(CAAU_Figther(caan_germany)) == False
-    assert caac.get_unit_count() == 2
-    assert caac.sub_unit(CAAU_Figther(caan_germany)) == True
-    assert caac.get_unit_count() == 1, f"caac.get_unit_count() == {caac.get_unit_count()}"
-    assert caac.add_unit(CAAU_TBomb(caan_germany)) == True
-    assert caac.get_unit_count() == 2
-    assert caac.sub_unit(CAAU_Figther(caan_japan)) == False
-    assert caac.get_unit_count() == 2, f"caac.get_unit_count() == {caac.get_unit_count()}"
-    assert caac.sub_unit(CAAU_TBomb(caan_germany)) == True
-    assert caac.get_unit_count() == 1, f"caac.get_unit_count() == {caac.get_unit_count()}"
-    assert caac.add_unit(CAAU_TBomb(caan_japan)) == True
-    assert caac.get_unit_count() == 2
-    assert caac.sub_unit(CAAU_Figther(caan_germany)) == True
-    assert caac.get_unit_count() == 1, f"caac.get_unit_count() == {caac.get_unit_count()}"
-    assert caac.sub_unit(CAAU_Figther(caan_germany)) == False
-    assert caac.get_unit_count() == 1, f"caac.get_unit_count() == {caac.get_unit_count()}"
-    assert caac.add_unit(CAAU_SBomb(caan_japan)) == False
     assert caac.get_unit_count() == 1
-    assert caac.sub_unit(CAAU_TBomb(caan_japan)) == True
-    assert caac.get_unit_count() == 0  
+    assert caac.add_unit(CAAU_TBomb(caan_germany)) == False
+    assert caac.get_unit_count() == 1
+    assert caac.add_unit(CAAU_SBomb(caan_germany)) == False
+    assert caac.get_unit_count() == 1
+    assert caac.add_unit(CAAU_Ari(caan_germany)) == True
+    assert caac.get_unit_count() == 2
+    assert caac.sub_unit(CAAU_MechInf(caan_japan)) == True
+    assert caac.get_unit_count() == 1
+    assert caac.add_unit(CAAU_Ari(caan_germany)) == False
+    assert caac.get_unit_count() == 1
     
     print(caac.info())    
 
@@ -395,6 +400,8 @@ if __name__ == "__main__":
 
     test_carrier()
     test_carrier_init()
+
+    test_cargo()
 
     '''    
     test_carrier(caan_germany, caar, [CType.U_FIGHTER])

@@ -79,8 +79,8 @@ class CAAU_Battleship(CAAUnit):
 
 ##############################################################################
 class CAAU_Container(CAAUnit):
-    def __init__(self, aa_nation, c_rules:CAAR, l_aa_units:list = None) -> None:
-        super().__init__(CType.U_CARRIER, aa_nation, i_count = None)
+    def __init__(self, t_type:CType, aa_nation, c_rules:CAAR, l_aa_units:list = None) -> None:
+        super().__init__(t_type, aa_nation, i_count = None)
         self.c_rules = c_rules
         self.c_container = CAAUnitContainer()
 
@@ -109,13 +109,13 @@ class CAAU_Container(CAAUnit):
 ##############################################################################
 class CAAU_Carrier(CAAU_Container):
     def __init__(self, aa_nation, c_rules: CAAR_Carrier, l_aa_units: list = None) -> None:
-        super().__init__(aa_nation, c_rules, l_aa_units)
+        super().__init__(CType.U_CARRIER, aa_nation, c_rules, l_aa_units)
         pass
  
 ##############################################################################
 class CAAU_Cargo(CAAU_Container):
     def __init__(self, aa_nation, c_rules: CAAR_Cargo, l_aa_units: list = None) -> None:
-        super().__init__(aa_nation, c_rules, l_aa_units)
+        super().__init__(CType.U_CARGO, aa_nation, c_rules, l_aa_units)
         pass
 
 
