@@ -118,32 +118,6 @@ class CAAU_Cargo(CAAU_Container):
         super().__init__(CType.U_CARGO, aa_nation, c_rules, l_aa_units)
         pass
 
-
-##############################################################################
-class CAAF_Major(CAAFacillity):
-    def __init__(self) -> None:
-        super().__init__(CType.F_MAJOR_FACTORY)
-        pass
-
-##############################################################################
-class CAAF_Minor(CAAFacillity):
-    def __init__(self) -> None:
-        super().__init__(CType.F_MINOR_FACTORY)
-        pass
-
-##############################################################################
-class CAAF_AirBase(CAAFacillity):
-    def __init__(self) -> None:
-        super().__init__(CType.F_AIR_BASE)
-        pass
-
-##############################################################################
-class CAAF_NavalBase(CAAFacillity):
-    def __init__(self) -> None:
-        super().__init__(CType.F_NAVAL_BASE)
-        pass
-
-
 ##############################################################################
 # Not executable
 ##############################################################################
