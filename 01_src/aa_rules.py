@@ -2,23 +2,48 @@ from aa_type import CType
 from aa_container import *
 
 class CAAR:
-    def __init__(self, aa_allowed_units = [], aa_conditinal_units = [], i_units_max = 0) -> None:
+    def __init__(self, aa_allowed_units = [], aa_conditinal_units = [], i_units_max = None, d_exlusive_limits = {}) -> None:
         self.aa_allowed_units = aa_allowed_units
         self.aa_conditinal_units = aa_conditinal_units
         self.i_unit_max = i_units_max
+        self.d_exlusive_limits = d_exlusive_limits
         pass
 
     def check_add(self, t_container:CAAUnitContainer, aa_unit:CType) -> bool:    
-        if t_container.get_unit_count() >= self.i_unit_max:
-            return False
-        if (len(self.aa_conditinal_units) > 0) and (aa_unit not in self.aa_conditinal_units):
+        b_ret = True
+        # check the overall limit
+        if (self.i_unit_max != None) and t_container.get_unit_count() >= self.i_unit_max:
+            b_ret = False
+            pass
+
+        # check for allowness 
+        if (b_ret == True) and \
+            aa_unit not in self.aa_allowed_units:
+            b_ret = False
+            pass
+
+        # check is there an contional unit 
+        if (b_ret == True) and \
+            (len(self.aa_conditinal_units) > 0) and \
+                (aa_unit not in self.aa_conditinal_units):
+            i_cond_unit = 0
             for aa_cond_unit in self.aa_conditinal_units:
-                if (t_container.get_unit_count(aa_cond_unit) > 0) and aa_unit in self.aa_allowed_units:
-                    return True
-            return False     
-        if aa_unit not in self.aa_allowed_units:
-            return False
-        return True
+                if (t_container.get_unit_count(aa_cond_unit) > 0):
+                    i_cond_unit = i_cond_unit + 1
+                pass
+            if (i_cond_unit == 0):
+                b_ret = False     
+                pass
+            pass
+
+        # check for limitations
+            if (b_ret == True) and \
+                (aa_unit in self.d_exlusive_limits) and \
+                    (t_container.get_unit_count(aa_unit) >= self.d_exlusive_limits[aa_unit]):
+                b_ret = False     
+                pass
+
+        return b_ret
     
     def check_sub(self, t_container:CAAUnitContainer):
         if t_container.get_unit_count() <= 0:
