@@ -56,6 +56,7 @@ class CAAR_Carrier(CAAR):
                  aa_conditinal_units = [],
                  i_units_max=2) -> None:
         super().__init__(aa_allowed_units, aa_conditinal_units, i_units_max)
+        pass
 
 class CAAR_Cargo(CAAR):
     def __init__(self, 
@@ -63,3 +64,16 @@ class CAAR_Cargo(CAAR):
                  aa_conditinal_units = [CType.U_INFANTARY, CType.U_MECH_INFANTARY],
                  i_units_max=2) -> None:
         super().__init__(aa_allowed_units, aa_conditinal_units, i_units_max)
+        pass
+
+class CAAR_Land(CAAR):
+    def __init__(self, aa_allowed_units=[], aa_conditinal_units=[], i_units_max=None, 
+                    d_exlusive_limits={CType.F_MINOR_FACTORY:1, CType.F_MAJOR_FACTORY:1, CType.F_NAVAL_BASE:1, CType.F_AIR_BASE:1}) -> None:
+        super().__init__(aa_allowed_units, aa_conditinal_units, i_units_max, d_exlusive_limits)
+        pass
+
+class CAAR_Sea(CAAR):
+    def __init__(self, aa_allowed_units=[], aa_conditinal_units=[], i_units_max=None, 
+                    d_exlusive_limits={CType.F_MINOR_FACTORY:0, CType.F_MAJOR_FACTORY:0, CType.F_NAVAL_BASE:0, CType.F_AIR_BASE:0, CType.C_UNIT_LAND:0}) -> None:
+        super().__init__(aa_allowed_units, aa_conditinal_units, i_units_max, d_exlusive_limits)
+        pass
