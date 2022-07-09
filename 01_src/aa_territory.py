@@ -7,7 +7,6 @@ from aa_rules import *
 class CAAI_Territory(CAAItem):
     def __init__(self, s_name:str,aa_region:CType, c_rules:CAAR, l_aa_units:list = []) -> None:
         super().__init__(s_name, CType.T_LAND)
-        self.l_aa_units = l_aa_units
         self.aa_region = aa_region
         self.c_rules = c_rules
         self.c_container = CAAUnitContainer()
@@ -38,6 +37,9 @@ class CAAI_Territory(CAAItem):
 ##############################################################################
 class CAAT_Land(CAAI_Territory):
     def __init__(self, s_name: str, aa_region: CType, aa_nation: CAAI_Nation, aa_ipc: int, c_rules: CAAR, l_aa_units: list = []) -> None:
+        if (type(c_rules) != CAAR_Land):
+            raise Exception (f"type wrong (is {type(c_rules)} expected CAAR")
+        
         super().__init__(s_name, aa_region, c_rules, l_aa_units)
         self.aa_ipc=aa_ipc
         self.aa_nation = aa_nation
