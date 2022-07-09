@@ -1,4 +1,5 @@
 from aa_type import CType
+import inspect
 
 ##############################################################################
 class CAAItem():
@@ -63,18 +64,19 @@ class CAAItem():
         
         s_container = self.get_units()
         if s_container != None:
-            s_container = "\n" + s_container + "\n"
+            s_container = "\n    " + s_container.replace("\n", "\n    ") + "\n"
         else:
             s_container = "N/A"
         return f'''
-Name    : {self.get_name()}
-Region  : {self.get_region()}
-Type    : {CType.str(self.get_type())}
-Nation  : {s_nation}
-Alliance: {CType.str(self.get_alliance())}
-IPC     : {self.get_ipc()}
-Units   : {s_container}
-Count   : {self.get_count()}
+{__name__}.{inspect.currentframe().f_code.co_name}:
+  Name    : {self.get_name()}
+  Region  : {CType.str(self.get_region())}
+  Type    : {CType.str(self.get_type())}
+  Nation  : {s_nation}
+  Alliance: {CType.str(self.get_alliance())}
+  IPC     : {self.get_ipc()}
+  Count   : {self.get_count()}
+  Units   : {s_container}
 '''
       
 ##############################################################################

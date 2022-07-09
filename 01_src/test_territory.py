@@ -10,7 +10,7 @@ import inspect
 ##############################################################################
 def test_land(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
-    caa = CAAI_Land(s_name,aa_region, aa_nation, aa_ipc, [])
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, [])
     assert caa.get_name() == s_name
     assert caa.get_region() == aa_region
     assert caa.get_type() == CType.T_LAND
