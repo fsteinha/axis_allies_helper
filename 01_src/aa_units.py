@@ -2,12 +2,12 @@ from copy import deepcopy
 from aa_type import CType
 from aa_rules import *
 from aa_container import *
-from aa_items import *
+from aa_nation import *
 from tabulate import tabulate
 
 ##############################################################################
 class CAAU_Inf(CAAUnit):
-    def __init__(self, aa_nation:CAANation, i_count = 1) -> None:
+    def __init__(self, aa_nation:CAAI_Nation, i_count = 1) -> None:
         super().__init__(CType.U_INFANTARY, aa_nation, i_count)
         pass
 

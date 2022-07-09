@@ -8,7 +8,7 @@ import inspect
 
 ##############################################################################
 def test_container_init(*args):
-    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     try:
         caacon = CAAUnitContainer(*args)
         print(caacon.info())    
@@ -19,9 +19,9 @@ def test_container_init(*args):
     
 ##############################################################################
 def test_container_add_sub():
-    test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
-    caan_germany = CAANation("Germany", CType.A_AXIS)
-    caan_nordpol = CAANation("Nordpol", CType.A_ALLIES)
+    sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caan_germany = CAAI_Nation("Germany", CType.A_AXIS)
+    caan_nordpol = CAAI_Nation("Nordpol", CType.A_ALLIES)
     
     print ("... init")
     caacon = CAAUnitContainer(CAAU_Inf(caan_germany, 1))
@@ -146,9 +146,9 @@ def test_container_add_sub():
 ##############################################################################
 if __name__ == "__main__":
     
-    caan_germany = CAANation("Germany", CType.A_AXIS)
-    caan_japan = CAANation("Japan", CType.A_AXIS)
-    caan_gb_europe = CAANation("Great Britain Europe", CType.A_ALLIES)
+    caan_germany = CAAI_Nation("Germany", CType.A_AXIS)
+    caan_japan = CAAI_Nation("Japan", CType.A_AXIS)
+    caan_gb_europe = CAAI_Nation("Great Britain Europe", CType.A_ALLIES)
     
     test_container_init(CAAU_Inf(caan_germany, 1))
     test_container_init(CAAU_Inf(caan_germany, 10), CAAU_Inf(caan_japan, 1),CAAU_TBomb(caan_japan, 3))
