@@ -67,7 +67,13 @@ class CAAR_Cargo(CAAR):
         pass
 
 class CAAR_Land(CAAR):
-    def __init__(self, aa_allowed_units=[], aa_conditinal_units=[], i_units_max=None, 
+    def __init__(self,  aa_allowed_units=[CType.F_MINOR_FACTORY, 
+                                            CType.F_MAJOR_FACTORY, 
+                                            CType.F_NAVAL_BASE, 
+                                            CType.F_AIR_BASE,
+                                            CType.C_UNIT_AIR,
+                                            CType.C_UNIT_LAND], 
+                        aa_conditinal_units=[], i_units_max=None, 
                     d_exlusive_limits={CType.F_MINOR_FACTORY:1, CType.F_MAJOR_FACTORY:1, CType.F_NAVAL_BASE:1, CType.F_AIR_BASE:1}) -> None:
         super().__init__(aa_allowed_units, aa_conditinal_units, i_units_max, d_exlusive_limits)
         pass

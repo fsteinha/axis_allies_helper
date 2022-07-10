@@ -21,9 +21,8 @@ class CAAI_Territory(CAAItem):
         if self.c_rules.check_add(self.c_container, aa_unit.get_type()) == False:
             return False
         
-        self.c_container.add(aa_unit)
-        return True
-    
+        return self.c_container.add(aa_unit)
+        
     def sub_unit(self, aa_unit) -> bool:
         if self.c_rules.check_sub(self.c_container) == False:
             return False
@@ -37,8 +36,9 @@ class CAAI_Territory(CAAItem):
 ##############################################################################
 class CAAT_Land(CAAI_Territory):
     def __init__(self, s_name: str, aa_region: CType, aa_nation: CAAI_Nation, aa_ipc: int, c_rules: CAAR, l_aa_units: list = []) -> None:
-        if (type(c_rules) != CAAR_Land):
-            raise Exception (f"type wrong (is {type(c_rules)} expected CAAR")
+        
+        if (str(c_rules).find("CAAR_Land") == -1):
+            raise Exception (f"isinstance(c_rules, CAAR_Land) results False")
         
         super().__init__(s_name, aa_region, c_rules, l_aa_units)
         self.aa_ipc=aa_ipc

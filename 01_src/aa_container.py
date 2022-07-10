@@ -1,5 +1,6 @@
 from aa_type import CType
 from aa_unit import CAAUnit
+from aa_facillities import CAAI_Facillity
 from tabulate import tabulate
 
 ##############################################################################
@@ -12,7 +13,7 @@ class CAAUnitContainer():
         pass
 
     def add(self, unit) -> bool:
-        if issubclass(type(unit), CAAUnit):
+        if (issubclass(type(unit), CAAUnit)):
             if unit.get_type() not in self.d_aa_units:
                 self.d_aa_units[unit.get_type()] = {unit.get_nation().get_name():unit}
             elif unit.get_nation().get_name() not in self.d_aa_units[unit.get_type()]:
@@ -20,6 +21,12 @@ class CAAUnitContainer():
             else:
                 self.d_aa_units[unit.get_type()][unit.get_nation().get_name()].add(unit.get_count())
             return True
+        elif issubclass(type(unit), CAAI_Facillity):
+            if unit.get_type() not in self.d_aa_units:
+                self.d_aa_units[unit.get_type()] = {CType.str(CType.C_FACILITY):unit}
+            else:
+                self.d_aa_units[unit.get_type()][CType.str(CType.C_FACILITY)].add(unit.get_count())
+            return True    
         return False
 
     def sub(self, unit) -> bool:

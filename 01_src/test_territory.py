@@ -1,6 +1,7 @@
 from test_common import *
 from aa_territory import *
 from aa_nation import *
+from aa_facillities import *
 import inspect
 
 ##############################################################################
@@ -17,7 +18,7 @@ def test_land_init(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int)
     assert caa.get_alliance() == aa_nation.get_alliance(), f"{caa.get_alliance()} != {aa_nation.get_alliance()}"
     assert caa.get_ipc()  == aa_ipc
     
-    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land, [CType.F_AIR_BASE, CType.F_MAJOR_FACTORY, CType.F_MINOR_FACTORY, CType.F_NAVAL_BASE])
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land(), [CAAF_AirBase(), CAAF_Major(), CAAF_Minor(), CAAF_NavalBase()])
     assert caa.get_unit_count() == 4, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 4"
     
     #TBD list
