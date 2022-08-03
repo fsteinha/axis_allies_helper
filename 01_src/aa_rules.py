@@ -18,7 +18,8 @@ class CAAR:
 
         # check for allowness 
         if (b_ret == True) and \
-            aa_unit not in self.aa_allowed_units:
+             ((aa_unit not in self.aa_allowed_units) and 
+                (CType.get_sub_class(aa_unit) not in self.aa_allowed_units)):
             b_ret = False
             pass
 
