@@ -280,6 +280,85 @@ def test_sea_init(s_name:str, aa_region:int):
     print(caa.info())
 
 ##############################################################################
+def test_sea(s_name:str, aa_region:int):
+    sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caan_test = CAAI_Nation("Germany", CType.A_AXIS)
+    caa = CAAT_Sea(s_name,aa_region, CAAR_Sea, [])
+    assert caa.get_name() == s_name
+    assert caa.get_region() == aa_region
+    assert caa.get_type() == CType.T_SEA
+    
+    caa = CAAT_Sea(s_name,aa_region, CAAR_Sea(), [])
+    assert caa.get_unit_count() == 0, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 0"
+    
+    assert caa.add_unit(CAAU_AAA(caan_germany)) == False
+    assert caa.get_unit_count() == 0
+    assert caa.add_unit(CAAU_Figther(caan_germany)) == True
+    #F_ge
+    assert caa.get_unit_count() == 1
+    assert caa.add_unit(CAAU_Figther(caan_germany)) == True
+    #F_ge(2)
+    assert caa.get_unit_count() == 2
+    assert caa.add_unit(CAAU_Figther(caan_germany)) == True
+    #F_ge(3)
+    assert caa.get_unit_count() == 3
+    assert caa.sub_unit(CAAU_Figther(caan_germany)) == True
+    #F_ge(2)
+    assert caa.get_unit_count() == 2, f"caa.get_unit_count() == {caa.get_unit_count()}"
+    assert caa.add_unit(CAAU_TBomb(caan_germany)) == True
+    #F_ge(2),TB_ge(1)
+    assert caa.get_unit_count() == 3
+    assert caa.sub_unit(CAAU_Figther(caan_japan)) == False
+    #F_ge(2),TB_ge(1)
+    assert caa.get_unit_count() == 3, f"caa.get_unit_count() == {caa.get_unit_count()}"
+    assert caa.sub_unit(CAAU_TBomb(caan_germany)) == True
+    #F_ge(2)
+    assert caa.get_unit_count() == 2, f"caa.get_unit_count() == {caa.get_unit_count()}"
+    assert caa.add_unit(CAAU_TBomb(caan_japan)) == True
+    #F_ge(2),TB_jp(1)
+    assert caa.get_unit_count() == 3
+    assert caa.sub_unit(CAAU_Figther(caan_germany)) == True
+    #F_ge(1),TB_jp(1)
+    assert caa.get_unit_count() == 2, f"caa.get_unit_count() == {caa.get_unit_count()}"
+    assert caa.sub_unit(CAAU_Figther(caan_germany)) == True
+    #TB_jp(1)
+    assert caa.get_unit_count() == 1, f"caa.get_unit_count() == {caa.get_unit_count()}"
+    assert caa.add_unit(CAAU_SBomb(caan_japan)) == True
+    #TB_jp(1),SB_jp(1)
+    assert caa.get_unit_count() == 2
+    assert caa.sub_unit(CAAU_TBomb(caan_japan)) == True
+    #SB_jp(1)
+    assert caa.get_unit_count() == 1  
+    assert caa.add_unit(CAAU_Battleship(caan_japan)) == True
+    #SB_jp(1), BS_ip(1)
+    assert caa.get_unit_count() == 2
+    assert caa.add_unit(CAAU_Carrier(caan_japan, CAAR_Carrier())) == True
+    #SB_jp(1), BS_ip(1), Car_jp(1)
+    assert caa.get_unit_count() == 3
+    assert caa.add_unit(CAAU_Cargo(caan_japan, CAAR_Cargo())) == True
+    #SB_jp(1), BS_ip(1), Car_jp(1), Cag_jp(1)
+    assert caa.get_unit_count() == 4
+    assert caa.add_unit(CAAU_Cruiser(caan_japan)) == True
+    #SB_jp(1), BS_ip(1), Car_jp(1), Cag_jp(1), Cru_jp(1)
+    assert caa.get_unit_count() == 5
+    assert caa.add_unit(CAAU_Tank(caan_japan)) == False
+    assert caa.get_unit_count() == 5
+    
+    caau_cargo = CAAU_Cargo(caan_test)
+    assert caau_cargo.add_unit(CAAU_Inf(caan_japan)) == True
+    assert caa.add_unit(caau_cargo) == True
+    #SB_jp(1), BS_ip(1), Car_jp(1), Cag_jp(2), Cru_jp(1)
+    assert caa.get_unit_count() == 6
+    
+    caar_carrier = CAAU_Carrier(caan_test)
+    assert caar_carrier.add_unit(CAAU_Figther(caan_japan)) == True
+    assert caa.add_unit(caar_carrier) == True
+    #SB_jp(1), BS_ip(1), Car_jp(1), Car_de(1), Cag_jp(2), Cru_jp(1)
+    assert caa.get_unit_count() == 7
+    
+    print(caa.info())
+
+##############################################################################
 if __name__ == "__main__":
     caan_germany = CAAI_Nation("Germany", CType.A_AXIS)
     caan_japan = CAAI_Nation("Japan", CType.A_AXIS)
@@ -292,4 +371,6 @@ if __name__ == "__main__":
     test_land("Western Germany",CType.R_EUROPE, caan_germany, 3)
     
     test_sea_init("78",CType.R_PACIFIC)
+    
+    test_sea("80",CType.R_PACIFIC)
     

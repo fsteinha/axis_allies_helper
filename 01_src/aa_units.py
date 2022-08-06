@@ -108,13 +108,13 @@ class CAAU_Container(CAAUnit):
 
 ##############################################################################
 class CAAU_Carrier(CAAU_Container):
-    def __init__(self, aa_nation, c_rules: CAAR_Carrier, l_aa_units: list = None) -> None:
+    def __init__(self, aa_nation, c_rules: CAAR_Carrier = CAAR_Carrier(), l_aa_units: list = None) -> None:
         super().__init__(CType.U_CARRIER, aa_nation, c_rules, l_aa_units)
         pass
  
 ##############################################################################
 class CAAU_Cargo(CAAU_Container):
-    def __init__(self, aa_nation, c_rules: CAAR_Cargo, l_aa_units: list = None) -> None:
+    def __init__(self, aa_nation, c_rules: CAAR_Cargo = CAAR_Cargo(), l_aa_units: list = None) -> None:
         super().__init__(CType.U_CARGO, aa_nation, c_rules, l_aa_units)
         pass
 
