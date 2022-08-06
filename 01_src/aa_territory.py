@@ -41,7 +41,7 @@ class CAAI_Territory(CAAItem):
     This calls is the parrent class for CAAT_Land and CAAT_Sea.
     The class provides adding and removing units according to the given rules.
     """
-    def __init__(self, s_name:str,aa_region:CType, c_rules:CAAR, l_aa_units:list = []) -> None:
+    def __init__(self, s_name:str, aa_territory_type:CType, aa_region:CType, c_rules:CAAR, l_aa_units:list = []) -> None:
         """! The Teritory class initializer.
         @param s_name     The name of the territory.
         @param aa_region  Region from static class CType.
@@ -50,7 +50,7 @@ class CAAI_Territory(CAAItem):
         
         @return  An instance of territory class.
         """
-        super().__init__(s_name, CType.T_LAND)
+        super().__init__(s_name, aa_territory_type)
         self.aa_region = aa_region
         self.c_rules = c_rules
         self.c_container = CAAUnitContainer()
@@ -141,12 +141,24 @@ class CAAI_Territory(CAAItem):
 
 ##############################################################################
 class CAAT_Land(CAAI_Territory):
+    """! The land class. 
+    This is a specialication for land of the territory class.
+    """
     def __init__(self, s_name: str, aa_region: CType, aa_nation: CAAI_Nation, aa_ipc: int, c_rules: CAAR, l_aa_units: list = []) -> None:
+        """! The Teritory class initializer.
+        @param  s_name     The name of the territory.
+        @param  aa_region  Region from static class CType.
+        @param  aa_nation  Owner nation of the land territory.
+        @param  aa_ipc     ipc value of the land.
+        @param  c_rules    Rules for the territory (land or sea), class CAAR.
+        @param  l_aa_units list with preset units.
+        @return An instance of land territory class.
+        """
         
         if (str(c_rules).find("CAAR_Land") == -1):
             raise Exception (f"isinstance(c_rules, CAAR_Land) results False")
         
-        super().__init__(s_name, aa_region, c_rules, l_aa_units)
+        super().__init__(s_name, CType.T_LAND, aa_region, c_rules, l_aa_units)
         self.aa_ipc=aa_ipc
         self.aa_nation = aa_nation
         
@@ -154,8 +166,20 @@ class CAAT_Land(CAAI_Territory):
         
 ##############################################################################
 class CAAT_Sea(CAAI_Territory):
+    """! The sea class. 
+    This is a specialication for sea of the territory class.
+    """
     def __init__(self, s_name: str, aa_region: CType, c_rules: CAAR, l_aa_units: list = []) -> None:
-        super().__init__(s_name, aa_region, c_rules, l_aa_units)
+        """! The Teritory class initializer.
+        @param  s_name     The name of the territory.
+        @param  aa_region  Region from static class CType.
+        @param  c_rules    Rules for the territory (land or sea), class CAAR.
+        @param  l_aa_units list with preset units.
+        @return An instance of land territory class.
+        """
+        super().__init__(s_name, CType.T_SEA, aa_region, c_rules, l_aa_units)
+        if (str(c_rules).find("CAAR_Sea") == -1):
+            raise Exception (f"isinstance(c_rules, CAAR_Sea) results False")
         pass
 
     
