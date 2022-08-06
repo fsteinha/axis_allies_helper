@@ -39,7 +39,7 @@ class CAAUnitContainer():
                (unit.get_nation().get_name() in self.d_aa_units[key_unit]):
                     key_nation = unit.get_nation().get_name()
             if (key_unit != None) and (key_nation != None):
-                print (key_nation)
+                # print (key_nation)
                 self.d_aa_units[key_unit][key_nation].sub(unit.get_count())
                 if self.d_aa_units[key_unit][key_nation].get_count() == 0:
                     del(self.d_aa_units[key_unit][key_nation])

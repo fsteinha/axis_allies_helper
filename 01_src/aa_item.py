@@ -54,30 +54,63 @@ class CAAItem():
             if self.i_count != None:
                 return self.i_count
             return 1
-        return CType.na()
-
+        return CType.na()    
 
     def info(self):
+        s_ret = ""
         s_nation = None
         if (self.get_nation()) != None:
             s_nation = self.get_nation().s_name
-        
+
         s_container = self.get_units()
         if s_container != None:
             s_container = "\n    " + s_container.replace("\n", "\n    ") + "\n"
         else:
             s_container = "N/A"
-        return f'''
-{__name__}.{inspect.currentframe().f_code.co_name}:
-  Name    : {self.get_name()}
-  Region  : {CType.str(self.get_region())}
-  Type    : {CType.str(self.get_type())}
-  Nation  : {s_nation}
-  Alliance: {CType.str(self.get_alliance())}
-  IPC     : {self.get_ipc()}
-  Count   : {self.get_count()}
-  Units   : {s_container}
-'''
+
+        if ('d_neighbore' in dir(self)):
+            b_neighbore = True
+            
+            def intern_get_neighbore(s_key):
+                if self.get_neighbore(s_key) != None:
+                    return self.get_neighbore(s_key).get_name()
+                return None
+
+            s_neighbore_nord       = intern_get_neighbore('nord')
+            s_neighbore_nord_east  = intern_get_neighbore('nord_east')
+            s_neighbore_east       = intern_get_neighbore('east')
+            s_neighbore_south_east = intern_get_neighbore('south_east')
+            s_neighbore_south      = intern_get_neighbore('south')
+            s_neighbore_south_west = intern_get_neighbore('south_west')
+            s_neighbore_west       = intern_get_neighbore('west')
+            s_neighbore_nord_west  = intern_get_neighbore('nord_west')
+        else:
+            b_neighbore = False
+
+
+        s_ret = s_ret + f"{__name__}.{inspect.currentframe().f_code.co_name}:"
+        s_ret = s_ret + f"  Name    : {self.get_name()}" + "\n"
+        s_ret = s_ret + f"  Region  : {CType.str(self.get_region())}" + "\n"
+        s_ret = s_ret + f"  Type    : {CType.str(self.get_type())}" + "\n"    
+        s_ret = s_ret + f"  Nation  : {s_nation}" + "\n"
+        s_ret = s_ret + f"  Alliance: {CType.str(self.get_alliance())}" + "\n"
+        s_ret = s_ret + f"  IPC     : {self.get_ipc()}" + "\n"
+        s_ret = s_ret + f"  Count   : {self.get_count()}" + "\n"
+        s_ret = s_ret + f"  Units   : {s_container}" + "\n"
+        if b_neighbore == True:
+            s_ret = s_ret + f"  Neighbore nord       : {s_neighbore_nord}"       + "\n"
+            s_ret = s_ret + f"  Neighbore nord_east  : {s_neighbore_nord_east}"  + "\n"
+            s_ret = s_ret + f"  Neighbore east       : {s_neighbore_east}"       + "\n"
+            s_ret = s_ret + f"  Neighbore south_east : {s_neighbore_south_east}" + "\n"
+            s_ret = s_ret + f"  Neighbore south      : {s_neighbore_south}"      + "\n"
+            s_ret = s_ret + f"  Neighbore south_west : {s_neighbore_south_west}" + "\n"
+            s_ret = s_ret + f"  Neighbore west       : {s_neighbore_west}"       + "\n"
+            s_ret = s_ret + f"  Neighbore nord_west  : {s_neighbore_nord_west}"  + "\n"
+        else:
+            s_ret = s_ret + f"  Neighbore  : N/A" + "\n"
+
+
+        return s_ret
       
 ##############################################################################
 # Not executable

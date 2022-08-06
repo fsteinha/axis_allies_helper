@@ -70,18 +70,35 @@ class CAAI_Territory(CAAItem):
         pass
 
     def add_unit(self, aa_unit:CAAUnit) -> bool:
+        """! Add a unit to conatainer
+        @param aa_unit Unit which should ad
+        @return  
+         - True 
+            - Unit was added sucessfull.
+         - False 
+            - Unit could not add.
+        """
         if self.c_rules.check_add(self.c_container, aa_unit.get_type()) == False:
             return False
         
         return self.c_container.add(aa_unit)
         
     def sub_unit(self, aa_unit) -> bool:
+        """! Remove a containing unit
+        @param aa_unit Unit which should remove
+        @return  
+         - True 
+            - Unit was remove sucessfull.
+         - False 
+            - Unit could not remove.
+        """
+
         if self.c_rules.check_sub(self.c_container) == False:
             return False
         
         return self.c_container.sub(aa_unit)
         
-    def connect_territory(self, s_neighbore: str, aa_territory) -> bool:
+    def set_neighbore(self, s_neighbore: str, aa_territory) -> bool:
         """! Set a neighbore of territory
         @param s_neighbore  key value from L_NEIGHBORE_KEY.
         @param aa_territory class from type (inheritor) CAAI_Territory.
@@ -99,8 +116,28 @@ class CAAI_Territory(CAAItem):
         return False
 
     def get_unit_count(self) -> int:
+        """! Returns the coaunt of containing units
+        @return  Containing units
+        """
+
         return self.c_container.get_unit_count()
 
+
+    def get_neighbore(self, s_neighbore: str) -> bool:
+        """! Get a neighbore of territory
+        @param s_neighbore  key value from L_NEIGHBORE_KEY.
+        @return 
+            - stored value for neigbore
+            - Exception in case the s_neigbore ky is wrong
+        """
+
+        if (s_neighbore in L_NEIGHBORE_KEY):
+            return self.d_neighbore[s_neighbore]
+        else:
+            raise Exception (f"wrong neibore key {s_neighbore}")
+        
+        # Never reached
+        return None
 
 ##############################################################################
 class CAAT_Land(CAAI_Territory):

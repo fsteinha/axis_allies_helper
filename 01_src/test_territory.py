@@ -41,9 +41,58 @@ def test_land_init(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int)
         assert (False), "Initialisation with not allowed unit succeed"
     except:
         pass
-
     
-    #TBD list
+    #test the neigbores
+
+    s_neighbore = 'nord'
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    assert caa.set_neighbore(s_neighbore, caa_test) == True
+    assert caa.get_neighbore(s_neighbore) == caa_test
+    assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    s_neighbore = 'nord_east'
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    assert caa.set_neighbore(s_neighbore, caa_test) == True
+    assert caa.get_neighbore(s_neighbore) == caa_test
+    assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    s_neighbore = 'east'
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    assert caa.set_neighbore(s_neighbore, caa_test) == True
+    assert caa.get_neighbore(s_neighbore) == caa_test
+    assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    s_neighbore = 'south_east'
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    assert caa.set_neighbore(s_neighbore, caa_test) == True
+    assert caa.get_neighbore(s_neighbore) == caa_test
+    assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    s_neighbore = 'south'
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    assert caa.set_neighbore(s_neighbore, caa_test) == True
+    assert caa.get_neighbore(s_neighbore) == caa_test
+    assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    s_neighbore = 'south_west'
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    assert caa.set_neighbore(s_neighbore, caa_test) == True
+    assert caa.get_neighbore(s_neighbore) == caa_test
+    assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    s_neighbore = 'west'
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    assert caa.set_neighbore(s_neighbore, caa_test) == True
+    assert caa.get_neighbore(s_neighbore) == caa_test
+    assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    s_neighbore = 'nord_west'
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    assert caa.set_neighbore(s_neighbore, caa_test) == True
+    assert caa.get_neighbore(s_neighbore) == caa_test
+    assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    #print item info
     print(caa.info())
 
 def test_land(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int):
@@ -111,7 +160,6 @@ def test_land(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int):
     assert caa.add_unit(CAAU_Cruiser(caan_japan)) == False
     #AB,Ma,Mi,NB,AAA_ge,SB_jp(1)
     assert caa.get_unit_count() == 6
-    
     
     #AB,Ma,Mi,NB,AAA_ge,SB_jp(1)
     print(caa.info())
