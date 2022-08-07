@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ais_20and_20allies_20helper_360',['Ais and allies helper',['../index.html',1,'']]]
+  ['axis_20and_20allies_20helper_370',['Axis and allies helper',['../index.html',1,'']]]
 ];
