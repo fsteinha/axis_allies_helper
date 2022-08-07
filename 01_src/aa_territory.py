@@ -6,13 +6,17 @@
 # @section description_aa_territory Description
 # This modul includes the classes:
 # - CAAI_Territory
-# - TBD
+# - CAAT_Land
+# - CAAT_Sea
+#
+# The territories in axis an allies are the areas for the conficting nations.
+# Units (Troups, Facillities) are place on territories. 
 #
 # @section libraries_main Libraries/Modules
-# - time standard library (https://docs.python.org/3/library/time.html)
-#   - Access to sleep function.
-# - sensors module (local)
-#   - Access to Sensor and TempSensor classes.
+# - aa_type (local)
+# - aa_item (local)
+# - aa_nation (local)
+# - aa_rules (local)
 #
 # @section notes_aa_territory Notes
 # - Comments are Doxygen compatible.
@@ -22,7 +26,7 @@
 #
 # @section author_doxygen_aa_territory Author(s)
 # - Created by Fred Steinhäuser on 07/09/2022.
-# - Modified by Fred Steinhäuser on 08/05/2022.
+# - Modified by Fred Steinhäuser on 08/07/2022.
 #
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
@@ -42,7 +46,7 @@ class CAAI_Territory(CAAItem):
     The class provides adding and removing units according to the given rules.
     """
     def __init__(self, s_name:str, aa_territory_type:CType, aa_region:CType, c_rules:CAAR, l_aa_units:list = []) -> None:
-        """! The Teritory class initializer.
+        """! The territory class initializer.
         @param s_name     The name of the territory.
         @param aa_region  Region from static class CType.
         @param c_rules    Rules for the territory (land or sea), class CAAR.
@@ -70,7 +74,7 @@ class CAAI_Territory(CAAItem):
         pass
 
     def add_unit(self, aa_unit:CAAUnit) -> bool:
-        """! Add a unit to conatainer
+        """! Add a unit to container
         @param aa_unit Unit which should ad
         @return  
          - True 

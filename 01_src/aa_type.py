@@ -1,51 +1,53 @@
 
 class CType():
     
-    C_TERRITORY         = 0
-    C_UNIT              = 1
-    C_UNIT_LAND         = 2
-    C_UNIT_SEA          = 3
-    C_UNIT_AIR          = 4
-    C_IPC               = 5
-    C_NATION            = 6
-    C_ALLIANCE          = 7
-    C_FACILITY          = 8
-    C_REGION            = 9
+    C_SESSION           = 0
+    C_TERRITORY         = 10
+    C_UNIT              = 11
+    C_UNIT_LAND         = 12
+    C_UNIT_SEA          = 13
+    C_UNIT_AIR          = 14
+    C_IPC               = 15
+    C_NATION            = 16
+    C_ALLIANCE          = 17
+    C_FACILITY          = 18
+    C_REGION            = 19
     
+    S_MAP               = 100
 
-    T_LAND              = 10
-    T_SEA               = 11
+    T_LAND              = 210
+    T_SEA               = 211
     
-    U_INFANTARY          = 100
-    U_MECH_INFANTARY     = 101
-    U_TANK               = 102
-    U_ARTILLERY          = 103
-    U_AAA                = 104
-    U_FIGHTER            = 105
-    U_T_BOMBER           = 106
-    U_S_BOMBER           = 107
-    U_CARGO              = 108
-    U_SUBMARINE          = 109
-    U_DESTROYER          = 110
-    U_CRUISER            = 111
-    U_BATTLESHIP         = 112
-    U_CARRIER            = 113
+    U_INFANTARY          = 300
+    U_MECH_INFANTARY     = 301
+    U_TANK               = 302
+    U_ARTILLERY          = 303
+    U_AAA                = 304
+    U_FIGHTER            = 305
+    U_T_BOMBER           = 306
+    U_S_BOMBER           = 307
+    U_CARGO              = 308
+    U_SUBMARINE          = 309
+    U_DESTROYER          = 310
+    U_CRUISER            = 311
+    U_BATTLESHIP         = 312
+    U_CARRIER            = 313
     
-    A_AXIS               = 200
-    A_ALLIES             = 201
+    A_AXIS               = 400
+    A_ALLIES             = 401
 
-    F_MAJOR_FACTORY     = 300
-    F_MINOR_FACTORY     = 301
-    F_AIR_BASE          = 302
-    F_NAVAL_BASE        = 303
+    F_MAJOR_FACTORY     = 500
+    F_MINOR_FACTORY     = 501
+    F_AIR_BASE          = 502
+    F_NAVAL_BASE        = 503
     
-    R_EUROPE            =400
-    R_ASIA_FAR_EAST     =401
-    R_NORDAMERICA       =402
-    R_SOUTHAMERICA      =403
-    R_AFRICA            =404
-    R_PACIFIC           =405
-    R_ASIA_MIDDLE_EAST  =406
+    R_EUROPE            =600
+    R_ASIA_FAR_EAST     =601
+    R_NORDAMERICA       =602
+    R_SOUTHAMERICA      =603
+    R_AFRICA            =604
+    R_PACIFIC           =605
+    R_ASIA_MIDDLE_EAST  =606
     
     
     NA                  = 1000    
@@ -59,6 +61,7 @@ class CType():
         C_FACILITY         : "Facility",
         C_REGION           : "Region",
 
+        S_MAP              : "Map",
 
         T_LAND             : "Land",
         T_SEA              : "Sea",
@@ -106,6 +109,7 @@ class CType():
         C_FACILITY         : C_FACILITY ,
         C_REGION           : C_REGION   ,
 
+        S_MAP              : C_SESSION,
 
         T_LAND             : C_TERRITORY,
         T_SEA              : C_TERRITORY,
