@@ -6,11 +6,24 @@ from aa_units import *
 import inspect
 
 ##############################################################################
+# GLOBALS
+##############################################################################
+
+caan_germany = CAAI_Nation("Germany", CType.A_AXIS)
+caan_japan = CAAI_Nation("Japan", CType.A_AXIS)
+caan_gb_europe = CAAI_Nation("Great Britain Europe", CType.A_ALLIES)
+
+##############################################################################
 # Tests
 ##############################################################################
 
 ##############################################################################
-def test_land_init(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int):
+@pytest.mark.parametrize("s_name, aa_region, aa_nation, aa_ipc", [
+    ("Western Germany",CType.R_EUROPE, caan_germany,10),
+    ("Japan",CType.R_ASIA_FAR_EAST, caan_japan,10),
+    ("Egypt",CType.R_AFRICA, caan_gb_europe,10),
+    ])
+def test_land_init(s_name, aa_region, aa_nation, aa_ipc):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land, [])
     assert caa.get_name() == s_name
@@ -113,7 +126,10 @@ def test_land_init(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int)
     print(caa.info())
 
 ##############################################################################
-def test_land(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int):
+@pytest.mark.parametrize("s_name, aa_region, aa_nation, aa_ipc", [
+    ("Western Germany",CType.R_EUROPE, caan_germany, 3)
+    ])
+def test_land(s_name, aa_region, aa_nation, aa_ipc):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land, [])
     assert caa.get_name() == s_name
@@ -183,6 +199,9 @@ def test_land(s_name:str, aa_region:int, aa_nation:CAAI_Nation, aa_ipc:int):
     print(caa.info())
 
 ##############################################################################
+@pytest.mark.parametrize("s_name, aa_region", [
+    ("78",CType.R_PACIFIC)
+    ])
 def test_sea_init(s_name:str, aa_region:int):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caan_test = CAAI_Nation("Germany", CType.A_AXIS)
@@ -280,6 +299,9 @@ def test_sea_init(s_name:str, aa_region:int):
     print(caa.info())
 
 ##############################################################################
+@pytest.mark.parametrize("s_name, aa_region", [
+    ("80",CType.R_PACIFIC)
+    ])
 def test_sea(s_name:str, aa_region:int):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caan_test = CAAI_Nation("Germany", CType.A_AXIS)
@@ -356,21 +378,4 @@ def test_sea(s_name:str, aa_region:int):
     #SB_jp(1), BS_ip(1), Car_jp(1), Car_de(1), Cag_jp(2), Cru_jp(1)
     assert caa.get_unit_count() == 7
     
-    print(caa.info())
-
-##############################################################################
-if __name__ == "__main__":
-    caan_germany = CAAI_Nation("Germany", CType.A_AXIS)
-    caan_japan = CAAI_Nation("Japan", CType.A_AXIS)
-    caan_gb_europe = CAAI_Nation("Great Britain Europe", CType.A_ALLIES)
-    
-    test_land_init("Western Germany",CType.R_EUROPE, caan_germany,10)
-    test_land_init("Japan",CType.R_ASIA_FAR_EAST, caan_japan,10)
-    test_land_init("Egypt",CType.R_AFRICA, caan_gb_europe,10)
-
-    test_land("Western Germany",CType.R_EUROPE, caan_germany, 3)
-    
-    test_sea_init("78",CType.R_PACIFIC)
-    
-    test_sea("80",CType.R_PACIFIC)
-    
+    print(caa.info())    

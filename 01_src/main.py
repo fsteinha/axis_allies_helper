@@ -1,5 +1,5 @@
 ##
-# @mainpage Ais and allies helper
+# @mainpage Axis and allies helper
 #
 # @section description_main Description
 # This i an application for support an ais and allies board game
