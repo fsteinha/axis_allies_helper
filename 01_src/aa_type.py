@@ -14,6 +14,7 @@ class CType():
     C_REGION            = 19
     
     S_MAP               = 100
+    S_SESSION           = 101
 
     T_LAND              = 210
     T_SEA               = 211
@@ -64,6 +65,7 @@ class CType():
         C_REGION           : "Region",
 
         S_MAP              : "Map",
+        S_SESSION          : "Session",
 
         T_LAND             : "Land",
         T_SEA              : "Sea",
@@ -114,6 +116,7 @@ class CType():
         C_REGION           : C_REGION   ,
 
         S_MAP              : C_SESSION,
+        S_SESSION          : C_SESSION,
 
         T_LAND             : C_TERRITORY,
         T_SEA              : C_TERRITORY,

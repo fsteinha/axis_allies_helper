@@ -39,6 +39,7 @@ class CAAI_Map(CAAItem):
     """
     def __init__(self, s_name: str, l_aa_territories:list = []) -> None:
         """! The map class initializer.
+        @param s_name           Name of the map
         @param l_aa_territories list with all inclusing territoriespreset units.
         @return  An instance of map class.
         """
