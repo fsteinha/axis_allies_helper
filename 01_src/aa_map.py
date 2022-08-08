@@ -5,7 +5,9 @@
 #
 # @section description_aa_territory Description
 # This modul includes the classes:
-# - TBD
+# - CAAI_Map
+# 
+# The CAAI_Map contains all territoires of axis and allies session
 #
 # @section libraries_main Libraries/Modules
 # - aa_type (local)
@@ -15,12 +17,12 @@
 # @section notes_aa_territory Notes
 # - Comments are Doxygen compatible.
 #
-# @section todo_aa_territory TODO
+# @section todo_aa_map TODO
 # - None.
 #
 # @section author_doxygen_aa_territory Author(s)
 # - Created by Fred Steinhäuser on 08/07/2022.
-# - Modified by Fred Steinhäuser on 08/07/2022.
+# - Modified by Fred Steinhäuser on 08/08/2022.
 #
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
