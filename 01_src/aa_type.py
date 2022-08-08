@@ -41,13 +41,15 @@ class CType():
     F_AIR_BASE          = 502
     F_NAVAL_BASE        = 503
     
-    R_EUROPE            =600
-    R_ASIA_FAR_EAST     =601
-    R_NORDAMERICA       =602
-    R_SOUTHAMERICA      =603
-    R_AFRICA            =604
-    R_PACIFIC           =605
-    R_ASIA_MIDDLE_EAST  =606
+    R_EUROPE            = 600
+    R_ASIA_FAR_EAST     = 601
+    R_NORDAMERICA       = 602
+    R_SOUTHAMERICA      = 603
+    R_AFRICA            = 604
+    R_PACIFIC           = 605
+    R_ASIA_MIDDLE_EAST  = 606
+    R_ATLANTIC          = 607
+    R_INDIAN_OCEAN      = 608
     
     
     NA                  = 1000    
@@ -96,7 +98,9 @@ class CType():
         R_AFRICA           : "Africa",
         R_PACIFIC          : "Pacific",
         R_ASIA_MIDDLE_EAST : "Asia middle east",
-        
+        R_ATLANTIC         : "Atlantic",
+        R_INDIAN_OCEAN     : "Indian ocean",
+            
         NA                 : "N/A"
     }
 
@@ -144,7 +148,9 @@ class CType():
         R_AFRICA           : C_REGION,
         R_PACIFIC          : C_REGION,
         R_ASIA_MIDDLE_EAST : C_REGION,
-        
+        R_ATLANTIC         : C_REGION,
+        R_INDIAN_OCEAN     : C_REGION,
+            
         NA                 : NA
     }
 

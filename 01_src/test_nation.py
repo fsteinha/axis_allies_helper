@@ -20,7 +20,6 @@ import inspect
     ("China"                , CType.A_ALLIES),
     ("ANZAC"                , CType.A_ALLIES)
     ])
-
 def test_nation(s_name, aa_alliance):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAI_Nation(s_name, aa_alliance)

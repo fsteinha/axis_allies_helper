@@ -24,8 +24,6 @@
 #
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
-
-from locale import D_FMT
 from aa_type import CType
 from aa_item import CAAItem
 from aa_territory import *
@@ -47,11 +45,11 @@ class CAAI_Map(CAAItem):
         self.d_territories = {}
         if l_aa_territories != None:
             for territory in l_aa_territories:
-                if self.add_territorie(territory) == False:
+                if self.add_territory(territory) == False:
                     raise Exception (f"Add territorie fail {territory}")
         pass
 
-    def add_unit(self, aa_territory:CAAI_Territory) -> bool:
+    def add_territory(self, aa_territory:CAAI_Territory) -> bool:
         """! Add a territory to global dictionary
         @param aa_unit Unit which should ad
         @return  
@@ -60,7 +58,9 @@ class CAAI_Map(CAAItem):
          - False 
             - territory could not add.
         """
-        if aa_territory not in self.d_territories:
+        if (aa_territory not in self.d_territories) and \
+            ((aa_territory.get_type() == CType.T_LAND) or \
+             (aa_territory.get_type() == CType.T_SEA)):
             self.d_territories[aa_territory.get_name()] = aa_territory
         else:
             return False
@@ -69,11 +69,12 @@ class CAAI_Map(CAAItem):
         
     def get_territory(self, s_territory: str) -> CAAI_Territory:
         """! Returns the territory object by given name
+        @param s_territory name of territory
         @return 
         - Success territory object
         - Fail    None
         """
-        if s_territory not in self.d_territories:
+        if s_territory in self.d_territories:
             return self.d_territories[s_territory]
         
         return None

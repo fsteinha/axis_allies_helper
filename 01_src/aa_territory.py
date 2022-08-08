@@ -148,7 +148,7 @@ class CAAT_Land(CAAI_Territory):
     """! The land class. 
     This is a specialication for land of the territory class.
     """
-    def __init__(self, s_name: str, aa_region: CType, aa_nation: CAAI_Nation, aa_ipc: int, c_rules: CAAR, l_aa_units: list = []) -> None:
+    def __init__(self, s_name: str, aa_region: CType, aa_nation: CAAI_Nation, aa_ipc: int, c_rules: CAAR = CAAR_Land, l_aa_units: list = []) -> None:
         """! The Teritory class initializer.
         @param  s_name     The name of the territory.
         @param  aa_region  Region from static class CType.
@@ -173,7 +173,7 @@ class CAAT_Sea(CAAI_Territory):
     """! The sea class. 
     This is a specialication for sea of the territory class.
     """
-    def __init__(self, s_name: str, aa_region: CType, c_rules: CAAR, l_aa_units: list = []) -> None:
+    def __init__(self, s_name: str, aa_region: CType, c_rules: CAAR = CAAR_Sea, l_aa_units: list = []) -> None:
         """! The Teritory class initializer.
         @param  s_name     The name of the territory.
         @param  aa_region  Region from static class CType.
