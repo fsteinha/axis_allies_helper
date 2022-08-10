@@ -18,12 +18,12 @@ caan_gb_europe = CAAI_Nation("Great Britain Europe", CType.A_ALLIES)
 ##############################################################################
 
 ##############################################################################
-@pytest.mark.parametrize("s_name, aa_region, aa_nation, aa_ipc", [
-    ("Western Germany",CType.R_EUROPE, caan_germany,10),
-    ("Japan",CType.R_ASIA_FAR_EAST, caan_japan,10),
-    ("Egypt",CType.R_AFRICA, caan_gb_europe,10),
+@pytest.mark.parametrize("s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation", [
+    ("Western Germany",CType.R_EUROPE,        caan_germany,   10, None),
+    ("Japan",          CType.R_ASIA_FAR_EAST, caan_japan,     10, None),
+    ("Egypt",          CType.R_AFRICA,        caan_gb_europe, 10, caan_germany),
     ])
-def test_land_init(s_name, aa_region, aa_nation, aa_ipc):
+def test_land_init(s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land, [])
     assert caa.get_name() == s_name
@@ -122,6 +122,15 @@ def test_land_init(s_name, aa_region, aa_nation, aa_ipc):
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
+    #test origin nation
+    caa = CAAT_Land(s_name, aa_region, aa_nation, aa_ipc, CAAR_Land, [], aa_origin_nation)
+    if aa_origin_nation == None:
+        assert caa.get_origin_nation() == aa_nation
+        assert caa.get_origin_nation() == caa.get_nation()
+    else:
+        assert caa.get_origin_nation() == aa_origin_nation
+    
+    
     #print item info
     print(caa.info())
 

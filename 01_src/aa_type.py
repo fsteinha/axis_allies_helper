@@ -13,8 +13,15 @@ class CType():
     C_FACILITY          = 18
     C_REGION            = 19
     
-    S_MAP               = 100
-    S_SESSION           = 101
+    S_MAP                    = 100
+    S_SESSION                = 101
+    S_PH1_PURCHASE_REPAIR    = 110
+    S_PH2_COMBAT_MOVE        = 111
+    S_PH3_CONDUCT_COMBAT     = 112
+    S_PH4_NONCOMBAT_MOVE     = 113
+    S_PH5_MOBILIZE_NEW_UNITS = 114
+    S_PH6_COLLECT_INCOME     = 115
+    
 
     T_LAND              = 210
     T_SEA               = 211
@@ -36,6 +43,9 @@ class CType():
     
     A_AXIS               = 400
     A_ALLIES             = 401
+    A_NEUTRAL            = 402
+    A_NEUTRAL_PRO_ALLIES = 403
+    A_NEUTRAL_PRO_AXIS   = 404   
 
     F_MAJOR_FACTORY     = 500
     F_MINOR_FACTORY     = 501
@@ -51,6 +61,12 @@ class CType():
     R_ASIA_MIDDLE_EAST  = 606
     R_ATLANTIC          = 607
     R_INDIAN_OCEAN      = 608
+    R_MEDITERRANEAN_SEA = 609
+    R_NORTH_SEA         = 610
+    R_BALTIC_SEA        = 611
+    R_ARTIC_SEA         = 612
+    R_BLACK_SEA         = 613
+    R_ASIA_CENTRAL      = 614
     
     
     NA                  = 1000    
@@ -64,9 +80,15 @@ class CType():
         C_FACILITY         : "Facility",
         C_REGION           : "Region",
 
-        S_MAP              : "Map",
-        S_SESSION          : "Session",
-
+        S_MAP                    : "Map",
+        S_SESSION                : "Session",
+        S_PH1_PURCHASE_REPAIR    : "Phase 1 Purchase Repair",
+        S_PH2_COMBAT_MOVE        : "Phase 2 Combat Move",
+        S_PH3_CONDUCT_COMBAT     : "Phase 3 Conduct Combat",
+        S_PH4_NONCOMBAT_MOVE     : "Phase 4 Noncombat move",
+        S_PH5_MOBILIZE_NEW_UNITS : "Phase 5 Mobilize new unis",
+        S_PH6_COLLECT_INCOME     : "Phase 6 Collect income",
+    
         T_LAND             : "Land",
         T_SEA              : "Sea",
            
@@ -85,9 +107,12 @@ class CType():
         U_BATTLESHIP       : "Battelship",
         U_CARRIER          : "Carrier",
 
-        A_AXIS             : "Axis",
-        A_ALLIES           : "Allies",
-   
+        A_AXIS               : "Axis",
+        A_ALLIES             : "Allies",
+        A_NEUTRAL            : "Neutral",
+        A_NEUTRAL_PRO_ALLIES : "Neutral pro allies",
+        A_NEUTRAL_PRO_AXIS   : "Neutral pro axis",
+           
         F_MAJOR_FACTORY    : "Major factory",
         F_MINOR_FACTORY    : "Minor factory",
         F_AIR_BASE         : "Air base",
@@ -102,7 +127,12 @@ class CType():
         R_ASIA_MIDDLE_EAST : "Asia middle east",
         R_ATLANTIC         : "Atlantic",
         R_INDIAN_OCEAN     : "Indian ocean",
-            
+        R_MEDITERRANEAN_SEA: "Mediterranean sea",
+        R_NORTH_SEA        : "Nord sea",
+        R_BALTIC_SEA       : "Baltic sea",
+        R_ARTIC_SEA        : "Artic sea",
+        R_BLACK_SEA        : "Black sea",
+        R_ASIA_CENTRAL     : "Asia central",
         NA                 : "N/A"
     }
 
@@ -115,9 +145,15 @@ class CType():
         C_FACILITY         : C_FACILITY ,
         C_REGION           : C_REGION   ,
 
-        S_MAP              : C_SESSION,
-        S_SESSION          : C_SESSION,
-
+        S_MAP                    : C_SESSION,
+        S_SESSION                : C_SESSION,
+        S_PH1_PURCHASE_REPAIR    : C_SESSION,
+        S_PH2_COMBAT_MOVE        : C_SESSION,
+        S_PH3_CONDUCT_COMBAT     : C_SESSION,
+        S_PH4_NONCOMBAT_MOVE     : C_SESSION,
+        S_PH5_MOBILIZE_NEW_UNITS : C_SESSION,
+        S_PH6_COLLECT_INCOME     : C_SESSION,
+    
         T_LAND             : C_TERRITORY,
         T_SEA              : C_TERRITORY,
            
@@ -136,8 +172,11 @@ class CType():
         U_BATTLESHIP       : C_UNIT,
         U_CARRIER          : C_UNIT,
 
-        A_AXIS             : C_ALLIANCE,
-        A_ALLIES           : C_ALLIANCE,
+        A_AXIS               : C_ALLIANCE,
+        A_ALLIES             : C_ALLIANCE,
+        A_NEUTRAL            : C_ALLIANCE,
+        A_NEUTRAL_PRO_ALLIES : C_ALLIANCE,
+        A_NEUTRAL_PRO_AXIS   : C_ALLIANCE,
    
         F_MAJOR_FACTORY    : C_FACILITY,
         F_MINOR_FACTORY    : C_FACILITY,
@@ -153,7 +192,13 @@ class CType():
         R_ASIA_MIDDLE_EAST : C_REGION,
         R_ATLANTIC         : C_REGION,
         R_INDIAN_OCEAN     : C_REGION,
-            
+        R_MEDITERRANEAN_SEA: C_REGION,
+        R_NORTH_SEA        : C_REGION,
+        R_BALTIC_SEA       : C_REGION,
+        R_ARTIC_SEA        : C_REGION,
+        R_BLACK_SEA        : C_REGION,
+        R_ASIA_CENTRAL     : C_REGION,
+
         NA                 : NA
     }
 

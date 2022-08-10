@@ -31,6 +31,7 @@
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
 
+from sre_constants import SRE_FLAG_IGNORECASE
 from aa_type import CType
 from aa_item import CAAItem
 from aa_nation import *
@@ -148,7 +149,7 @@ class CAAT_Land(CAAI_Territory):
     """! The land class. 
     This is a specialication for land of the territory class.
     """
-    def __init__(self, s_name: str, aa_region: CType, aa_nation: CAAI_Nation, aa_ipc: int, c_rules: CAAR = CAAR_Land, l_aa_units: list = []) -> None:
+    def __init__(self, s_name: str, aa_region: CType, aa_nation: CAAI_Nation, aa_ipc: int, c_rules: CAAR = CAAR_Land, l_aa_units: list = [], aa_origin_nation: CAAI_Nation = None) -> None:
         """! The Teritory class initializer.
         @param  s_name     The name of the territory.
         @param  aa_region  Region from static class CType.
@@ -165,7 +166,10 @@ class CAAT_Land(CAAI_Territory):
         super().__init__(s_name, CType.T_LAND, aa_region, c_rules, l_aa_units)
         self.aa_ipc=aa_ipc
         self.aa_nation = aa_nation
-        
+        if aa_origin_nation == None:
+            self.aa_origin_nation = aa_nation
+        else:
+            self.aa_origin_nation = aa_origin_nation
         pass
         
 ##############################################################################

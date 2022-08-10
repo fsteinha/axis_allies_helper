@@ -28,8 +28,19 @@
 
 from aa_type import CType
 from aa_item import CAAItem
+from aa_nation import *
 from aa_map import *
 
+from aa_session_def_global_1940 import *
+
+L_SESSION_PHASES = [
+    CType.S_PH1_PURCHASE_REPAIR,
+    CType.S_PH2_COMBAT_MOVE,        
+    CType.S_PH3_CONDUCT_COMBAT,     
+    CType.S_PH4_NONCOMBAT_MOVE,     
+    CType.S_PH5_MOBILIZE_NEW_UNITS, 
+    CType.S_PH6_COLLECT_INCOME,       
+]
 
 ##############################################################################
 class CAAI_Session(CAAItem):
@@ -38,19 +49,15 @@ class CAAI_Session(CAAItem):
     """
     def __init__(self, s_name:str, 
                        aa_map:CAAI_Map = None, 
-                       l_aa_alliances:list = [], 
-                       d_aa_nations:dict = {}, 
-                       l_aa_session_phases:list = [], 
-                       i_round:int = 1, 
-                       aa_current_nation:CAAI_Nation = None,
-                       aa_current_phase:int = 0) -> None:
+                       i_round:int = 1,
+                       l_aa_nations = L_NATION_SETUP_GLOBAL_1940, 
+                       aa_current_nation:CAAI_Nation = CAAN_GERMANY,
+                       aa_current_phase:int = CType.S_PH1_PURCHASE_REPAIR) -> None:
         """! The session class initializer.
         @param s_name               Name of the session
         @param aa_map               aa_map object (default = None).
-        @param l_aa_alliances       List with playing alliances ((default = [])).
-        @param d_aa_nations         Dictionary with playing nations (key=nation, value=alliance).
-        @param l_aa_session_phases  List of the phases in the round. (default = [])
         @param i_round              Number for round (default = 1)
+        @param l_aa_nations         List with playing nations ((default = [])).
         @param aa_current_nation    Nation which is active (default = None)
         @param aa_current_phase     Active phase (default = None)
 

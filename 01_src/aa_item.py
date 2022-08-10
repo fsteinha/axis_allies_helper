@@ -29,6 +29,11 @@ class CAAItem():
             return self.aa_nation
         return None
         
+    def get_origin_nation(self):
+        if ('aa_origin_nation' in dir(self)):
+            return self.aa_origin_nation
+        return None
+            
     def get_alliance(self) -> str:
         if ('aa_alliance' in dir(self)):
             return self.aa_alliance
@@ -59,8 +64,12 @@ class CAAItem():
     def info(self):
         s_ret = ""
         s_nation = None
+        s_origin_nation = None
         if (self.get_nation()) != None:
             s_nation = self.get_nation().s_name
+
+        if (self.get_origin_nation()) != None:
+            s_origin_nation = self.get_origin_nation().s_name
 
         s_container = self.get_units()
         if s_container != None:
@@ -89,14 +98,15 @@ class CAAItem():
 
 
         s_ret = s_ret + f"{__name__}.{inspect.currentframe().f_code.co_name}:"
-        s_ret = s_ret + f"  Name    : {self.get_name()}" + "\n"
-        s_ret = s_ret + f"  Region  : {CType.str(self.get_region())}" + "\n"
-        s_ret = s_ret + f"  Type    : {CType.str(self.get_type())}" + "\n"    
-        s_ret = s_ret + f"  Nation  : {s_nation}" + "\n"
-        s_ret = s_ret + f"  Alliance: {CType.str(self.get_alliance())}" + "\n"
-        s_ret = s_ret + f"  IPC     : {self.get_ipc()}" + "\n"
-        s_ret = s_ret + f"  Count   : {self.get_count()}" + "\n"
-        s_ret = s_ret + f"  Units   : {s_container}" + "\n"
+        s_ret = s_ret + f"  Name          : {self.get_name()}" + "\n"
+        s_ret = s_ret + f"  Region        : {CType.str(self.get_region())}" + "\n"
+        s_ret = s_ret + f"  Type          : {CType.str(self.get_type())}" + "\n"    
+        s_ret = s_ret + f"  Nation        : {s_nation}" + "\n"
+        s_ret = s_ret + f"  Origin Nation : {s_origin_nation}" + "\n"        
+        s_ret = s_ret + f"  Alliance      : {CType.str(self.get_alliance())}" + "\n"
+        s_ret = s_ret + f"  IPC           : {self.get_ipc()}" + "\n"
+        s_ret = s_ret + f"  Count         : {self.get_count()}" + "\n"
+        s_ret = s_ret + f"  Units         : {s_container}" + "\n"
         if b_neighbore == True:
             s_ret = s_ret + f"  Neighbore nord       : {s_neighbore_nord}"       + "\n"
             s_ret = s_ret + f"  Neighbore nord_east  : {s_neighbore_nord_east}"  + "\n"
