@@ -9,3 +9,18 @@
 # - current state is development stat
 #
 # Copyright (c) 2022 Fred Steinhaeuser.  All rights reserved.
+
+def main():
+    """! The main function.
+    """
+
+
+
+
+def option_parser():
+    pass
+
+
+
+if __name__ == "__main__":
+    main()
