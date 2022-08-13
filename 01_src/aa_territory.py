@@ -31,6 +31,7 @@
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
 
+from ast import And
 from sre_constants import SRE_FLAG_IGNORECASE
 from aa_type import CType
 from aa_item import CAAItem
@@ -118,6 +119,8 @@ class CAAI_Territory(CAAItem):
             - preset of the value in s_neighbore is not None
             - s_neighbore is unknown
         """
+        #if (type(aa_territory) != list) and (type(aa_territory) != CAAT_Land) and (type(aa_territory) != CAAT_Sea):
+        #    return False
 
         if (s_neighbore in L_NEIGHBORE_KEY) and (self.d_neighbore[s_neighbore] == None):
             self.d_neighbore[s_neighbore] = aa_territory
@@ -134,16 +137,19 @@ class CAAI_Territory(CAAItem):
             - dictionary consits errors
         """
         if type(d_neighbore) != dict:
+            self.set_error_message(f"d_neigbore type is not a dict (is {d_neighbore})")
             return False
         i_key_count = 0
 
         for key in d_neighbore:
             b_ret = self.set_neighbore(key, d_neighbore[key])
             if b_ret == False:
+                self.set_error_message(f"setting of neighbore failed (key: {key}, value: {d_neighbore[key]})")
                 return b_ret
             i_key_count = i_key_count + 1
 
         if i_key_count != len(L_NEIGHBORE_KEY):
+            self.set_error_message(f"not all keys")
             return False
 
         return True

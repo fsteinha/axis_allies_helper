@@ -133,6 +133,7 @@ def test_land_init(s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation):
 
     #test neighbores function
 
+    caa = CAAT_Land(s_name, aa_region, aa_nation, aa_ipc)
     caa_nord = CAAT_Land(f"{s_name}_nord",aa_region, aa_nation, aa_ipc)
     caa_nord_east = CAAT_Land(f"{s_name}_nord_east",aa_region, aa_nation, aa_ipc)
     caa_east = CAAT_Land(f"{s_name}_east",aa_region, aa_nation, aa_ipc)
@@ -154,7 +155,8 @@ def test_land_init(s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation):
 
     assert caa.set_neighbores({"nord": caa_nord, "ne": caa_nord_east, "e": caa_east, "se": caa_south_east, "s": caa_south, "sw": caa_south_west, "w": caa_west, "nw": caa_nord_west}) == False
 
-    #assert caa.set_neighbore(s_neighbore, caa_test) == False
+    assert caa.set_neighbore("n", "this is a false type") == False
+
 
     #print item info
     print(caa.info())
@@ -245,8 +247,6 @@ def test_sea_init(s_name:str, aa_region:int):
     assert caa.get_region() == aa_region
     assert caa.get_type() == CType.T_SEA
 
-
-
     b_assert = False
     try:
         caa = CAAT_Sea(s_name, aa_region, CAAR_Sea(),
@@ -328,6 +328,32 @@ def test_sea_init(s_name:str, aa_region:int):
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
+
+    #test neighbores function
+
+    caa = CAAT_Sea(s_name, aa_region)
+    caa_nord = CAAT_Sea(f"{s_name}_nord",aa_region)
+    caa_nord_east = CAAT_Sea(f"{s_name}_nord_east",aa_region)
+    caa_east = CAAT_Sea(f"{s_name}_east",aa_region)
+    caa_south_east = CAAT_Sea(f"{s_name}_south_east",aa_region)
+    caa_south = CAAT_Sea(f"{s_name}_south",aa_region)
+    caa_south_west = CAAT_Sea(f"{s_name}_south_west",aa_region)
+    caa_west = CAAT_Sea(f"{s_name}_west",aa_region)
+    caa_nord_west = CAAT_Sea(f"{s_name}_nord_west",aa_region)
+
+    assert caa.set_neighbores({"n": caa_nord, "ne": caa_nord_east, "e": caa_east, "se": caa_south_east, "s": caa_south, "sw": caa_south_west, "w": caa_west, "nw": caa_nord_west}) == True
+    assert caa.get_neighbore("n") == caa_nord
+    assert caa.get_neighbore("ne") == caa_nord_east
+    assert caa.get_neighbore("e") == caa_east
+    assert caa.get_neighbore("se") == caa_south_east
+    assert caa.get_neighbore("s") == caa_south
+    assert caa.get_neighbore("sw") == caa_south_west
+    assert caa.get_neighbore("w") == caa_west
+    assert caa.get_neighbore("nw") == caa_nord_west
+
+    assert caa.set_neighbores({"nord": caa_nord, "ne": caa_nord_east, "e": caa_east, "se": caa_south_east, "s": caa_south, "sw": caa_south_west, "w": caa_west, "nw": caa_nord_west}) == False
+
+    assert caa.set_neighbore("n", "this is a false type") == False
 
     #print item info
     print(caa.info())

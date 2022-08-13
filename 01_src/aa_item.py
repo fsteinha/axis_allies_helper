@@ -11,6 +11,15 @@ class CAAItem():
         elif  CType.str(aa_type) != None:
             self.aa_type = aa_type
 
+        self.s_error_message = None
+
+    def set_error_message(self, s_error_msg: str) -> None:
+        print(f"Error: {s_error_msg}")
+        self.s_error_message = s_error_msg
+
+    def get_error_message(self) -> None:
+        return self.s_error_message
+
     def get_name(self) -> str:
         if ('s_name' in dir(self)):
             return self.s_name
@@ -118,6 +127,7 @@ class CAAItem():
             s_ret = s_ret + f"  Neighbore nord_west  : {s_neighbore_nord_west}"  + "\n"
         else:
             s_ret = s_ret + f"  Neighbore  : N/A" + "\n"
+        s_ret = s_ret + f"Error           :{self.get_error_message()}"
 
 
         return s_ret
