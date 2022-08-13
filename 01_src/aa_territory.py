@@ -119,8 +119,8 @@ class CAAI_Territory(CAAItem):
             - preset of the value in s_neighbore is not None
             - s_neighbore is unknown
         """
-        #if (type(aa_territory) != list) and (type(aa_territory) != CAAT_Land) and (type(aa_territory) != CAAT_Sea):
-        #    return False
+        if (type(aa_territory) != list) and (type(aa_territory) != CAAT_Land) and (type(aa_territory) != CAAT_Sea):
+            return False
 
         if (s_neighbore in L_NEIGHBORE_KEY) and (self.d_neighbore[s_neighbore] == None):
             self.d_neighbore[s_neighbore] = aa_territory
@@ -164,18 +164,26 @@ class CAAI_Territory(CAAItem):
         return self.c_container.get_unit_count()
 
 
-    def get_neighbore(self, s_neighbore: str) -> bool:
+    def get_neighbore(self, s_neighbore: str):
         """! Get a neighbore of territory
-        @param s_neighbore  key value from L_NEIGHBORE_KEY.
+        @param s_neighbore
+                    - key value from L_NEIGHBORE_KEY.
+                    - None
         @return
-            - stored value for neigbore
-            - Exception in case the s_neigbore ky is wrong
+            - In case s_neighbore is a string
+                - stored value for neigbore
+                - Exception in case the s_neigbore ky is wrong
+            - In case s_neighbore is None
+                - complete store dictionary
         """
 
-        if (s_neighbore in L_NEIGHBORE_KEY):
-            return self.d_neighbore[s_neighbore]
+        if (s_neighbore != None):
+            if (s_neighbore in L_NEIGHBORE_KEY):
+                return self.d_neighbore[s_neighbore]
+            else:
+                raise Exception (f"wrong neibore key {s_neighbore}")
         else:
-            raise Exception (f"wrong neibore key {s_neighbore}")
+            return self.d_neighbore
 
         # Never reached
         return None
