@@ -1089,6 +1089,8 @@ L_TERRITORIES_SETUP_GLOBAL_1940 = [
     CAAT_YUNNAN,
 ]
 
+C_MAP_GLOBAL_1940 = CAAI_Map("aa_map_global_1940", L_TERRITORIES_SETUP_GLOBAL_1940)
+
 #CAAM_GLOBAL_1940 = CAAI_Map("Map-Global-1940"
 
 if __name__ == '__main__':

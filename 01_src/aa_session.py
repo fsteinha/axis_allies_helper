@@ -48,7 +48,7 @@ class CAAI_Session(CAAItem):
     The session class contains all objects of an axis and allies session
     """
     def __init__(self, s_name:str,
-                       aa_map:CAAI_Map = None,
+                       aa_map:CAAI_Map = C_MAP_GLOBAL_1940,
                        i_round:int = 1,
                        l_aa_nations = L_NATION_SETUP_GLOBAL_1940,
                        aa_current_nation:CAAI_Nation = CAAN_GERMANY,
@@ -64,7 +64,43 @@ class CAAI_Session(CAAItem):
         @return  An instance of session class.
         """
         super().__init__(s_name, CType.S_SESSION)
-        TODO
+
+        # check map type
+        if (type(aa_map) != CAAI_Map):
+            raise Exception (f"Given map is unvalid {type(aa_map)}")
+
+        self.aa_map = aa_map
+
+        # check the round
+        if (i_round < 1):
+            raise Exception (f"i_round not valid: {i_round}")
+
+        self.i_round = i_round
+
+        # check nations list
+        if (type(l_aa_nations) != list):
+            raise Exception (f"Given nation list is unvalid {type(l_aa_nations)}")
+
+        # check nation list type
+        for aa_nation in l_aa_nations:
+            if (type(aa_nation) != CAAI_Nation):
+                raise Exception (f"Given object in l_aa_nations is not an nation object {type(aa_nation)}")
+
+        self.l_aa_nations = l_aa_nations
+
+        # check current nation type
+        if (type(aa_current_nation) != CAAI_Nation):
+            raise Exception (f"Given aa_current_nation object is not an nation object {type(aa_current_nation)}")
+
+        if (aa_current_nation not in l_aa_nations):
+            raise Exception (f"Given aa_current_nation object is not in l_aa_nations")
+
+        self.aa_current_nation = aa_current_nation
+
+        # check current phase
+        if (aa_current_phase < CType.S_PH1_PURCHASE_REPAIR) or (aa_current_nation > CType.S_PH6_COLLECT_INCOME):
+            raise Exception (f"aa_current_phase not valid {aa_current_phase}")
+
         pass
 
 
