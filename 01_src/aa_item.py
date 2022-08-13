@@ -28,12 +28,12 @@ class CAAItem():
         if ('aa_nation' in dir(self)):
             return self.aa_nation
         return None
-        
+
     def get_origin_nation(self):
         if ('aa_origin_nation' in dir(self)):
             return self.aa_origin_nation
         return None
-            
+
     def get_alliance(self) -> str:
         if ('aa_alliance' in dir(self)):
             return self.aa_alliance
@@ -59,7 +59,7 @@ class CAAItem():
             if self.i_count != None:
                 return self.i_count
             return 1
-        return CType.na()    
+        return CType.na()
 
     def info(self):
         s_ret = ""
@@ -79,20 +79,20 @@ class CAAItem():
 
         if ('d_neighbore' in dir(self)):
             b_neighbore = True
-            
+
             def intern_get_neighbore(s_key):
                 if self.get_neighbore(s_key) != None:
                     return self.get_neighbore(s_key).get_name()
                 return None
 
-            s_neighbore_nord       = intern_get_neighbore('nord')
-            s_neighbore_nord_east  = intern_get_neighbore('nord_east')
-            s_neighbore_east       = intern_get_neighbore('east')
-            s_neighbore_south_east = intern_get_neighbore('south_east')
-            s_neighbore_south      = intern_get_neighbore('south')
-            s_neighbore_south_west = intern_get_neighbore('south_west')
-            s_neighbore_west       = intern_get_neighbore('west')
-            s_neighbore_nord_west  = intern_get_neighbore('nord_west')
+            s_neighbore_nord       = intern_get_neighbore('n')
+            s_neighbore_nord_east  = intern_get_neighbore('ne')
+            s_neighbore_east       = intern_get_neighbore('e')
+            s_neighbore_south_east = intern_get_neighbore('se')
+            s_neighbore_south      = intern_get_neighbore('s')
+            s_neighbore_south_west = intern_get_neighbore('sw')
+            s_neighbore_west       = intern_get_neighbore('w')
+            s_neighbore_nord_west  = intern_get_neighbore('nw')
         else:
             b_neighbore = False
 
@@ -100,9 +100,9 @@ class CAAItem():
         s_ret = s_ret + f"{__name__}.{inspect.currentframe().f_code.co_name}:"
         s_ret = s_ret + f"  Name          : {self.get_name()}" + "\n"
         s_ret = s_ret + f"  Region        : {CType.str(self.get_region())}" + "\n"
-        s_ret = s_ret + f"  Type          : {CType.str(self.get_type())}" + "\n"    
+        s_ret = s_ret + f"  Type          : {CType.str(self.get_type())}" + "\n"
         s_ret = s_ret + f"  Nation        : {s_nation}" + "\n"
-        s_ret = s_ret + f"  Origin Nation : {s_origin_nation}" + "\n"        
+        s_ret = s_ret + f"  Origin Nation : {s_origin_nation}" + "\n"
         s_ret = s_ret + f"  Alliance      : {CType.str(self.get_alliance())}" + "\n"
         s_ret = s_ret + f"  IPC           : {self.get_ipc()}" + "\n"
         s_ret = s_ret + f"  Count         : {self.get_count()}" + "\n"
@@ -121,7 +121,7 @@ class CAAItem():
 
 
         return s_ret
-      
+
 ##############################################################################
 # Not executable
 ##############################################################################

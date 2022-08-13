@@ -1,6 +1,6 @@
 
 class CType():
-    
+
     C_SESSION           = 0
     C_TERRITORY         = 10
     C_UNIT              = 11
@@ -12,7 +12,7 @@ class CType():
     C_ALLIANCE          = 17
     C_FACILITY          = 18
     C_REGION            = 19
-    
+
     S_MAP                    = 100
     S_SESSION                = 101
     S_PH1_PURCHASE_REPAIR    = 110
@@ -21,11 +21,11 @@ class CType():
     S_PH4_NONCOMBAT_MOVE     = 113
     S_PH5_MOBILIZE_NEW_UNITS = 114
     S_PH6_COLLECT_INCOME     = 115
-    
+
 
     T_LAND              = 210
     T_SEA               = 211
-    
+
     U_INFANTARY          = 300
     U_MECH_INFANTARY     = 301
     U_TANK               = 302
@@ -40,18 +40,18 @@ class CType():
     U_CRUISER            = 311
     U_BATTLESHIP         = 312
     U_CARRIER            = 313
-    
+
     A_AXIS               = 400
     A_ALLIES             = 401
     A_NEUTRAL            = 402
     A_NEUTRAL_PRO_ALLIES = 403
-    A_NEUTRAL_PRO_AXIS   = 404   
+    A_NEUTRAL_PRO_AXIS   = 404
 
     F_MAJOR_FACTORY     = 500
     F_MINOR_FACTORY     = 501
     F_AIR_BASE          = 502
     F_NAVAL_BASE        = 503
-    
+
     R_EUROPE            = 600
     R_ASIA_FAR_EAST     = 601
     R_NORDAMERICA       = 602
@@ -68,10 +68,10 @@ class CType():
     R_BLACK_SEA         = 613
     R_ASIA_CENTRAL      = 614
     R_AUSTRALIA         = 615
-    
-    
-    NA                  = 1000    
-      
+
+
+    NA                  = 1000
+
     d_Str = {
         C_TERRITORY        : "Territory",
         C_UNIT             : "Unit",
@@ -89,10 +89,10 @@ class CType():
         S_PH4_NONCOMBAT_MOVE     : "Phase 4 Noncombat move",
         S_PH5_MOBILIZE_NEW_UNITS : "Phase 5 Mobilize new unis",
         S_PH6_COLLECT_INCOME     : "Phase 6 Collect income",
-    
+
         T_LAND             : "Land",
         T_SEA              : "Sea",
-           
+
         U_INFANTARY        : "Infantary",
         U_MECH_INFANTARY   : "Mech-Infantary",
         U_TANK             : "Tank",
@@ -113,12 +113,12 @@ class CType():
         A_NEUTRAL            : "Neutral",
         A_NEUTRAL_PRO_ALLIES : "Neutral pro allies",
         A_NEUTRAL_PRO_AXIS   : "Neutral pro axis",
-           
+
         F_MAJOR_FACTORY    : "Major factory",
         F_MINOR_FACTORY    : "Minor factory",
         F_AIR_BASE         : "Air base",
         F_NAVAL_BASE       : "Naval base",
-   
+
         R_EUROPE           : "Europe",
         R_ASIA_FAR_EAST    : "Asia far east",
         R_NORDAMERICA      : "North america",
@@ -155,10 +155,10 @@ class CType():
         S_PH4_NONCOMBAT_MOVE     : C_SESSION,
         S_PH5_MOBILIZE_NEW_UNITS : C_SESSION,
         S_PH6_COLLECT_INCOME     : C_SESSION,
-    
+
         T_LAND             : C_TERRITORY,
         T_SEA              : C_TERRITORY,
-           
+
         U_INFANTARY        : C_UNIT,
         U_MECH_INFANTARY   : C_UNIT,
         U_TANK             : C_UNIT,
@@ -179,12 +179,12 @@ class CType():
         A_NEUTRAL            : C_ALLIANCE,
         A_NEUTRAL_PRO_ALLIES : C_ALLIANCE,
         A_NEUTRAL_PRO_AXIS   : C_ALLIANCE,
-   
+
         F_MAJOR_FACTORY    : C_FACILITY,
         F_MINOR_FACTORY    : C_FACILITY,
         F_AIR_BASE         : C_FACILITY,
         F_NAVAL_BASE       : C_FACILITY,
-   
+
         R_EUROPE           : C_REGION,
         R_ASIA_FAR_EAST    : C_REGION,
         R_NORDAMERICA      : C_REGION,
@@ -220,14 +220,14 @@ class CType():
         U_CRUISER          : C_UNIT_SEA,
         U_BATTLESHIP       : C_UNIT_SEA,
         U_CARRIER          : C_UNIT_SEA,
-    }    
+    }
 
     @staticmethod
     def str(t_type:int) -> str:
         try:
             return CType.d_Str[t_type]
         except:
-            return None   
+            return None
 
     @staticmethod
     def type(s_type:str) -> int:
@@ -243,16 +243,16 @@ class CType():
         try:
             return CType.d_Class[t_type]
         except:
-            return None   
+            return None
 
     @staticmethod
     def get_sub_class(t_type:int) -> int:
         try:
             return CType.d_Sub_Class[t_type]
         except:
-            return None   
+            return None
 
-# test 
+# test
 if __name__ == "__main__":
     assert CType.str(CType.C_TERRITORY       ) == "Territory"
     assert CType.str(CType.C_UNIT            ) == "Unit"
@@ -261,7 +261,7 @@ if __name__ == "__main__":
 
     assert CType.str(CType.T_LAND            ) == "Land"
     assert CType.str(CType.T_SEA             ) == "Sea"
-    
+
     assert CType.str(CType.U_INFANTARY       ) == "Infantary"
     assert CType.str(CType.U_MECH_INFANTARY  ) == "Mech-Infantary"
     assert CType.str(CType.U_TANK            ) == "Tank"
@@ -278,12 +278,12 @@ if __name__ == "__main__":
     assert CType.str(CType.U_CARRIER         ) == "Carrier"
     assert CType.str(CType.A_AXIS            ) == "Axis"
     assert CType.str(CType.A_ALLIES          ) == "Allies"
-   
+
     assert CType.str(CType.F_MAJOR_FACTORY   ) == "Major factory"
     assert CType.str(CType.F_MINOR_FACTORY   ) == "Minor factory"
     assert CType.str(CType.F_AIR_BASE        ) == "Air base"
     assert CType.str(CType.F_NAVAL_BASE      ) == "Naval base"
-   
+
     assert CType.str(CType.R_EUROPE          ) == "Europe"
     assert CType.str(CType.R_ASIA_FAR_EAST   ) == "Asia far east"
     assert CType.str(CType.R_NORDAMERICA     ) == "North america"
@@ -291,21 +291,21 @@ if __name__ == "__main__":
     assert CType.str(CType.R_AFRICA          ) == "Africa"
     assert CType.str(CType.R_PACIFIC         ) == "Pacific"
     assert CType.str(CType.R_ASIA_MIDDLE_EAST) == "Asia middle east"
-    
+
     assert CType.str(CType.NA                ) == "N/A"
 
     assert CType.get_class(CType.C_TERRITORY        )  == CType.C_TERRITORY
-    assert CType.get_class(CType.C_UNIT             )  == CType.C_UNIT     
-    assert CType.get_class(CType.C_IPC              )  == CType.C_IPC      
-    assert CType.get_class(CType.C_NATION           )  == CType.C_NATION   
-    assert CType.get_class(CType.C_ALLIANCE         )  == CType.C_ALLIANCE 
-    assert CType.get_class(CType.C_FACILITY         )  == CType.C_FACILITY 
-    assert CType.get_class(CType.C_REGION           )  == CType.C_REGION   
+    assert CType.get_class(CType.C_UNIT             )  == CType.C_UNIT
+    assert CType.get_class(CType.C_IPC              )  == CType.C_IPC
+    assert CType.get_class(CType.C_NATION           )  == CType.C_NATION
+    assert CType.get_class(CType.C_ALLIANCE         )  == CType.C_ALLIANCE
+    assert CType.get_class(CType.C_FACILITY         )  == CType.C_FACILITY
+    assert CType.get_class(CType.C_REGION           )  == CType.C_REGION
 
 
     assert CType.get_class(CType.T_LAND             )  == CType.C_TERRITORY
     assert CType.get_class(CType.T_SEA              )  == CType.C_TERRITORY
-       
+
     assert CType.get_class(CType.U_INFANTARY        )  == CType.C_UNIT
     assert CType.get_class(CType.U_MECH_INFANTARY   )  == CType.C_UNIT
     assert CType.get_class(CType.U_TANK             )  == CType.C_UNIT
@@ -323,12 +323,12 @@ if __name__ == "__main__":
 
     assert CType.get_class(CType.A_AXIS             )  == CType.C_ALLIANCE
     assert CType.get_class(CType.A_ALLIES           )  == CType.C_ALLIANCE
-   
+
     assert CType.get_class(CType.F_MAJOR_FACTORY    )  == CType.C_FACILITY
     assert CType.get_class(CType.F_MINOR_FACTORY    )  == CType.C_FACILITY
     assert CType.get_class(CType.F_AIR_BASE         )  == CType.C_FACILITY
     assert CType.get_class(CType.F_NAVAL_BASE       )  == CType.C_FACILITY
-   
+
     assert CType.get_class(CType.R_EUROPE           )  == CType.C_REGION
     assert CType.get_class(CType.R_ASIA_FAR_EAST    )  == CType.C_REGION
     assert CType.get_class(CType.R_NORDAMERICA      )  == CType.C_REGION
@@ -336,7 +336,7 @@ if __name__ == "__main__":
     assert CType.get_class(CType.R_AFRICA           )  == CType.C_REGION
     assert CType.get_class(CType.R_PACIFIC          )  == CType.C_REGION
     assert CType.get_class(CType.R_ASIA_MIDDLE_EAST )  == CType.C_REGION
-    
+
     assert CType.get_class(CType.NA                 )  == CType.NA
 
     assert CType.get_sub_class(CType.C_TERRITORY        )  == None
@@ -350,7 +350,7 @@ if __name__ == "__main__":
 
     assert CType.get_sub_class(CType.T_LAND             )  == None
     assert CType.get_sub_class(CType.T_SEA              )  == None
-       
+
     assert CType.get_sub_class(CType.U_INFANTARY        )  == CType.C_UNIT_LAND
     assert CType.get_sub_class(CType.U_MECH_INFANTARY   )  == CType.C_UNIT_LAND
     assert CType.get_sub_class(CType.U_TANK             )  == CType.C_UNIT_LAND
@@ -368,12 +368,12 @@ if __name__ == "__main__":
 
     assert CType.get_sub_class(CType.A_AXIS             )  == None
     assert CType.get_sub_class(CType.A_ALLIES           )  == None
-   
+
     assert CType.get_sub_class(CType.F_MAJOR_FACTORY    )  == None
     assert CType.get_sub_class(CType.F_MINOR_FACTORY    )  == None
     assert CType.get_sub_class(CType.F_AIR_BASE         )  == None
     assert CType.get_sub_class(CType.F_NAVAL_BASE       )  == None
-   
+
     assert CType.get_sub_class(CType.R_EUROPE           )  == None
     assert CType.get_sub_class(CType.R_ASIA_FAR_EAST    )  == None
     assert CType.get_sub_class(CType.R_NORDAMERICA      )  == None
@@ -381,8 +381,7 @@ if __name__ == "__main__":
     assert CType.get_sub_class(CType.R_AFRICA           )  == None
     assert CType.get_sub_class(CType.R_PACIFIC          )  == None
     assert CType.get_sub_class(CType.R_ASIA_MIDDLE_EAST )  == None
-    
+
     assert CType.get_sub_class(CType.NA                 )  == None
 
 
-    
