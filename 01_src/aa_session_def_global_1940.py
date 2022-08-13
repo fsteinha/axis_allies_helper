@@ -6,7 +6,7 @@
 # @section description_aa_territory Description
 # This modul includes:
 # - TODO
-# 
+#
 # @section libraries_main Libraries/Modules
 # - aa_type (local)
 # - aa_item (local)
@@ -25,6 +25,7 @@
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
 
+from os import ctermid
 from aa_type import CType
 from aa_item import CAAItem
 from aa_nation import *
@@ -44,362 +45,718 @@ CAAN_ITALY          = CAAI_Nation("Italy"         , CType.A_AXIS  )
 CAAN_ANZAC          = CAAI_Nation("ANZAC"         , CType.A_ALLIES)
 CAAN_FRANCE         = CAAI_Nation("France"        , CType.A_ALLIES)
 
-CAAN_AFGANISTAN     = CAAI_Nation("Afganistan"    , CType.A_NEUTRAL) 
-CAAN_ANGOLA         = CAAI_Nation("Angola"        , CType.A_NEUTRAL) 
+CAAN_AFGANISTAN     = CAAI_Nation("Afganistan"    , CType.A_NEUTRAL)
+CAAN_ANGOLA         = CAAI_Nation("Angola"        , CType.A_NEUTRAL)
+CAAN_ARGENTINA      = CAAI_Nation("Argentina"     , CType.A_NEUTRAL)
+CAAN_BOLIVIA        = CAAI_Nation("Bolivia"       , CType.A_NEUTRAL)
+CAAN_BRAZIL         = CAAI_Nation("Brazil"        , CType.A_NEUTRAL)
+CAAN_BULGARIA       = CAAI_Nation("Bulgaria"      , CType.A_NEUTRAL_PRO_AXIS)
+CAAN_CHILE          = CAAI_Nation("Chile"         , CType.A_NEUTRAL)
+CAAN_COLOMBIA       = CAAI_Nation("Colombia"      , CType.A_NEUTRAL)
+CAAN_PERSIA         = CAAI_Nation("Persia"        , CType.A_NEUTRAL_PRO_ALLIES)
+CAAN_ECUADOR        = CAAI_Nation("Ecuador"       , CType.A_NEUTRAL_PRO_ALLIES)
+CAAN_EIRE           = CAAI_Nation("Eire"          , CType.A_NEUTRAL_PRO_ALLIES)
+CAAN_FINNLAND       = CAAI_Nation("Finnland"      , CType.A_NEUTRAL_PRO_AXIS)
+CAAN_GREECE         = CAAI_Nation("Greece"        , CType.A_NEUTRAL_PRO_ALLIES)
+CAAN_IRAQ           = CAAI_Nation("Iraq"          , CType.A_NEUTRAL_PRO_AXIS)
+CAAN_LIBERIA        = CAAI_Nation("Liberia"       , CType.A_NEUTRAL)
+CAAN_MONGOLIA       = CAAI_Nation("Mongolia"      , CType.A_NEUTRAL)
+CAAN_MOZAMBIQUE     = CAAI_Nation("Mozambique"    , CType.A_NEUTRAL)
+CAAN_NETHERLANDS    = CAAI_Nation("Netherlands"   , CType.A_ALLIES)
+CAAN_RIO_DE_ORO     = CAAI_Nation("Rio de oro"    , CType.A_NEUTRAL)
+CAAN_SAUDI_ARABIA   = CAAI_Nation("Saudi Arabia"  , CType.A_NEUTRAL)
+CAAN_SIERA_LEONE    = CAAI_Nation("Siera Leone"   , CType.A_NEUTRAL)
+CAAN_SPAIN          = CAAI_Nation("Spain"         , CType.A_NEUTRAL)
+CAAN_SWEDEN         = CAAI_Nation("Sweden"        , CType.A_NEUTRAL)
+CAAN_SWITZERLAND    = CAAI_Nation("Switzerland"   , CType.A_NEUTRAL)
+CAAN_TURKEY         = CAAI_Nation("Turkey"        , CType.A_NEUTRAL)
+CAAN_PARAQUAY       = CAAI_Nation("Paraquay"      , CType.A_NEUTRAL)
+CAAN_PERU           = CAAI_Nation("Peru"          , CType.A_NEUTRAL)
+CAAN_PORTUGESE_GUINEA = CAAI_Nation("Portugese Guinea", CType.A_NEUTRAL)
+CAAN_PORTUGAL         = CAAI_Nation("Portugal"    , CType.A_NEUTRAL)
+CAAN_URUGUAY          = CAAI_Nation("Uruguay"      , CType.A_NEUTRAL)
+CAAN_VENEZUELA        = CAAI_Nation("Venezuela"   , CType.A_NEUTRAL)
+CAAN_YUGOSLAVIA       = CAAI_Nation("Yugoslavia"  , CType.A_NEUTRAL_PRO_ALLIES)
 
-Provinz	WorldArea	Region	Nation	IPC	Naval-Base	Air Base	Minor Ind.	Major Ind.	Supplie Route	INF	M.INF	ARI	TANK	AAA	FIGHTER	T.BOMB	S.BOMB	SUB	DEST	CRUISER	B.SHIP	CARRIER	CARRIER (F)	CARRIER (FF)	CARRIER (FT)	CARRIER (T)	CARRIER (TT)	CAR	CAR(I)	CAR (II)	CAR (IM)	CAR (IT)	CAR (IA)	CAR (IAAA)	Allies
-CAAT_SEASIDE_001 = CAAT_Sea("Seaside 1" , CType.R_PACIFIC)																										
-CAAT_SEASIDE_002 = CAAT_Sea("Seaside 2" , CType.R_PACIFIC)																										
-CAAT_SEASIDE_003 = CAAT_Sea("Seaside 3" , CType.R_PACIFIC)																													
-CAAT_SEASIDE_004 = CAAT_Sea("Seaside 4" , CType.R_PACIFIC)																													
-CAAT_SEASIDE_005 = CAAT_Sea("Seaside 5" , CType.R_PACIFIC)																													
-CAAT_SEASIDE_006 = CAAT_Sea("Seaside 6" , CType.R_PACIFIC)																													
-CAAT_SEASIDE_007 = CAAT_Sea("Seaside 7" , CType.R_PACIFIC)																														
-CAAT_SEASIDE_008 = CAAT_Sea("Seaside 8" , CType.R_PACIFIC)																														
-CAAT_SEASIDE_009 = CAAT_Sea("Seaside 9" , CType.R_PACIFIC)																														
-CAAT_SEASIDE_010 = CAAT_Sea("Seaside 10", CType.R_PACIFIC)																														
-CAAT_SEASIDE_011 = CAAT_Sea("Seaside 11", CType.R_PACIFIC)																														
-CAAT_SEASIDE_012 = CAAT_Sea("Seaside 12", CType.R_PACIFIC)																														
-CAAT_SEASIDE_013 = CAAT_Sea("Seaside 13", CType.R_PACIFIC)																														
-CAAT_SEASIDE_014 = CAAT_Sea("Seaside 14", CType.R_PACIFIC)																														
-CAAT_SEASIDE_015 = CAAT_Sea("Seaside 15", CType.R_PACIFIC)																														
-CAAT_SEASIDE_016 = CAAT_Sea("Seaside 16", CType.R_PACIFIC)																														
-CAAT_SEASIDE_017 = CAAT_Sea("Seaside 17", CType.R_PACIFIC)																														
-CAAT_SEASIDE_018 = CAAT_Sea("Seaside 18", CType.R_PACIFIC)																										
-CAAT_SEASIDE_019 = CAAT_Sea("Seaside 19", CType.R_PACIFIC)																										
-CAAT_SEASIDE_020 = CAAT_Sea("Seaside 20", CType.R_PACIFIC)																													
-CAAT_SEASIDE_021 = CAAT_Sea("Seaside 21", CType.R_PACIFIC)																													
-CAAT_SEASIDE_022 = CAAT_Sea("Seaside 22", CType.R_PACIFIC)																													
-CAAT_SEASIDE_023 = CAAT_Sea("Seaside 23", CType.R_PACIFIC)																													
-CAAT_SEASIDE_024 = CAAT_Sea("Seaside 24", CType.R_PACIFIC)																														
-CAAT_SEASIDE_025 = CAAT_Sea("Seaside 25", CType.R_PACIFIC)																														
-CAAT_SEASIDE_026 = CAAT_Sea("Seaside 26", CType.R_PACIFIC)																														
-CAAT_SEASIDE_027 = CAAT_Sea("Seaside 27", CType.R_PACIFIC)																														
-CAAT_SEASIDE_028 = CAAT_Sea("Seaside 28", CType.R_PACIFIC)																														
-CAAT_SEASIDE_029 = CAAT_Sea("Seaside 29", CType.R_PACIFIC)																														
-CAAT_SEASIDE_030 = CAAT_Sea("Seaside 30", CType.R_PACIFIC)																														
-CAAT_SEASIDE_031 = CAAT_Sea("Seaside 31", CType.R_PACIFIC)																																
-CAAT_SEASIDE_031 = CAAT_Sea("Seaside 31", CType.R_PACIFIC)																																
-CAAT_SEASIDE_031 = CAAT_Sea("Seaside 31", CType.R_PACIFIC)																																
-CAAT_SEASIDE_031 = CAAT_Sea("Seaside 31", CType.R_PACIFIC)																																
-CAAT_SEASIDE_034 = CAAT_Sea("Seaside 34", CType.R_PACIFIC)																																
-CAAT_SEASIDE_035 = CAAT_Sea("Seaside 35", CType.R_PACIFIC)																																
-CAAT_SEASIDE_036 = CAAT_Sea("Seaside 36", CType.R_PACIFIC)																																
-CAAT_SEASIDE_037 = CAAT_Sea("Seaside 37", CType.R_PACIFIC)																																
-CAAT_SEASIDE_038 = CAAT_Sea("Seaside 38", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_039 = CAAT_Sea("Seaside 39", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_040 = CAAT_Sea("Seaside 40", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_041 = CAAT_Sea("Seaside 41", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_042 = CAAT_Sea("Seaside 42", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_043 = CAAT_Sea("Seaside 43", CType.R_PACIFIC)																																
-CAAT_SEASIDE_044 = CAAT_Sea("Seaside 44", CType.R_PACIFIC)																																
-CAAT_SEASIDE_045 = CAAT_Sea("Seaside 45", CType.R_PACIFIC)																																
-CAAT_SEASIDE_046 = CAAT_Sea("Seaside 46", CType.R_PACIFIC)																																
-CAAT_SEASIDE_047 = CAAT_Sea("Seaside 47", CType.R_PACIFIC)																																
-CAAT_SEASIDE_048 = CAAT_Sea("Seaside 48", CType.R_PACIFIC)																																
-CAAT_SEASIDE_049 = CAAT_Sea("Seaside 49", CType.R_PACIFIC)																																
-CAAT_SEASIDE_050 = CAAT_Sea("Seaside 50", CType.R_PACIFIC)																																
-CAAT_SEASIDE_051 = CAAT_Sea("Seaside 51", CType.R_PACIFIC)																																
-CAAT_SEASIDE_052 = CAAT_Sea("Seaside 52", CType.R_PACIFIC)																																
-CAAT_SEASIDE_053 = CAAT_Sea("Seaside 53", CType.R_PACIFIC)																																
-CAAT_SEASIDE_054 = CAAT_Sea("Seaside 54", CType.R_PACIFIC)																																
-CAAT_SEASIDE_055 = CAAT_Sea("Seaside 55", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_056 = CAAT_Sea("Seaside 56", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_057 = CAAT_Sea("Seaside 57", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_058 = CAAT_Sea("Seaside 58", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_059 = CAAT_Sea("Seaside 59", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_060 = CAAT_Sea("Seaside 60", CType.R_INDIAN_OCEAN)																																
-CAAT_SEASIDE_061 = CAAT_Sea("Seaside 61", CType.R_PACIFIC)																																
+
+CAAT_SEASIDE_001 = CAAT_Sea("Seaside 1" , CType.R_PACIFIC)
+CAAT_SEASIDE_002 = CAAT_Sea("Seaside 2" , CType.R_PACIFIC)
+CAAT_SEASIDE_003 = CAAT_Sea("Seaside 3" , CType.R_PACIFIC)
+CAAT_SEASIDE_004 = CAAT_Sea("Seaside 4" , CType.R_PACIFIC)
+CAAT_SEASIDE_005 = CAAT_Sea("Seaside 5" , CType.R_PACIFIC)
+CAAT_SEASIDE_006 = CAAT_Sea("Seaside 6" , CType.R_PACIFIC)
+CAAT_SEASIDE_007 = CAAT_Sea("Seaside 7" , CType.R_PACIFIC)
+CAAT_SEASIDE_008 = CAAT_Sea("Seaside 8" , CType.R_PACIFIC)
+CAAT_SEASIDE_009 = CAAT_Sea("Seaside 9" , CType.R_PACIFIC)
+CAAT_SEASIDE_010 = CAAT_Sea("Seaside 10", CType.R_PACIFIC)
+CAAT_SEASIDE_011 = CAAT_Sea("Seaside 11", CType.R_PACIFIC)
+CAAT_SEASIDE_012 = CAAT_Sea("Seaside 12", CType.R_PACIFIC)
+CAAT_SEASIDE_013 = CAAT_Sea("Seaside 13", CType.R_PACIFIC)
+CAAT_SEASIDE_014 = CAAT_Sea("Seaside 14", CType.R_PACIFIC)
+CAAT_SEASIDE_015 = CAAT_Sea("Seaside 15", CType.R_PACIFIC)
+CAAT_SEASIDE_016 = CAAT_Sea("Seaside 16", CType.R_PACIFIC)
+CAAT_SEASIDE_017 = CAAT_Sea("Seaside 17", CType.R_PACIFIC)
+CAAT_SEASIDE_018 = CAAT_Sea("Seaside 18", CType.R_PACIFIC)
+CAAT_SEASIDE_019 = CAAT_Sea("Seaside 19", CType.R_PACIFIC)
+CAAT_SEASIDE_020 = CAAT_Sea("Seaside 20", CType.R_PACIFIC)
+CAAT_SEASIDE_021 = CAAT_Sea("Seaside 21", CType.R_PACIFIC)
+CAAT_SEASIDE_022 = CAAT_Sea("Seaside 22", CType.R_PACIFIC)
+CAAT_SEASIDE_023 = CAAT_Sea("Seaside 23", CType.R_PACIFIC)
+CAAT_SEASIDE_024 = CAAT_Sea("Seaside 24", CType.R_PACIFIC)
+CAAT_SEASIDE_025 = CAAT_Sea("Seaside 25", CType.R_PACIFIC)
+CAAT_SEASIDE_026 = CAAT_Sea("Seaside 26", CType.R_PACIFIC)
+CAAT_SEASIDE_027 = CAAT_Sea("Seaside 27", CType.R_PACIFIC)
+CAAT_SEASIDE_028 = CAAT_Sea("Seaside 28", CType.R_PACIFIC)
+CAAT_SEASIDE_029 = CAAT_Sea("Seaside 29", CType.R_PACIFIC)
+CAAT_SEASIDE_030 = CAAT_Sea("Seaside 30", CType.R_PACIFIC)
+CAAT_SEASIDE_031 = CAAT_Sea("Seaside 31", CType.R_PACIFIC)
+CAAT_SEASIDE_031 = CAAT_Sea("Seaside 31", CType.R_PACIFIC)
+CAAT_SEASIDE_031 = CAAT_Sea("Seaside 31", CType.R_PACIFIC)
+CAAT_SEASIDE_031 = CAAT_Sea("Seaside 31", CType.R_PACIFIC)
+CAAT_SEASIDE_034 = CAAT_Sea("Seaside 34", CType.R_PACIFIC)
+CAAT_SEASIDE_035 = CAAT_Sea("Seaside 35", CType.R_PACIFIC)
+CAAT_SEASIDE_036 = CAAT_Sea("Seaside 36", CType.R_PACIFIC)
+CAAT_SEASIDE_037 = CAAT_Sea("Seaside 37", CType.R_PACIFIC)
+CAAT_SEASIDE_038 = CAAT_Sea("Seaside 38", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_039 = CAAT_Sea("Seaside 39", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_040 = CAAT_Sea("Seaside 40", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_041 = CAAT_Sea("Seaside 41", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_042 = CAAT_Sea("Seaside 42", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_043 = CAAT_Sea("Seaside 43", CType.R_PACIFIC)
+CAAT_SEASIDE_044 = CAAT_Sea("Seaside 44", CType.R_PACIFIC)
+CAAT_SEASIDE_045 = CAAT_Sea("Seaside 45", CType.R_PACIFIC)
+CAAT_SEASIDE_046 = CAAT_Sea("Seaside 46", CType.R_PACIFIC)
+CAAT_SEASIDE_047 = CAAT_Sea("Seaside 47", CType.R_PACIFIC)
+CAAT_SEASIDE_048 = CAAT_Sea("Seaside 48", CType.R_PACIFIC)
+CAAT_SEASIDE_049 = CAAT_Sea("Seaside 49", CType.R_PACIFIC)
+CAAT_SEASIDE_050 = CAAT_Sea("Seaside 50", CType.R_PACIFIC)
+CAAT_SEASIDE_051 = CAAT_Sea("Seaside 51", CType.R_PACIFIC)
+CAAT_SEASIDE_052 = CAAT_Sea("Seaside 52", CType.R_PACIFIC)
+CAAT_SEASIDE_053 = CAAT_Sea("Seaside 53", CType.R_PACIFIC)
+CAAT_SEASIDE_054 = CAAT_Sea("Seaside 54", CType.R_PACIFIC)
+CAAT_SEASIDE_055 = CAAT_Sea("Seaside 55", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_056 = CAAT_Sea("Seaside 56", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_057 = CAAT_Sea("Seaside 57", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_058 = CAAT_Sea("Seaside 58", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_059 = CAAT_Sea("Seaside 59", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_060 = CAAT_Sea("Seaside 60", CType.R_INDIAN_OCEAN)
+CAAT_SEASIDE_061 = CAAT_Sea("Seaside 61", CType.R_PACIFIC)
 CAAT_SEASIDE_062 = CAAT_Sea("Seaside 62", CType.R_PACIFIC)
 CAAT_SEASIDE_063 = CAAT_Sea("Seaside 63", CType.R_PACIFIC)
-CAAT_SEASIDE_064 = CAAT_Sea("Seaside 64", CType.R_PACIFIC)																																
-CAAT_SEASIDE_065 = CAAT_Sea("Seaside 65", CType.R_PACIFIC)																																
-CAAT_SEASIDE_066 = CAAT_Sea("Seaside 66", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_067 = CAAT_Sea("Seaside 67", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_068 = CAAT_Sea("Seaside 68", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_069 = CAAT_Sea("Seaside 69", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_070 = CAAT_Sea("Seaside 70", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_071 = CAAT_Sea("Seaside 71", CType.R_PACIFIC)																																
-CAAT_SEASIDE_072 = CAAT_Sea("Seaside 72", CType.R_PACIFIC)																																
-CAAT_SEASIDE_073 = CAAT_Sea("Seaside 73", CType.R_PACIFIC)																																
-CAAT_SEASIDE_074 = CAAT_Sea("Seaside 74", CType.R_PACIFIC)																																
-CAAT_SEASIDE_075 = CAAT_Sea("Seaside 75", CType.R_PACIFIC)																																
-CAAT_SEASIDE_076 = CAAT_Sea("Seaside 76", CType.R_PACIFIC)																																
-CAAT_SEASIDE_077 = CAAT_Sea("Seaside 77", CType.R_PACIFIC)																																
-CAAT_SEASIDE_078 = CAAT_Sea("Seaside 78", CType.R_PACIFIC)																																
-CAAT_SEASIDE_079 = CAAT_Sea("Seaside 79", CType.R_PACIFIC)																																
-CAAT_SEASIDE_080 = CAAT_Sea("Seaside 80", CType.R_PACIFIC)																																
-CAAT_SEASIDE_081 = CAAT_Sea("Seaside 81", CType.R_PACIFIC)																																
-CAAT_SEASIDE_082 = CAAT_Sea("Seaside 82", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_083 = CAAT_Sea("Seaside 83", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_084 = CAAT_Sea("Seaside 84", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_085 = CAAT_Sea("Seaside 85", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_086 = CAAT_Sea("Seaside 86", CType.R_ATLANTIC)																																
+CAAT_SEASIDE_064 = CAAT_Sea("Seaside 64", CType.R_PACIFIC)
+CAAT_SEASIDE_065 = CAAT_Sea("Seaside 65", CType.R_PACIFIC)
+CAAT_SEASIDE_066 = CAAT_Sea("Seaside 66", CType.R_ATLANTIC)
+CAAT_SEASIDE_067 = CAAT_Sea("Seaside 67", CType.R_ATLANTIC)
+CAAT_SEASIDE_068 = CAAT_Sea("Seaside 68", CType.R_ATLANTIC)
+CAAT_SEASIDE_069 = CAAT_Sea("Seaside 69", CType.R_ATLANTIC)
+CAAT_SEASIDE_070 = CAAT_Sea("Seaside 70", CType.R_ATLANTIC)
+CAAT_SEASIDE_071 = CAAT_Sea("Seaside 71", CType.R_PACIFIC)
+CAAT_SEASIDE_072 = CAAT_Sea("Seaside 72", CType.R_PACIFIC)
+CAAT_SEASIDE_073 = CAAT_Sea("Seaside 73", CType.R_PACIFIC)
+CAAT_SEASIDE_074 = CAAT_Sea("Seaside 74", CType.R_PACIFIC)
+CAAT_SEASIDE_075 = CAAT_Sea("Seaside 75", CType.R_PACIFIC)
+CAAT_SEASIDE_076 = CAAT_Sea("Seaside 76", CType.R_PACIFIC)
+CAAT_SEASIDE_077 = CAAT_Sea("Seaside 77", CType.R_PACIFIC)
+CAAT_SEASIDE_078 = CAAT_Sea("Seaside 78", CType.R_PACIFIC)
+CAAT_SEASIDE_079 = CAAT_Sea("Seaside 79", CType.R_PACIFIC)
+CAAT_SEASIDE_080 = CAAT_Sea("Seaside 80", CType.R_PACIFIC)
+CAAT_SEASIDE_081 = CAAT_Sea("Seaside 81", CType.R_PACIFIC)
+CAAT_SEASIDE_082 = CAAT_Sea("Seaside 82", CType.R_ATLANTIC)
+CAAT_SEASIDE_083 = CAAT_Sea("Seaside 83", CType.R_ATLANTIC)
+CAAT_SEASIDE_084 = CAAT_Sea("Seaside 84", CType.R_ATLANTIC)
+CAAT_SEASIDE_085 = CAAT_Sea("Seaside 85", CType.R_ATLANTIC)
+CAAT_SEASIDE_086 = CAAT_Sea("Seaside 86", CType.R_ATLANTIC)
 CAAT_SEASIDE_087 = CAAT_Sea("Seaside 87", CType.R_ATLANTIC)
-CAAT_SEASIDE_088 = CAAT_Sea("Seaside 88", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_089 = CAAT_Sea("Seaside 89", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_090 = CAAT_Sea("Seaside 90", CType.R_ATLANTIC)																																
+CAAT_SEASIDE_088 = CAAT_Sea("Seaside 88", CType.R_ATLANTIC)
+CAAT_SEASIDE_089 = CAAT_Sea("Seaside 89", CType.R_ATLANTIC)
+CAAT_SEASIDE_090 = CAAT_Sea("Seaside 90", CType.R_ATLANTIC)
 CAAT_SEASIDE_091 = CAAT_Sea("Seaside 91", CType.R_ATLANTIC)
-CAAT_SEASIDE_092 = CAAT_Sea("Seaside 92", CType.R_MEDITERRANEAN_SEA)																																
-CAAT_SEASIDE_093 = CAAT_Sea("Seaside 93", CType.R_MEDITERRANEAN_SEA)																																
-CAAT_SEASIDE_094 = CAAT_Sea("Seaside 94", CType.R_MEDITERRANEAN_SEA)																																
-CAAT_SEASIDE_095 = CAAT_Sea("Seaside 95", CType.R_MEDITERRANEAN_SEA)																																
-CAAT_SEASIDE_096 = CAAT_Sea("Seaside 96", CType.R_MEDITERRANEAN_SEA)																																
-CAAT_SEASIDE_097 = CAAT_Sea("Seaside 97", CType.R_MEDITERRANEAN_SEA)																																
-CAAT_SEASIDE_098 = CAAT_Sea("Seaside 98", CType.R_MEDITERRANEAN_SEA)																																
-CAAT_SEASIDE_099 = CAAT_Sea("Seaside 99", CType.R_MEDITERRANEAN_SEA)																																
-CAAT_SEASIDE_100 = CAAT_Sea("Seaside 100", CType.R_BLACK_SEA)																																
+CAAT_SEASIDE_092 = CAAT_Sea("Seaside 92", CType.R_MEDITERRANEAN_SEA)
+CAAT_SEASIDE_093 = CAAT_Sea("Seaside 93", CType.R_MEDITERRANEAN_SEA)
+CAAT_SEASIDE_094 = CAAT_Sea("Seaside 94", CType.R_MEDITERRANEAN_SEA)
+CAAT_SEASIDE_095 = CAAT_Sea("Seaside 95", CType.R_MEDITERRANEAN_SEA)
+CAAT_SEASIDE_096 = CAAT_Sea("Seaside 96", CType.R_MEDITERRANEAN_SEA)
+CAAT_SEASIDE_097 = CAAT_Sea("Seaside 97", CType.R_MEDITERRANEAN_SEA)
+CAAT_SEASIDE_098 = CAAT_Sea("Seaside 98", CType.R_MEDITERRANEAN_SEA)
+CAAT_SEASIDE_099 = CAAT_Sea("Seaside 99", CType.R_MEDITERRANEAN_SEA)
+CAAT_SEASIDE_100 = CAAT_Sea("Seaside 100", CType.R_BLACK_SEA)
 CAAT_SEASIDE_101 = CAAT_Sea("Seaside 101", CType.R_ATLANTIC)
-CAAT_SEASIDE_102 = CAAT_Sea("Seaside 102", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_103 = CAAT_Sea("Seaside 103", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_104 = CAAT_Sea("Seaside 104", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_105 = CAAT_Sea("Seaside 105", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_106 = CAAT_Sea("Seaside 106", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_107 = CAAT_Sea("Seaside 107", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_108 = CAAT_Sea("Seaside 108", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_109 = CAAT_Sea("Seaside 109", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_110 = CAAT_Sea("Seaside 110", CType.R_NORTH_SEA)																																
-CAAT_SEASIDE_111 = CAAT_Sea("Seaside 111", CType.R_NORTH_SEA)																																
-CAAT_SEASIDE_112 = CAAT_Sea("Seaside 112", CType.R_NORTH_SEA)																																
-CAAT_SEASIDE_113 = CAAT_Sea("Seaside 113", CType.R_BALTIC_SEA)																																
-CAAT_SEASIDE_114 = CAAT_Sea("Seaside 114", CType.R_BALTIC_SEA)																																
-CAAT_SEASIDE_115 = CAAT_Sea("Seaside 115", CType.R_BALTIC_SEA)																																
-CAAT_SEASIDE_116 = CAAT_Sea("Seaside 116", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_117 = CAAT_Sea("Seaside 117", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_118 = CAAT_Sea("Seaside 118", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_119 = CAAT_Sea("Seaside 119", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_120 = CAAT_Sea("Seaside 120", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_121 = CAAT_Sea("Seaside 121", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_122 = CAAT_Sea("Seaside 122", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_123 = CAAT_Sea("Seaside 123", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_124 = CAAT_Sea("Seaside 124", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_125 = CAAT_Sea("Seaside 125", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_126 = CAAT_Sea("Seaside 126", CType.R_ATLANTIC)																																
-CAAT_SEASIDE_127 = CAAT_Sea("Seaside 127", CType.R_ARTIC_SEA)																																
+CAAT_SEASIDE_102 = CAAT_Sea("Seaside 102", CType.R_ATLANTIC)
+CAAT_SEASIDE_103 = CAAT_Sea("Seaside 103", CType.R_ATLANTIC)
+CAAT_SEASIDE_104 = CAAT_Sea("Seaside 104", CType.R_ATLANTIC)
+CAAT_SEASIDE_105 = CAAT_Sea("Seaside 105", CType.R_ATLANTIC)
+CAAT_SEASIDE_106 = CAAT_Sea("Seaside 106", CType.R_ATLANTIC)
+CAAT_SEASIDE_107 = CAAT_Sea("Seaside 107", CType.R_ATLANTIC)
+CAAT_SEASIDE_108 = CAAT_Sea("Seaside 108", CType.R_ATLANTIC)
+CAAT_SEASIDE_109 = CAAT_Sea("Seaside 109", CType.R_ATLANTIC)
+CAAT_SEASIDE_110 = CAAT_Sea("Seaside 110", CType.R_NORTH_SEA)
+CAAT_SEASIDE_111 = CAAT_Sea("Seaside 111", CType.R_NORTH_SEA)
+CAAT_SEASIDE_112 = CAAT_Sea("Seaside 112", CType.R_NORTH_SEA)
+CAAT_SEASIDE_113 = CAAT_Sea("Seaside 113", CType.R_BALTIC_SEA)
+CAAT_SEASIDE_114 = CAAT_Sea("Seaside 114", CType.R_BALTIC_SEA)
+CAAT_SEASIDE_115 = CAAT_Sea("Seaside 115", CType.R_BALTIC_SEA)
+CAAT_SEASIDE_116 = CAAT_Sea("Seaside 116", CType.R_ATLANTIC)
+CAAT_SEASIDE_117 = CAAT_Sea("Seaside 117", CType.R_ATLANTIC)
+CAAT_SEASIDE_118 = CAAT_Sea("Seaside 118", CType.R_ATLANTIC)
+CAAT_SEASIDE_119 = CAAT_Sea("Seaside 119", CType.R_ATLANTIC)
+CAAT_SEASIDE_120 = CAAT_Sea("Seaside 120", CType.R_ATLANTIC)
+CAAT_SEASIDE_121 = CAAT_Sea("Seaside 121", CType.R_ATLANTIC)
+CAAT_SEASIDE_122 = CAAT_Sea("Seaside 122", CType.R_ATLANTIC)
+CAAT_SEASIDE_123 = CAAT_Sea("Seaside 123", CType.R_ATLANTIC)
+CAAT_SEASIDE_124 = CAAT_Sea("Seaside 124", CType.R_ATLANTIC)
+CAAT_SEASIDE_125 = CAAT_Sea("Seaside 125", CType.R_ATLANTIC)
+CAAT_SEASIDE_126 = CAAT_Sea("Seaside 126", CType.R_ATLANTIC)
+CAAT_SEASIDE_127 = CAAT_Sea("Seaside 127", CType.R_ARTIC_SEA)
 
-CAAT_AFGHANISTAN = CAAT_Land("Afghanistan",                   CType.R_ASIA_CENTRAL, CAAN_AFGANISTAN,    4)
-CAAT_ALSKA       = CAAT_Land("Alaska",                        CType.R_NORDAMERICA,  CAAN_UNITED_STATES, 2)
-CAAT_ALBANIA     = CAAT_Land("Albania",                       CType.R_EUROPE,       CAAN_ITALY,         1)																																
-CAAT_ALBERTA     = CAAT_Land("Alberta Saskatchewan Manitoba", CType.R_NORDAMERICA,  CAAN_UK_AT,         1)																																
-CAAT_ALEUTIAN    = CAAT_Land("Aleutian Island",               CType.R_NORDAMERICA,  CAAN_UNITED_STATES, 0)																															
-
-
-
-CAAT_Alexandria           = CAAT_Land("Alexandria",           CType.R_AFRICA,        CAAN_UK_AT,        0)																																
-CAAT_Algeria              = CAAT_Land("Algeria",              CType.R_AFRICA,        CAAN_FRANCE,       1)																															
-CAAT_Amur                 = CAAT_Land("Amur",                 CType.R_ASIA_FAR_EAST, CAAN_SOVIET_UNION, 1)																															
-CAAT_Anglo_Egyptian_Sudan = CAAT_Land("Anglo Egyptian Sudan", CType.R_AFRICA,        CAAN_ITALY,        1)																															
-CAAT_Angola               = CAAT_Land("Angola",               CType.R_AFRICA,        CAAN_ANGOLA,       1, CAAR_Land, [CAAU_Inf(CAAN_ANGOLA, 2)])																																
-CAAT_Anhwe                = CAAT_Land("Anhwe",	              CType.R_ASIA_FAR_EAST, CAAN_CHINA,        1)																				
-CAAT_Archangel            = CAAT_Land("Archangel",	N/A		N/A																																
-CAAT_Argentinia           = CAAT_Land("Argentinia",	N/A		N/A																																
-CAAT_Baltic_States        = CAAT_Land("Baltic States",	N/A		N/A																																
-CAAT_Belgian_Congo        = CAAT_Land("Belgian Congo",	N/A		N/A																																
-CAAT_Bessarabia           = CAAT_Land("Bessarabia",	N/A		N/A																																
-CAAT_Bolivia              = CAAT_Land("Bolivia",	N/A		N/A																																
-CAAT_Borneo               = CAAT_Land("Borneo",	N/A		N/A																																
-CAAT_Brazil               = CAAT_Land("Brazil",	N/A		N/A																																
-CAAT_British_Guiana       = CAAT_Land("British Guiana",	N/A		N/A																																
-CAAT_British_Somaliland   = CAAT_Land("British Somaliland",, CType.R_AFRICA, CAAN_UK_AT, 0)																											
-CAAT_Bryansk 	         = CAAT_Land("Bryansk", 	", 																																
-CAAT_Bulgaria            = CAAT_Land("Bulgaria", 	", 																																
-CAAT_Burma   	         = CAAT_Land("Burma", 	", 																																
-CAAT_Buryatia	         = CAAT_Land("Buryatia	EP	RuAsia", 	1																															
-CAAT_Buyant_Uhaa         = CAAT_Land("Buyant-Uhaa", 	", 																																
-CAAT_Caucasus            = CAAT_Land("Caucasus", 	", 																																
-CAAT_Celebes             = CAAT_Land("Celebes", 	", 																																
-CAAT_Central_America     = CAAT_Land("Central America", 	", 																																
-CAAT_Central_Mongoli     = CAAT_Land("Central Mongolia", 	", 																																
-CAAT_Central_            = CAAT_Land("Central Unit States", 	", 																																
-CAAT_Ceylon              = CAAT_Land("Ceylon", 	", 																																
-CAAT_Chahar              = CAAT_Land("Chahar", 	", 																																
-CAAT_Chile               = CAAT_Land("Chile", 	", 																																
-CAAT_Colombia            = CAAT_Land("Colombia", 	", 																																
-CAAT_Crete               = CAAT_Land("Crete", 	", 																																
-CAAT_Cyprus              = CAAT_Land("Cyprus", 	", 																																
-CAAT_Denmark             = CAAT_Land("Denmark", 	", 																																
-CAAT_Dutch New Guinea    = CAAT_Land("Dutch New Guinea", 	", 																																
-CAAT_Dzavhan             = CAAT_Land("Dzavhan", 	", 																																
-CAAT_Eastern Persia      = CAAT_Land("Eastern Persia", 	", 																																
-CAAT_Eastern Unit States = CAAT_Land("Eastern Unit States", 	", 																																
-CAAT_Ecuador             = CAAT_Land("Ecuador", 	", 																																
-CAAT_Egypt               = CAAT_Land("Egypt", 	", 																																
-CAAT_Eire                = CAAT_Land("Eire", 	", 																																
-CAAT_Estern Poland       = CAAT_Land("Estern Poland", 	", 																																
-CAAT_Ethiopia            = CAAT_Land("Ethiopia", CType.R_AFRICA, CAAN_ITALY 1) 																																
-CAAT_Evenkiyskiy         = CAAT_Land("Evenkiyskiy	EP	RuAsia", 	1																															
-CAAT_Fiji    	         = CAAT_Land("Fiji", 		GBP	0																															
-CAAT_Finland             = CAAT_Land("Finland", 	", 																																
-CAAT_Formosa             = CAAT_Land("Formosa", 	", 																																
-CAAT_France              = CAAT_Land("France", 	", 																																
-CAAT_French_Central_Africa    = CAAT_Land("French Central Africa", 	", 																																
-CAAT_French_Equatorial_Africa = CAAT_Land("French Equatorial Africa ", 	", 																																
-CAAT_French_Guiana            = CAAT_Land("French Guiana", 	", 																																
-CAAT_French_Indo_China        = CAAT_Land("French Indo China", 	", 																																
-CAAT_French_Madagascar        = CAAT_Land("French Madagascar", 	", 																																
-CAAT_French_West_Africa       = CAAT_Land("French West Africa", 	", 																																
-CAAT_Germany                  = CAAT_Land("Germany", 	", 																																
-CAAT_Gibralter                = CAAT_Land("Gibralter", 	", 																																
-CAAT_Gilbert_Islands          = CAAT_Land("Gilbert Islands", 		GBP	0																															
-CAAT_Gold_Coast               = CAAT_Land("Gold Coast", 	", 																																
-CAAT_Greater_Southern_Germany = CAAT_Land("Greater Southern Germany", 	", 																																
-CAAT_Greece                   = CAAT_Land("Greece", 	", 																																
-CAAT_Greenland                = CAAT_Land("Greenland", 	", 																																
-CAAT_Guam                     = CAAT_Land("Guam", 	", 																																
-CAAT_Hainan                   = CAAT_Land("Hainan", 	", 																																
-CAAT_Hawaiian_Islands         = CAAT_Land("Hawaiian Islands", 		US	1																															
-CAAT_Holland_Belgium          = CAAT_Land("Holland Belgium", 	", 																																
-CAAT_Hopei   		          = CAAT_Land("Hopei", 	", 																																
-CAAT_Hunan  		          = CAAT_Land("Hunan", 	", 																																
-CAAT_Iceland                  = CAAT_Land("Iceland", 	", 																																
-CAAT_India                    = CAAT_Land("India", 	", 																																
-CAAT_Iraq                     = CAAT_Land("Iraq", 	", 																																
-CAAT_Italian_Somaliland       = CAAT_Land("Italian Somaliland", 	", 																																
-CAAT_Iwo_Jima                 = CAAT_Land("Iwo Jima", 		JP	1																															
-CAAT_Japan                    = CAAT_Land("Japan", 	", 																																
-CAAT_Java                     = CAAT_Land("Java", 	", 																																
-CAAT_Jehol                    = CAAT_Land("Jehol", 	", 																																
-CAAT_Johnston Islands         = CAAT_Land("Johnston Islands", 		US	0																															
-CAAT_Kansu                    = CAAT_Land("Kansu", 	", 																																
-CAAT_Karelia  	              = CAAT_Land("Karelia", 	", 																																
-CAAT_Kazakhstan               = CAAT_Land("Kazakhstan", 	", 																																
-CAAT_Kenya                    = CAAT_Land("Kenya", 	", 																																
-CAAT_Kiangsi  	              = CAAT_Land("Kiangsi", 	", 																																
-CAAT_Kiangsu                  = CAAT_Land("Kiangsu", 	", 																																
-CAAT_Korea                    = CAAT_Land("Korea", 	", 																																
-CAAT_Kwangsi                  = CAAT_Land("Kwangsi", 	", 																																
-CAAT_Kwangtung                = CAAT_Land("Kwangtung", 	", 																																
-CAAT_Kweichow                 = CAAT_Land("Kweichow", 	", 																																
-CAAT_Liberia                  = CAAT_Land("Liberia", 	", 																																
-CAAT_Line_Islands             = CAAT_Land("Line Islands", 		US	0																															
-CAAT_Lybia                    = CAAT_Land("Lybia", CType.R_AFRICA, CAAN_UK_AT, 0)																																
-CAAT_Malaya                   = CAAT_Land("Malaya", 	", 																																
-CAAT_Manchuria                = CAAT_Land("Manchuria", 	", 																																
-CAAT_Manila                   = CAAT_Land("Manila", 	", 																																
-CAAT_Marianas                 = CAAT_Land("Marianas", 		JP	0																															
-CAAT_Marshall_Islands         = CAAT_Land("Marshall Islands", 		JP	0																															
-CAAT_Mexico 	              = CAAT_Land("Mexico", 		US	2																															
-CAAT_Midway 	              = CAAT_Land("Midway", 		US	0																															
-CAAT_Moroco 	              = CAAT_Land("Moroco", 	", 																																
-CAAT_Mozambique               = CAAT_Land("Mozambique", 	", 																																
-CAAT_Nenetsia                 = CAAT_Land("Nenetsia", 	", 																																
-CAAT_New_Britain              = CAAT_Land("New Britain", 		ANZAC	0																															
-CAAT_New_Brunswick_Nova_Scotia = CAAT_Land("New Brunswick Nova Scotia", 	", 																																
-CAAT_New_Guinea                = CAAT_Land("New Guinea", 		ANZAC	0																															
-CAAT_New_Hebrides              = CAAT_Land("New Hebrides", 		FR	0																															
-CAAT_New_South_Wales           = CAAT_Land("New South Wales", 		ANZAC	2																															
-CAAT_New_Zealand               = CAAT_Land("New Zealand", 		ANZAC	2																															
-CAAT_Newfoundland_Labrador     = CAAT_Land("Newfoundland Labrador", 	", 																																
-CAAT_Nigeria                   = CAAT_Land("Nigeria", 	", 																																
-CAAT_Normandy_Bordeaux         = CAAT_Land("Normandy Bordeaux", 	", 																																
-CAAT_Northern_Italy            = CAAT_Land("Northern Italy", 	", 																																
-CAAT_Northern_Territory        = CAAT_Land("Northern Territory", 	", 																																
-CAAT_Northwest_Persia          = CAAT_Land("Northwest Persia", 	", 																																
-CAAT_Norway                    = CAAT_Land("Norway", 	", 																																
-CAAT_Novgorod                  = CAAT_Land("Novgorod", 	", 																																
-CAAT_Novosibirsk               = CAAT_Land("Novosibirsk", 	", 																																
-CAAT_Okinawa                   = CAAT_Land("Okinawa", 	", 																																
-CAAT_Olgiy                     = CAAT_Land("Olgiy", 	", 																																
-CAAT_Ontario                   = CAAT_Land("Ontario", 	", 																																
-CAAT_Palau_Island              = CAAT_Land("Palau Island", 	", 																																
-CAAT_Paraguay                  = CAAT_Land("Paraguay", 	", 																																
-CAAT_Persia                    = CAAT_Land("Persia", 	", 																																
-CAAT_Peru                      = CAAT_Land("Peru", 	", 																																
-CAAT_Phillipines               = CAAT_Land("Phillipines", 	", 																																
-CAAT_Poland                    = CAAT_Land("Poland", 	", 																																
-CAAT_Portugal                  = CAAT_Land("Portugal", 	", 																																
-CAAT_Portuguese                = CAAT_Land("Portuguese Guinea", 	", 																																
-CAAT_Quebec                    = CAAT_Land("Quebec", 	", 																																
-CAAT_Queensland                = CAAT_Land("Queensland", 		ANZAC	2																															
-CAAT_Rhodesia                  = CAAT_Land("Rhodesia", 	", 																																
-CAAT_Rio_de_Oro                = CAAT_Land("Rio de Oro", 	", 																																
-CAAT_Romania                   = CAAT_Land("Romania", 	", 																																
-CAAT_Rostov                    = CAAT_Land("Rostov", 	", 																																
-CAAT_Russia                    = CAAT_Land("Russia", 	", 																																
-CAAT_Sakha                     = CAAT_Land("Sakha	EP	RuAsia", 	1																															
-CAAT_Samara                    = CAAT_Land("Samara", 	", 																																
-CAAT_Samoa                     = CAAT_Land("Samoa", 		GBP	0																															
-CAAT_Sardinia                  = CAAT_Land("Sardinia", 	", 																																
-CAAT_Saudi_Arabia              = CAAT_Land("Saudi Arabia", 	", 																																
-CAAT_Scotland                  = CAAT_Land("Scotland", 	", 																																
-CAAT_Shan_State                = CAAT_Land("Shan State", 	", 																																
-CAAT_Shantung                  = CAAT_Land("Shantung", 	", 																																
-CAAT_Shensi                    = CAAT_Land("Shensi", 	", 																																
-CAAT_Siam                      = CAAT_Land("Siam", 	", 																																
-CAAT_Siberia                   = CAAT_Land("Siberia	EP	RuAsia", 	1																															
-CAAT_Sicily                    = CAAT_Land("Sicily", 	", 																																
-CAAT_Sierra_Leone              = CAAT_Land("Sierra Leone", 	", 																																
-CAAT_Sikang                    = CAAT_Land("Sikang", 	", 																																
-CAAT_Slovakia_Hungar           = CAAT_Land("Slovakia Hungary", 	", 																																
-CAAT_Smolensk                  = CAAT_Land("Smolensk", 	", 																																
-CAAT_Solomon_Islands           = CAAT_Land("Solomon Islands", 		ANZAC	0																															
-CAAT_South_Australia           = CAAT_Land("South Australia", 	", 																																
-CAAT_South_East_Mexico         = CAAT_Land("South East Mexico", 	", 																																
-CAAT_South_West_Africa         = CAAT_Land("South West Africa", 	", 																																
-CAAT_Southern_France           = CAAT_Land("Southern France", 	", 																																
-CAAT_Southern_Italy            = CAAT_Land("Southern Italy", 	", 																																
-CAAT_Soviet_Far_East           = CAAT_Land("Soviet Far East", 		SU	1																															
-CAAT_Spain                     = CAAT_Land("Spain", 	", 																																
-CAAT_Suiyuan                   = CAAT_Land("Suiyuan ", 	", 																																
-CAAT_Sumatra   	               = CAAT_Land("Sumatra", 	", 																																
-CAAT_Suriname                  = CAAT_Land("Suriname", 	", 																																
-CAAT_Sweden                    = CAAT_Land("Sweden", 	", 																																
-CAAT_Switzerland               = CAAT_Land("Switzerland", 	", 																																
-CAAT_Syria  	               = CAAT_Land("Syria", 	", 																																
-CAAT_Szechwan                  = CAAT_Land("Szechwan", 	", 																																
-CAAT_Tambov                    = CAAT_Land("Tambov", 	", 																																
-CAAT_Tanganyika_Territory      = CAAT_Land("Tanganyika Territory", 	", 																																
-CAAT_Timguska                  = CAAT_Land("Timguska	EP	RuAsia", 	1																															
-CAAT_Tobruk                    = CAAT_Land("Tobruk", 	", 																																
-CAAT_Trans_Jordan              = CAAT_Land("Trans-Jordan", 	", 																																
-CAAT_Tsagaan_Olom              = CAAT_Land("Tsagaan-Olom", 	", 																																
-CAAT_Tsinghai                  = CAAT_Land("Tsinghai", 	", 																																
-CAAT_Tunisia                   = CAAT_Land("Tunisia", 	", 																																
-CAAT_Turkey                    = CAAT_Land("Turkey", 	", 																																
-CAAT_Turkmenistan              = CAAT_Land("Turkmenistan", 	", 																																
-CAAT_Ukraine                   = CAAT_Land("Ukraine", 	", 																																
-CAAT_Ulaanbaatar               = CAAT_Land("Ulaanbaatar", 	", 																																
-CAAT_Union_of_South_Africa     = CAAT_Land("Union of South Africa", 	", 																																
-CAAT_United_Kingdom            = CAAT_Land("United Kingdom", 	", 																																
-CAAT_Urals                     = CAAT_Land("Urals", 	", 																																
-CAAT_Uruguay                   = CAAT_Land("Uruguay", 	", 																																
-CAAT_Venezuela                 = CAAT_Land("Venezuela", 	", 																																
-CAAT_Victoria                  = CAAT_Land("Victoria", 		ANZAC	1																															
-CAAT_Volgograd                 = CAAT_Land("Volgograd", 	", 																																
-CAAT_Volodga                   = CAAT_Land("Volodga", 	", 																																
-CAAT_Vyborg                    = CAAT_Land("Vyborg", 	", 																																
-CAAT_Wake_Island               = CAAT_Land("Wake Island", 		US	0																															
-CAAT_West_India                = CAAT_Land("West India", 	", 																																
-CAAT_West_Indies               = CAAT_Land("West Indies", 	", 																																
-CAAT_Western_Australia         = CAAT_Land("Western Australia", 	", 																																
-CAAT_Western_Canada            = CAAT_Land("Western Canada", 		GBP	1																															
-CAAT_Western_Germany           = CAAT_Land("Western Germany", 	", 																																
-CAAT_Western_Ukraine           = CAAT_Land("Western Ukraine", 	", 																																
-CAAT_Western_United_States     = CAAT_Land("Western United States", 		US	10																															
-CAAT_Yakut                     = CAAT_Land("Yakut S. S. R. 	EP	RuAsia", 	1																															
-CAAT_Yenisey                   = CAAT_Land("Yenisey	EP	RuAsia", 	1																															
-CAAT_Yugoslavia                = CAAT_Land("Yugoslavia", 	", 																																
-CAAT_Yunnan                    = CAAT_Land("Yunnan", 	", 																																
-
-
-
-
-
+CAAT_AFGHANISTAN               = CAAT_Land("Afghanistan",                   CType.R_ASIA_CENTRAL,     CAAN_AFGANISTAN,    4)
+CAAT_ALSKA                     = CAAT_Land("Alaska",                        CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 2)
+CAAT_ALBANIA                   = CAAT_Land("Albania",                       CType.R_EUROPE,           CAAN_ITALY,         1)
+CAAT_ALBERTA                   = CAAT_Land("Alberta Saskatchewan Manitoba", CType.R_NORDAMERICA,      CAAN_UK_AT,         1)
+CAAT_ALEUTIAN                  = CAAT_Land("Aleutian Island",               CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 0)
+CAAT_ALEXANDRIA                = CAAT_Land("Alexandria",                    CType.R_AFRICA,           CAAN_UK_AT,         0)
+CAAT_ALGERIA                   = CAAT_Land("Algeria",                       CType.R_AFRICA,           CAAN_FRANCE,        1)
+CAAT_AMUR                      = CAAT_Land("Amur",                          CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_ANGLO_EGYPTIAN_SUDAn      = CAAT_Land("Anglo Egyptian Sudan",          CType.R_AFRICA,           CAAN_ITALY,         1)
+CAAT_ANGOLA                    = CAAT_Land("Angola",                        CType.R_AFRICA,           CAAN_ANGOLA,        1, [CAAU_Inf(CAAN_ANGOLA, 2)])
+CAAT_ANHWE                     = CAAT_Land("Anhwe",                         CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_ARCHANGEL                 = CAAT_Land("Archangel",                     CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_ARGENTINIA                = CAAT_Land("Argentinia",                    CType.R_SOUTHAMERICA,     CAAN_ARGENTINA,     2, [CAAU_Inf(CAAN_ARGENTINA, 2)])
+CAAT_BALTIC_STATES             = CAAT_Land("Baltic States",                 CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_BELGIAN_CONGO             = CAAT_Land("Belgian Congo",                 CType.R_AFRICA,           CAAN_UK_AT,         1)
+CAAT_BESSARABIA                = CAAT_Land("Bessarabia",                    CType.R_EUROPE,           CAAN_SOVIET_UNION,  0)
+CAAT_BOLIVIA                   = CAAT_Land("Bolivia",                       CType.R_SOUTHAMERICA,     CAAN_BOLIVIA,       0)
+CAAT_BORNEO                    = CAAT_Land("Borneo",                        CType.R_ASIA_FAR_EAST,    CAAN_UK_PA,         4)
+CAAT_BRAZIL                    = CAAT_Land("Brazil",                        CType.R_SOUTHAMERICA,     CAAN_BRAZIL,        3)
+CAAT_BRITISH_GUIANA            = CAAT_Land("British Guiana",                CType.R_SOUTHAMERICA,     CAAN_UK_AT,         0)
+CAAT_BRITISH_SOMALILAND        = CAAT_Land("British Somaliland",            CType.R_AFRICA,           CAAN_UK_AT,         0)
+CAAT_BRYANSK                   = CAAT_Land("Bryansk",                       CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_BULGARIA                  = CAAT_Land("Bulgaria",                      CType.R_EUROPE,           CAAN_BULGARIA,      1, [CAAU_Inf(CAAN_BULGARIA, 4)])
+CAAT_BURMA                     = CAAT_Land("Burma",                         CType.R_ASIA_FAR_EAST,    CAAN_UK_PA,         1)
+CAAT_BURYATIA                  = CAAT_Land("Buryatia",                      CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_BUYANT_UHAA               = CAAT_Land("Buyant-Uhaa",                   CType.R_ASIA_FAR_EAST,    CAAN_MONGOLIA,      0, [CAAU_Inf(CAAN_MONGOLIA, 2)])
+CAAT_CAUCASUS                  = CAAT_Land("Caucasus",                      CType.R_ASIA_CENTRAL,     CAAN_SOVIET_UNION,  2)
+CAAT_CELEBES                   = CAAT_Land("Celebes",                       CType.R_ASIA_FAR_EAST,    CAAN_NETHERLANDS,   3)
+CAAT_CENTRAL_AMERICA           = CAAT_Land("Central America",               CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 1)
+CAAT_CENTRAL_MONGOLIA          = CAAT_Land("Central Mongolia",              CType.R_ASIA_FAR_EAST,    CAAN_MONGOLIA,      0)
+CAAT_CENTRAL_US                = CAAT_Land("Central Unit States",           CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 12)
+CAAT_CEYLON                    = CAAT_Land("Ceylon",                        CType.R_ASIA_FAR_EAST,    CAAN_UK_PA,         0)
+CAAT_CHAHAR                    = CAAT_Land("Chahar",                        CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_CHILE                     = CAAT_Land("Chile",                         CType.R_SOUTHAMERICA,     CAAN_CHILE,         2, [CAAU_Inf(CAAN_CHILE, 2)])
+CAAT_COLOMBIA                  = CAAT_Land("Colombia",                      CType.R_SOUTHAMERICA,     CAAN_CHINA,         0)
+CAAT_CRETE                     = CAAT_Land("Crete",                         CType.R_EUROPE,           CAAN_GREECE,        0)
+CAAT_CYPRUS                    = CAAT_Land("Cyprus",                        CType.R_EUROPE,           CAAN_UK_AT,         0)
+CAAT_DENMARK                   = CAAT_Land("Denmark",                       CType.R_EUROPE,           CAAN_GERMANY,       2)
+CAAT_DUTCH_NEW_GUINEA          = CAAT_Land("Dutch New Guinea",              CType.R_ASIA_FAR_EAST,    CAAN_NETHERLANDS,   0)
+CAAT_DZAVHAN                   = CAAT_Land("Dzavhan",                       CType.R_ASIA_FAR_EAST,    CAAN_MONGOLIA,      0, [CAAU_Inf(CAAN_MONGOLIA, 1)])
+CAAT_EASTERN_PERSIA            = CAAT_Land("Eastern Persia",                CType.R_ASIA_CENTRAL,     CAAN_PERSIA,        0)
+CAAT_EASTERN_UNIT_STATES       = CAAT_Land("Eastern Unit States",           CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 20)
+CAAT_ECUADOR                   = CAAT_Land("Ecuador",                       CType.R_SOUTHAMERICA,     CAAN_ECUADOR,       0)
+CAAT_EGYPT                     = CAAT_Land("Egypt",                         CType.R_AFRICA,           CAAN_UK_AT,         2)
+CAAT_EIRE                      = CAAT_Land("Eire",                          CType.R_EUROPE,           CAAN_EIRE,          0)
+CAAT_ESTERN_POLAND             = CAAT_Land("Estern Poland",                 CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_ETHIOPIA                  = CAAT_Land("Ethiopia",                      CType.R_AFRICA,           CAAN_ITALY,         1)
+CAAT_EVENKIYSKIY               = CAAT_Land("Evenkiyskiy",                   CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_FIJI                      = CAAT_Land("Fiji",                          CType.R_PACIFIC,          CAAN_UK_PA,         0)
+CAAT_FINLAND                   = CAAT_Land("Finland",                       CType.R_EUROPE,           CAAN_FINNLAND,      2, [CAAU_Inf(CAAN_FINNLAND, 4)])
+CAAT_FORMOSA                   = CAAT_Land("Formosa",                       CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         1)
+CAAT_FRANCE                    = CAAT_Land("France",                        CType.R_EUROPE,           CAAN_FRANCE,        4)
+CAAT_FRENCH_CENTRAL_AFRICA     = CAAT_Land("French Central Africa",         CType.R_AFRICA,           CAAN_FRANCE,        1)
+CAAT_FRENCH_EQUATORIAL_AFRICA  = CAAT_Land("French Equatorial Africa",      CType.R_AFRICA,           CAAN_FRANCE,        1)
+CAAT_FRENCH_GUIANA             = CAAT_Land("French Guiana",                 CType.R_SOUTHAMERICA,     CAAN_FRANCE,        0)
+CAAT_FRENCH_INDO_CHINA         = CAAT_Land("French Indo China",             CType.R_ASIA_FAR_EAST,    CAAN_FRANCE,        2)
+CAAT_FRENCH_MADAGASCAR         = CAAT_Land("French Madagascar",             CType.R_AFRICA,           CAAN_FRANCE,        1)
+CAAT_FRENCH_WEST_AFRICA        = CAAT_Land("French West Africa",            CType.R_AFRICA,           CAAN_FRANCE,        1)
+CAAT_GERMANY                   = CAAT_Land("Germany",                       CType.R_EUROPE,           CAAN_GERMANY,       5)
+CAAT_GIBRALTER                 = CAAT_Land("Gibralter",                     CType.R_EUROPE,           CAAN_UK_AT,         0)
+CAAT_GILBERT_ISLANDS           = CAAT_Land("Gilbert Islands",               CType.R_EUROPE,           CAAN_UK_PA,         0)
+CAAT_GOLD_COAST                = CAAT_Land("Gold Coast",                    CType.R_EUROPE,           CAAN_UK_AT,         1)
+CAAT_GREATER_SOUTHERN_GERMANY  = CAAT_Land("Greater Southern Germany",      CType.R_EUROPE,           CAAN_GERMANY,       4)
+CAAT_GREECE                    = CAAT_Land("Greece",                        CType.R_EUROPE,           CAAN_GREECE,        2, [CAAU_Inf(CAAN_GREECE,2)])
+CAAT_GREENLAND                 = CAAT_Land("Greenland",                     CType.R_EUROPE,           CAAN_UNITED_STATES, 0)
+CAAT_GUAM                      = CAAT_Land("Guam",                          CType.R_PACIFIC,          CAAN_UNITED_STATES, 0)
+CAAT_HAINAN                    = CAAT_Land("Hainan",                        CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         0)
+CAAT_HAWAIIAN_ISLANDS          = CAAT_Land("Hawaiian Islands",              CType.R_ASIA_FAR_EAST,    CAAN_UNITED_STATES, 1)
+CAAT_HOLLAND_BELGIUM           = CAAT_Land("Holland Belgium",               CType.R_EUROPE,           CAAN_GERMANY,       3)
+CAAT_HOPEI                     = CAAT_Land("Hopei",                         CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_HUNAN                     = CAAT_Land("Hunan",                         CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_ICELAND                   = CAAT_Land("Iceland",                       CType.R_EUROPE,           CAAN_UK_AT,         0)
+CAAT_INDIA                     = CAAT_Land("India",                         CType.R_ASIA_FAR_EAST,    CAAN_UK_PA,         3)
+CAAT_IRAQ                      = CAAT_Land("Iraq",                          CType.R_ASIA_CENTRAL,     CAAN_IRAQ,          2, [CAAU_Inf(CAAN_IRAQ, 3)])
+CAAT_ITALIAN_SOMALILAND        = CAAT_Land("Italian Somaliland",            CType.R_AFRICA,           CAAN_ITALY,         0)
+CAAT_IWO_JIMA                  = CAAT_Land("Iwo Jima",                      CType.R_PACIFIC,          CAAN_JAPAN,         1)
+CAAT_JAPAN                     = CAAT_Land("Japan",                         CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         8)
+CAAT_JAVA                      = CAAT_Land("Java",                          CType.R_ASIA_FAR_EAST,    CAAN_NETHERLANDS,   4)
+CAAT_JEHOL                     = CAAT_Land("Jehol",                         CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         1, [], CAAN_CHINA)
+CAAT_JOHNSTON_ISLANDS          = CAAT_Land("Johnston Islands",              CType.R_PACIFIC,          CAAN_UNITED_STATES, 0)
+CAAT_KANSU                     = CAAT_Land("Kansu",                         CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_KARELIA                   = CAAT_Land("Karelia",                       CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_KAZAKHSTAN                = CAAT_Land("Kazakhstan",                    CType.R_ASIA_CENTRAL,     CAAN_SOVIET_UNION,  1)
+CAAT_KENYA                     = CAAT_Land("Kenya",                         CType.R_AFRICA,           CAAN_UK_AT,         1)
+CAAT_KIANGSI                   = CAAT_Land("Kiangsi",                       CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         1, [], CAAN_CHINA)
+CAAT_KIANGSU                   = CAAT_Land("Kiangsu",                       CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         3, [], CAAN_CHINA)
+CAAT_KOREA                     = CAAT_Land("Korea",                         CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         3)
+CAAT_KWANGSI                   = CAAT_Land("Kwangsi",                       CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         1, [], CAAN_CHINA)
+CAAT_KWANGTUNG                 = CAAT_Land("Kwangtung",                     CType.R_ASIA_FAR_EAST,    CAAN_UK_PA,         3)
+CAAT_KWEICHOW                  = CAAT_Land("Kweichow",                      CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_LIBERIA                   = CAAT_Land("Liberia",                       CType.R_AFRICA,           CAAN_LIBERIA,       0)
+CAAT_LINE_ISLANDS              = CAAT_Land("Line Islands",                  CType.R_PACIFIC,          CAAN_UNITED_STATES, 0)
+CAAT_LYBIA                     = CAAT_Land("Lybia",                         CType.R_AFRICA,           CAAN_UK_AT,         0)
+CAAT_MALAYA                    = CAAT_Land("Malaya",                        CType.R_ASIA_FAR_EAST,    CAAN_UK_PA,         3)
+CAAT_MANCHURIA                 = CAAT_Land("Manchuria",                     CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         3, [], CAAN_CHINA)
+##CAAT_MANILA                    = CAAT_Land("Manila",                      CType.
+CAAT_MARIANAS                  = CAAT_Land("Marianas",                      CType.R_PACIFIC,          CAAN_JAPAN,         0)
+CAAT_MARSHALL_ISLANDS          = CAAT_Land("Marshall Islands",              CType.R_PACIFIC,          CAAN_JAPAN,         0)
+CAAT_MEXICO                    = CAAT_Land("Mexico",                        CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 2)
+CAAT_MIDWAY                    = CAAT_Land("Midway",                        CType.R_PACIFIC,          CAAN_UNITED_STATES, 0)
+CAAT_MOROCO                    = CAAT_Land("Moroco",                        CType.R_AFRICA,           CAAN_FRANCE,        1)
+CAAT_MOZAMBIQUE                = CAAT_Land("Mozambique",                    CType.R_AFRICA,           CAAN_MOZAMBIQUE,    1, [CAAU_Inf(CAAN_MOZAMBIQUE)])
+CAAT_NENETSIA                  = CAAT_Land("Nenetsia",                      CType.R_EUROPE,           CAAN_SOVIET_UNION,  0)
+CAAT_NEW_BRITAIN               = CAAT_Land("New Britain",                   CType.R_PACIFIC,          CAAN_ANZAC,         0)
+CAAT_NEW_BRUNSWICK_NOVA_SCOTIA = CAAT_Land("New Brunswick Nova Scotia",     CType.R_NORDAMERICA,      CAAN_UK_AT,         1)
+CAAT_NEW_GUINEA                = CAAT_Land("New Guinea",                    CType.R_PACIFIC,          CAAN_ANZAC,         0)
+CAAT_NEW_HEBRIDES              = CAAT_Land("New Hebrides",                  CType.R_PACIFIC,          CAAN_FRANCE,        0)
+CAAT_NEW_SOUTH_WALES           = CAAT_Land("New South Wales",               CType.R_AUSTRALIA,        CAAN_ANZAC,         2)
+CAAT_NEW_ZEALAND               = CAAT_Land("New Zealand",                   CType.R_PACIFIC,          CAAN_ANZAC,         2)
+CAAT_NEWFOUNDLAND_LABRADOR     = CAAT_Land("Newfoundland Labrador",         CType.R_NORDAMERICA,      CAAN_UK_AT,         2)
+CAAT_MIDWAY                    = CAAT_Land("Midway",                        CType.R_PACIFIC,          CAAN_ANZAC,         0)
+CAAT_NIGERIA                   = CAAT_Land("Nigeria",                       CType.R_AFRICA,           CAAN_UK_AT,         1)
+CAAT_NORMANDY_BORDEAUX         = CAAT_Land("Normandy Bordeaux",             CType.R_EUROPE,           CAAN_FRANCE,        2)
+CAAT_NORTHERN_ITALY            = CAAT_Land("Northern Italy",                CType.R_EUROPE,           CAAN_ITALY,         4)
+CAAT_NORTHERN_TERRITORY        = CAAT_Land("Northern Territory",            CType.R_AUSTRALIA,        CAAN_ANZAC,         1)
+CAAT_NORTHWEST_PERSIA          = CAAT_Land("Northwest Persia",              CType.R_ASIA_CENTRAL,     CAAN_PERSIA,        0)
+CAAT_NORWAY                    = CAAT_Land("Norway",                        CType.R_EUROPE,           CAAN_GERMANY,       3)
+CAAT_NOVGOROD                  = CAAT_Land("Novgorod",                      CType.R_EUROPE,           CAAN_SOVIET_UNION,  2)
+CAAT_NOVOSIBIRSK               = CAAT_Land("Novosibirsk",                   CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_OKINAWA                   = CAAT_Land("Okinawa",                       CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         1)
+CAAT_OLGIY                     = CAAT_Land("Olgiy",                         CType.R_ASIA_FAR_EAST,    CAAN_MONGOLIA,      0, [CAAU_Inf(CAAN_MONGOLIA)])
+CAAT_ONTARIO                   = CAAT_Land("Ontario",                       CType.R_NORDAMERICA,      CAAN_UK_AT,         2)
+CAAT_PALAU_ISLAND              = CAAT_Land("Palau Island",                  CType.R_PACIFIC,          CAAN_JAPAN,         0)
+CAAT_PARAGUAY                  = CAAT_Land("Paraguay",                      CType.R_SOUTHAMERICA,     CAAN_PARAQUAY,      0)
+CAAT_PERSIA                    = CAAT_Land("Persia",                        CType.R_ASIA_CENTRAL,     CAAN_PERSIA,        2, [CAAU_Inf(CAAN_PERSIA, 2)])
+CAAT_PERU                      = CAAT_Land("Peru",                          CType.R_SOUTHAMERICA,     CAAN_PERU,          0)
+CAAT_PHILLIPINES               = CAAT_Land("Phillipines",                   CType.R_PACIFIC,          CAAN_UNITED_STATES, 2)
+CAAT_POLAND                    = CAAT_Land("Poland",                        CType.R_EUROPE,           CAAN_GERMANY,       2)
+CAAT_PORTUGAL                  = CAAT_Land("Portugal",                      CType.R_EUROPE,           CAAN_PORTUGAL,      1, [CAAU_Inf(CAAN_PORTUGAL, 2)])
+CAAT_PORTUGUESE                = CAAT_Land("Portuguese Guinea",             CType.R_AFRICA,           CAAN_PORTUGAL,      0)
+CAAT_QUEBEC                    = CAAT_Land("Quebec",                        CType.R_NORDAMERICA,      CAAN_UK_AT,         2)
+CAAT_QUEENSLAND                = CAAT_Land("Queensland",                    CType.R_AUSTRALIA,        CAAN_ANZAC,         2)
+CAAT_RHODESIA                  = CAAT_Land("Rhodesia",                      CType.R_AFRICA,           CAAN_UK_AT,         1)
+CAAT_RIO_DE_ORO                = CAAT_Land("Rio de Oro",                    CType.R_AFRICA,           CAAN_RIO_DE_ORO,    0)
+CAAT_ROMANIA                   = CAAT_Land("Romania",                       CType.R_EUROPE,           CAAN_GERMANY,       1)
+CAAT_ROSTOV                    = CAAT_Land("Rostov",                        CType.R_EUROPE,           CAAN_SOVIET_UNION,  2)
+CAAT_RUSSIA                    = CAAT_Land("Russia",                        CType.R_EUROPE,           CAAN_SOVIET_UNION,  3)
+CAAT_SAKHA                     = CAAT_Land("Sakha",                         CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_SAMARA                    = CAAT_Land("Samara",                        CType.R_ASIA_CENTRAL,     CAAN_SOVIET_UNION,  1)
+CAAT_SAMOA                     = CAAT_Land("Samoa",                         CType.R_PACIFIC,          CAAN_UK_PA,         0)
+CAAT_SARDINIA                  = CAAT_Land("Sardinia",                      CType.R_EUROPE,           CAAN_ITALY,         0)
+CAAT_SAUDI_ARABIA              = CAAT_Land("Saudi Arabia",                  CType.R_ASIA_MIDDLE_EAST, CAAN_SAUDI_ARABIA, 2, [CAAU_Inf(CAAN_SAUDI_ARABIA, 2)])
+CAAT_SCOTLAND                  = CAAT_Land("Scotland",                      CType.R_EUROPE,           CAAN_UK_AT,         2)
+CAAT_SHAN_STATE                = CAAT_Land("Shan State",                    CType.R_ASIA_FAR_EAST,    CAAN_UK_PA,         1)
+CAAT_SHANTUNG                  = CAAT_Land("Shantung",                      CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         1, [], CAAN_CHINA)
+CAAT_SHENSI                    = CAAT_Land("Shensi",                        CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_SIAM                      = CAAT_Land("Siam",                          CType.R_ASIA_FAR_EAST,    CAAN_JAPAN,         1)
+CAAT_SIBERIA                   = CAAT_Land("Siberia",                       CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_SICILY                    = CAAT_Land("Sicily",                        CType.R_EUROPE,           CAAN_ITALY,         0)
+CAAT_SIERRA_LEONE              = CAAT_Land("Sierra Leone",                  CType.R_AFRICA,           CAAN_SIERA_LEONE,   0)
+CAAT_SIKANG                    = CAAT_Land("Sikang",                        CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_SLOVAKIA_HUNGAR           = CAAT_Land("Slovakia Hungary",              CType.R_EUROPE,           CAAN_GERMANY,       3)
+CAAT_SMOLENSK                  = CAAT_Land("Smolensk",                      CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_SOLOMON_ISLANDS           = CAAT_Land("Solomon Islands",               CType.R_PACIFIC,          CAAN_ANZAC,         0)
+CAAT_SOUTH_AUSTRALIA           = CAAT_Land("South Australia",               CType.R_AUSTRALIA,        CAAN_ANZAC,         1)
+CAAT_SOUTH_EAST_MEXICO         = CAAT_Land("South East Mexico",             CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 1)
+CAAT_SOUTH_WEST_AFRICA         = CAAT_Land("South West Africa",             CType.R_AFRICA,           CAAN_UK_AT,         1)
+CAAT_SOUTHERN_FRANCE           = CAAT_Land("Southern France",               CType.R_EUROPE,           CAAN_FRANCE,        3)
+CAAT_SOUTHERN_ITALY            = CAAT_Land("Southern Italy",                CType.R_EUROPE,           CAAN_ITALY,         3)
+CAAT_SOVIET_FAR_EAST           = CAAT_Land("Soviet Far East",               CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_SPAIN                     = CAAT_Land("Spain",                         CType.R_EUROPE,           CAAN_SPAIN,         6)
+CAAT_SUIYUAN                   = CAAT_Land("Suiyuan",                       CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_SUMATRA                   = CAAT_Land("Sumatra",                       CType.R_PACIFIC,          CAAN_NETHERLANDS,   4)
+CAAT_SURINAME                  = CAAT_Land("Suriname",                      CType.R_SOUTHAMERICA,     CAAN_NETHERLANDS,   0)
+CAAT_SWEDEN                    = CAAT_Land("Sweden",                        CType.R_EUROPE,           CAAN_SWEDEN,        3, [CAAU_Inf(CAAN_SWEDEN, 6)])
+CAAT_SWITZERLAND               = CAAT_Land("Switzerland",                   CType.R_EUROPE,           CAAN_SWITZERLAND,   0, [CAAU_Inf(CAAN_SWITZERLAND, 2)])
+CAAT_SYRIA                     = CAAT_Land("Syria",                         CType.R_ASIA_MIDDLE_EAST, CAAN_FRANCE,        1)
+CAAT_SZECHWAN                  = CAAT_Land("Szechwan",                      CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_TAMBOV                    = CAAT_Land("Tambov",                        CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_TANGANYIKA_TERRITORY      = CAAT_Land("Tanganyika Territory",          CType.R_AFRICA,           CAAN_UK_AT,         1)
+CAAT_TIMGUSKA                  = CAAT_Land("Timguska",                      CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_TOBRUK                    = CAAT_Land("Tobruk",                        CType.R_AFRICA,           CAAN_UK_AT,         0)
+CAAT_TRANS_JORDAN              = CAAT_Land("Trans-Jordan",                  CType.R_ASIA_MIDDLE_EAST, CAAN_UK_AT,         1)
+CAAT_TSAGAAN_OLOM              = CAAT_Land("Tsagaan-Olom",                  CType.R_ASIA_FAR_EAST,    CAAN_MONGOLIA,      0)
+CAAT_TSINGHAI                  = CAAT_Land("Tsinghai",                      CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
+CAAT_TUNISIA                   = CAAT_Land("Tunisia",                       CType.R_AFRICA,           CAAN_FRANCE,        1)
+CAAT_TURKEY                    = CAAT_Land("Turkey",                        CType.R_ASIA_MIDDLE_EAST, CAAN_TURKEY,        2, [CAAU_Inf(CAAN_TURKEY,2)])
+CAAT_TURKMENISTAN              = CAAT_Land("Turkmenistan",                  CType.R_ASIA_MIDDLE_EAST, CAAN_SOVIET_UNION,  0)
+CAAT_UKRAINE                   = CAAT_Land("Ukraine",                       CType.R_EUROPE,           CAAN_SOVIET_UNION,  2)
+CAAT_ULAANBAATAR               = CAAT_Land("Ulaanbaatar",                   CType.R_ASIA_FAR_EAST,    CAAN_MONGOLIA,      0,[CAAU_Inf(CAAN_MONGOLIA, 1)])
+CAAT_UNION_OF_SOUTH_AFRICA     = CAAT_Land("Union of South Africa",         CType.R_AFRICA,           CAAN_UK_AT,         2)
+CAAT_UNITED_KINGDOM            = CAAT_Land("United Kingdom",                CType.R_EUROPE,           CAAN_UK_AT,         6)
+CAAT_URALS                     = CAAT_Land("Urals",                         CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_URUGUAY                   = CAAT_Land("Uruguay",                       CType.R_SOUTHAMERICA,     CAAN_URUGUAY,       0)
+CAAT_VENEZUELA                 = CAAT_Land("Venezuela",                     CType.R_SOUTHAMERICA,     CAAN_VENEZUELA,     2, [CAAU_Inf(CAAN_VENEZUELA,2)])
+CAAT_VICTORIA                  = CAAT_Land("Victoria",                      CType.R_AUSTRALIA,        CAAN_ANZAC,         1)
+CAAT_VOLGOGRAD                 = CAAT_Land("Volgograd",                     CType.R_EUROPE,           CAAN_SOVIET_UNION,  2)
+CAAT_VOLODGA                   = CAAT_Land("Volodga",                       CType.R_EUROPE,           CAAN_SOVIET_UNION,  1)
+CAAT_VYBORG                    = CAAT_Land("Vyborg",                        CType.R_EUROPE,           CAAN_SOVIET_UNION,  0)
+CAAT_WAKE_ISLAND               = CAAT_Land("Wake Island",                   CType.R_PACIFIC,          CAAN_UNITED_STATES, 0)
+CAAT_WEST_INDIA                = CAAT_Land("West India",                    CType.R_ASIA_FAR_EAST,    CAAN_UK_AT,         2)
+CAAT_WEST_INDIES               = CAAT_Land("West Indies",                   CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 1)
+CAAT_WESTERN_AUSTRALIA         = CAAT_Land("Western Australia",             CType.R_AUSTRALIA,        CAAN_ANZAC,         1)
+CAAT_WESTERN_CANADA            = CAAT_Land("Western Canada",                CType.R_NORDAMERICA,      CAAN_UK_PA,         1)
+CAAT_WESTERN_GERMANY           = CAAT_Land("Western Germany",               CType.R_EUROPE,           CAAN_GERMANY,       5)
+CAAT_WESTERN_UKRAINE           = CAAT_Land("Western Ukraine",               CType.R_EUROPE,           CAAN_SOVIET_UNION,  2)
+CAAT_WESTERN_UNITED_STATES     = CAAT_Land("Western United States",         CType.R_NORDAMERICA,      CAAN_UNITED_STATES, 10)
+CAAT_YAKUT                     = CAAT_Land("Yakut S.S.R",                   CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_YENISEY                   = CAAT_Land("Yenisey",                       CType.R_ASIA_FAR_EAST,    CAAN_SOVIET_UNION,  1)
+CAAT_YUGOSLAVIA                = CAAT_Land("Yugoslavia",                    CType.R_EUROPE,           CAAN_YUGOSLAVIA,    2, [CAAU_Inf(CAAN_YUGOSLAVIA, 4)])
+CAAT_YUNNAN                    = CAAT_Land("Yunnan",                        CType.R_ASIA_FAR_EAST,    CAAN_CHINA,         1)
 
 
 
 L_NATION_SETUP_GLOBAL_1940 = [
-    CAAN_GERMANY,       
-    CAAN_SOVIET_UNION,  
-    CAAN_JAPAN,         
-    CAAN_UNITED_STATES, 
-    CAAN_CHINA,         
-    CAAN_UNITED_KINGDOM,
-    CAAN_ITALY,         
-    CAAN_ANZAC,         
-    CAAN_FRANCE        
+    CAAN_GERMANY,
+    CAAN_SOVIET_UNION,
+    CAAN_JAPAN,
+    CAAN_UNITED_STATES,
+    CAAN_CHINA,
+    CAAN_UK_AT,
+    CAAN_UK_PA,
+    CAAN_ITALY,
+    CAAN_ANZAC,
+    CAAN_FRANCE
 ]
 
-CAAM_GLOBAL_1940 = CAAI_Map("Map-Global-1940")
+L_TERRITORIES_SETUP_GLOBAL_1940 = [
+CAAT_SEASIDE_001,
+    CAAT_SEASIDE_002,
+    CAAT_SEASIDE_003,
+    CAAT_SEASIDE_004,
+    CAAT_SEASIDE_005,
+    CAAT_SEASIDE_006,
+    CAAT_SEASIDE_007,
+    CAAT_SEASIDE_008,
+    CAAT_SEASIDE_009,
+    CAAT_SEASIDE_010,
+    CAAT_SEASIDE_011,
+    CAAT_SEASIDE_012,
+    CAAT_SEASIDE_013,
+    CAAT_SEASIDE_014,
+    CAAT_SEASIDE_015,
+    CAAT_SEASIDE_016,
+    CAAT_SEASIDE_017,
+    CAAT_SEASIDE_018,
+    CAAT_SEASIDE_019,
+    CAAT_SEASIDE_020,
+    CAAT_SEASIDE_021,
+    CAAT_SEASIDE_022,
+    CAAT_SEASIDE_023,
+    CAAT_SEASIDE_024,
+    CAAT_SEASIDE_025,
+    CAAT_SEASIDE_026,
+    CAAT_SEASIDE_027,
+    CAAT_SEASIDE_028,
+    CAAT_SEASIDE_029,
+    CAAT_SEASIDE_030,
+    CAAT_SEASIDE_031,
+    CAAT_SEASIDE_031,
+    CAAT_SEASIDE_031,
+    CAAT_SEASIDE_031,
+    CAAT_SEASIDE_034,
+    CAAT_SEASIDE_035,
+    CAAT_SEASIDE_036,
+    CAAT_SEASIDE_037,
+    CAAT_SEASIDE_038,
+    CAAT_SEASIDE_039,
+    CAAT_SEASIDE_040,
+    CAAT_SEASIDE_041,
+    CAAT_SEASIDE_042,
+    CAAT_SEASIDE_043,
+    CAAT_SEASIDE_044,
+    CAAT_SEASIDE_045,
+    CAAT_SEASIDE_046,
+    CAAT_SEASIDE_047,
+    CAAT_SEASIDE_048,
+    CAAT_SEASIDE_049,
+    CAAT_SEASIDE_050,
+    CAAT_SEASIDE_051,
+    CAAT_SEASIDE_052,
+    CAAT_SEASIDE_053,
+    CAAT_SEASIDE_054,
+    CAAT_SEASIDE_055,
+    CAAT_SEASIDE_056,
+    CAAT_SEASIDE_057,
+    CAAT_SEASIDE_058,
+    CAAT_SEASIDE_059,
+    CAAT_SEASIDE_060,
+    CAAT_SEASIDE_061,
+    CAAT_SEASIDE_062,
+    CAAT_SEASIDE_063,
+    CAAT_SEASIDE_064,
+    CAAT_SEASIDE_065,
+    CAAT_SEASIDE_066,
+    CAAT_SEASIDE_067,
+    CAAT_SEASIDE_068,
+    CAAT_SEASIDE_069,
+    CAAT_SEASIDE_070,
+    CAAT_SEASIDE_071,
+    CAAT_SEASIDE_072,
+    CAAT_SEASIDE_073,
+    CAAT_SEASIDE_074,
+    CAAT_SEASIDE_075,
+    CAAT_SEASIDE_076,
+    CAAT_SEASIDE_077,
+    CAAT_SEASIDE_078,
+    CAAT_SEASIDE_079,
+    CAAT_SEASIDE_080,
+    CAAT_SEASIDE_081,
+    CAAT_SEASIDE_082,
+    CAAT_SEASIDE_083,
+    CAAT_SEASIDE_084,
+    CAAT_SEASIDE_085,
+    CAAT_SEASIDE_086,
+    CAAT_SEASIDE_087,
+    CAAT_SEASIDE_088,
+    CAAT_SEASIDE_089,
+    CAAT_SEASIDE_090,
+    CAAT_SEASIDE_091,
+    CAAT_SEASIDE_092,
+    CAAT_SEASIDE_093,
+    CAAT_SEASIDE_094,
+    CAAT_SEASIDE_095,
+    CAAT_SEASIDE_096,
+    CAAT_SEASIDE_097,
+    CAAT_SEASIDE_098,
+    CAAT_SEASIDE_099,
+    CAAT_SEASIDE_100,
+    CAAT_SEASIDE_101,
+    CAAT_SEASIDE_102,
+    CAAT_SEASIDE_103,
+    CAAT_SEASIDE_104,
+    CAAT_SEASIDE_105,
+    CAAT_SEASIDE_106,
+    CAAT_SEASIDE_107,
+    CAAT_SEASIDE_108,
+    CAAT_SEASIDE_109,
+    CAAT_SEASIDE_110,
+    CAAT_SEASIDE_111,
+    CAAT_SEASIDE_112,
+    CAAT_SEASIDE_113,
+    CAAT_SEASIDE_114,
+    CAAT_SEASIDE_115,
+    CAAT_SEASIDE_116,
+    CAAT_SEASIDE_117,
+    CAAT_SEASIDE_118,
+    CAAT_SEASIDE_119,
+    CAAT_SEASIDE_120,
+    CAAT_SEASIDE_121,
+    CAAT_SEASIDE_122,
+    CAAT_SEASIDE_123,
+    CAAT_SEASIDE_124,
+    CAAT_SEASIDE_125,
+    CAAT_SEASIDE_126,
+    CAAT_SEASIDE_127,
 
+    CAAT_AFGHANISTAN,
+    CAAT_ALSKA,
+    CAAT_ALBANIA,
+    CAAT_ALBERTA,
+    CAAT_ALEUTIAN,
+    CAAT_ALEXANDRIA,
+    CAAT_ALGERIA,
+    CAAT_AMUR,
+    CAAT_ANGLO_EGYPTIAN_SUDAn,
+    CAAT_ANGOLA,
+    CAAT_ANHWE,
+    CAAT_ARCHANGEL,
+    CAAT_ARGENTINIA,
+    CAAT_BALTIC_STATES,
+    CAAT_BELGIAN_CONGO,
+    CAAT_BESSARABIA,
+    CAAT_BOLIVIA,
+    CAAT_BORNEO,
+    CAAT_BRAZIL,
+    CAAT_BRITISH_GUIANA,
+    CAAT_BRITISH_SOMALILAND,
+    CAAT_BRYANSK,
+    CAAT_BULGARIA,
+    CAAT_BURMA,
+    CAAT_BURYATIA,
+    CAAT_BUYANT_UHAA,
+    CAAT_CAUCASUS,
+    CAAT_CELEBES,
+    CAAT_CENTRAL_AMERICA,
+    CAAT_CENTRAL_MONGOLIA,
+    CAAT_CENTRAL_US,
+    CAAT_CEYLON,
+    CAAT_CHAHAR,
+    CAAT_CHILE,
+    CAAT_COLOMBIA,
+    CAAT_CRETE,
+    CAAT_CYPRUS,
+    CAAT_DENMARK,
+    CAAT_DUTCH_NEW_GUINEA,
+    CAAT_DZAVHAN,
+    CAAT_EASTERN_PERSIA,
+    CAAT_EASTERN_UNIT_STATES,
+    CAAT_ECUADOR,
+    CAAT_EGYPT,
+    CAAT_EIRE,
+    CAAT_ESTERN_POLAND,
+    CAAT_ETHIOPIA,
+    CAAT_EVENKIYSKIY,
+    CAAT_FIJI,
+    CAAT_FINLAND,
+    CAAT_FORMOSA,
+    CAAT_FRANCE,
+    CAAT_FRENCH_CENTRAL_AFRICA,
+    CAAT_FRENCH_EQUATORIAL_AFRICA,
+    CAAT_FRENCH_GUIANA,
+    CAAT_FRENCH_INDO_CHINA,
+    CAAT_FRENCH_MADAGASCAR,
+    CAAT_FRENCH_WEST_AFRICA,
+    CAAT_GERMANY,
+    CAAT_GIBRALTER,
+    CAAT_GILBERT_ISLANDS,
+    CAAT_GOLD_COAST,
+    CAAT_GREATER_SOUTHERN_GERMANY,
+    CAAT_GREECE,
+    CAAT_GREENLAND,
+    CAAT_GUAM,
+    CAAT_HAINAN,
+    CAAT_HAWAIIAN_ISLANDS,
+    CAAT_HOLLAND_BELGIUM,
+    CAAT_HOPEI,
+    CAAT_HUNAN,
+    CAAT_ICELAND,
+    CAAT_INDIA,
+    CAAT_IRAQ,
+    CAAT_ITALIAN_SOMALILAND,
+    CAAT_IWO_JIMA,
+    CAAT_JAPAN,
+    CAAT_JAVA,
+    CAAT_JEHOL,
+    CAAT_JOHNSTON_ISLANDS,
+    CAAT_KANSU,
+    CAAT_KARELIA,
+    CAAT_KAZAKHSTAN,
+    CAAT_KENYA,
+    CAAT_KIANGSI,
+    CAAT_KIANGSU,
+    CAAT_KOREA,
+    CAAT_KWANGSI,
+    CAAT_KWANGTUNG,
+    CAAT_KWEICHOW,
+    CAAT_LIBERIA,
+    CAAT_LINE_ISLANDS,
+    CAAT_LYBIA,
+    CAAT_MALAYA,
+    CAAT_MANCHURIA,
+    ##CAAT_MANILA,
+    CAAT_MARIANAS,
+    CAAT_MARSHALL_ISLANDS,
+    CAAT_MEXICO,
+    CAAT_MIDWAY,
+    CAAT_MOROCO,
+    CAAT_MOZAMBIQUE,
+    CAAT_NENETSIA,
+    CAAT_NEW_BRITAIN,
+    CAAT_NEW_BRUNSWICK_NOVA_SCOTIA,
+    CAAT_NEW_GUINEA,
+    CAAT_NEW_HEBRIDES,
+    CAAT_NEW_SOUTH_WALES,
+    CAAT_NEW_ZEALAND,
+    CAAT_NEWFOUNDLAND_LABRADOR,
+    CAAT_MIDWAY,
+    CAAT_NIGERIA,
+    CAAT_NORMANDY_BORDEAUX,
+    CAAT_NORTHERN_ITALY,
+    CAAT_NORTHERN_TERRITORY,
+    CAAT_NORTHWEST_PERSIA,
+    CAAT_NORWAY,
+    CAAT_NOVGOROD,
+    CAAT_NOVOSIBIRSK,
+    CAAT_OKINAWA,
+    CAAT_OLGIY,
+    CAAT_ONTARIO,
+    CAAT_PALAU_ISLAND,
+    CAAT_PARAGUAY,
+    CAAT_PERSIA,
+    CAAT_PERU,
+    CAAT_PHILLIPINES,
+    CAAT_POLAND,
+    CAAT_PORTUGAL,
+    CAAT_PORTUGUESE,
+    CAAT_QUEBEC,
+    CAAT_QUEENSLAND,
+    CAAT_RHODESIA,
+    CAAT_RIO_DE_ORO,
+    CAAT_ROMANIA,
+    CAAT_ROSTOV,
+    CAAT_RUSSIA,
+    CAAT_SAKHA,
+    CAAT_SAMARA,
+    CAAT_SAMOA,
+    CAAT_SARDINIA,
+    CAAT_SAUDI_ARABIA,
+    CAAT_SCOTLAND,
+    CAAT_SHAN_STATE,
+    CAAT_SHANTUNG,
+    CAAT_SHENSI,
+    CAAT_SIAM,
+    CAAT_SIBERIA,
+    CAAT_SICILY,
+    CAAT_SIERRA_LEONE,
+    CAAT_SIKANG,
+    CAAT_SLOVAKIA_HUNGAR,
+    CAAT_SMOLENSK,
+    CAAT_SOLOMON_ISLANDS,
+    CAAT_SOUTH_AUSTRALIA,
+    CAAT_SOUTH_EAST_MEXICO,
+    CAAT_SOUTH_WEST_AFRICA,
+    CAAT_SOUTHERN_FRANCE,
+    CAAT_SOUTHERN_ITALY,
+    CAAT_SOVIET_FAR_EAST,
+    CAAT_SPAIN,
+    CAAT_SUIYUAN,
+    CAAT_SUMATRA,
+    CAAT_SURINAME,
+    CAAT_SWEDEN,
+    CAAT_SWITZERLAND,
+    CAAT_SYRIA,
+    CAAT_SZECHWAN,
+    CAAT_TAMBOV,
+    CAAT_TANGANYIKA_TERRITORY,
+    CAAT_TIMGUSKA,
+    CAAT_TOBRUK,
+    CAAT_TRANS_JORDAN,
+    CAAT_TSAGAAN_OLOM,
+    CAAT_TSINGHAI,
+    CAAT_TUNISIA,
+    CAAT_TURKEY,
+    CAAT_TURKMENISTAN,
+    CAAT_UKRAINE,
+    CAAT_ULAANBAATAR,
+    CAAT_UNION_OF_SOUTH_AFRICA,
+    CAAT_UNITED_KINGDOM,
+    CAAT_URALS,
+    CAAT_URUGUAY,
+    CAAT_VENEZUELA,
+    CAAT_VICTORIA,
+    CAAT_VOLGOGRAD,
+    CAAT_VOLODGA,
+    CAAT_VYBORG,
+    CAAT_WAKE_ISLAND,
+    CAAT_WEST_INDIA,
+    CAAT_WEST_INDIES,
+    CAAT_WESTERN_AUSTRALIA,
+    CAAT_WESTERN_CANADA,
+    CAAT_WESTERN_GERMANY,
+    CAAT_WESTERN_UKRAINE,
+    CAAT_WESTERN_UNITED_STATES,
+    CAAT_YAKUT,
+    CAAT_YENISEY,
+    CAAT_YUGOSLAVIA,
+    CAAT_YUNNAN,
+]
+
+#CAAM_GLOBAL_1940 = CAAI_Map("Map-Global-1940"
 

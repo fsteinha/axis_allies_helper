@@ -67,6 +67,7 @@ class CType():
     R_ARTIC_SEA         = 612
     R_BLACK_SEA         = 613
     R_ASIA_CENTRAL      = 614
+    R_AUSTRALIA         = 615
     
     
     NA                  = 1000    
@@ -133,6 +134,7 @@ class CType():
         R_ARTIC_SEA        : "Artic sea",
         R_BLACK_SEA        : "Black sea",
         R_ASIA_CENTRAL     : "Asia central",
+        R_AUSTRALIA        : "Australia",
         NA                 : "N/A"
     }
 
@@ -198,6 +200,7 @@ class CType():
         R_ARTIC_SEA        : C_REGION,
         R_BLACK_SEA        : C_REGION,
         R_ASIA_CENTRAL     : C_REGION,
+        R_AUSTRALIA        : C_REGION,
 
         NA                 : NA
     }

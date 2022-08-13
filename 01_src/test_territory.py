@@ -25,23 +25,23 @@ caan_gb_europe = CAAI_Nation("Great Britain Europe", CType.A_ALLIES)
     ])
 def test_land_init(s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
-    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc)
     assert caa.get_name() == s_name
     assert caa.get_region() == aa_region
     assert caa.get_type() == CType.T_LAND
     assert caa.get_alliance() == aa_nation.get_alliance(), f"{caa.get_alliance()} != {aa_nation.get_alliance()}"
     assert caa.get_ipc()  == aa_ipc
     
-    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land(), 
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, 
                      [CAAF_AirBase(), CAAF_Major(), CAAF_Minor(), CAAF_NavalBase()])
     assert caa.get_unit_count() == 4, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 4"
     
-    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land(), 
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, 
                      [CAAF_AirBase(), CAAF_Major(), CAAF_Minor(), CAAF_NavalBase(), 
                       CAAU_AAA(aa_nation), CAAU_SBomb(aa_nation),CAAU_Tank(aa_nation)])
     assert caa.get_unit_count() == 7, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 7"
 
-    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land(), 
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, 
                      [CAAF_AirBase(), CAAF_Major(), CAAF_Minor(), CAAF_NavalBase(), 
                       CAAU_AAA(aa_nation), CAAU_SBomb(aa_nation),CAAU_Tank(aa_nation,10)])
     assert caa.get_unit_count() == 16, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 16"
@@ -49,7 +49,7 @@ def test_land_init(s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation):
     # try to put not allowed units in the territory
     b_assert = False
     try:
-        caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land(), 
+        caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, 
                      [CAAF_AirBase(), CAAF_Major(), CAAF_Minor(), CAAF_NavalBase(), 
                       CAAU_AAA(aa_nation), CAAU_SBomb(aa_nation),CAAU_Tank(aa_nation,10),
                       CAAU_Battleship(aa_nation)])
@@ -62,9 +62,10 @@ def test_land_init(s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation):
     # try to bind not allowed rules in the territory
     b_assert = False
     try:
-        caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Sea(), 
+        caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, 
                      [CAAF_AirBase(), CAAF_Major(), CAAF_Minor(), CAAF_NavalBase(), 
-                      CAAU_AAA(aa_nation), CAAU_SBomb(aa_nation),CAAU_Tank(aa_nation,10)])
+                      CAAU_AAA(aa_nation), CAAU_SBomb(aa_nation),CAAU_Tank(aa_nation,10)], 
+                      None, CAAR_Sea())
         b_assert = True
     except:
         pass
@@ -75,55 +76,55 @@ def test_land_init(s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation):
     #test the neigbores
 
     s_neighbore = 'nord'
-    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc)
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'nord_east'
-    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc)
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'east'
-    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc)
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'south_east'
-    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc)
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'south'
-    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc)
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'south_west'
-    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc)
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'west'
-    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc)
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'nord_west'
-    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa_test = CAAT_Land(f"{s_name}_{s_neighbore}",aa_region, aa_nation, aa_ipc)
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     #test origin nation
-    caa = CAAT_Land(s_name, aa_region, aa_nation, aa_ipc, CAAR_Land, [], aa_origin_nation)
+    caa = CAAT_Land(s_name, aa_region, aa_nation, aa_ipc, [], aa_origin_nation)
     if aa_origin_nation == None:
         assert caa.get_origin_nation() == aa_nation
         assert caa.get_origin_nation() == caa.get_nation()
@@ -140,14 +141,14 @@ def test_land_init(s_name, aa_region, aa_nation, aa_ipc, aa_origin_nation):
     ])
 def test_land(s_name, aa_region, aa_nation, aa_ipc):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
-    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land, [])
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc)
     assert caa.get_name() == s_name
     assert caa.get_region() == aa_region
     assert caa.get_type() == CType.T_LAND
     assert caa.get_alliance() == aa_nation.get_alliance(), f"{caa.get_alliance()} != {aa_nation.get_alliance()}"
     assert caa.get_ipc()  == aa_ipc
     
-    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, CAAR_Land(), 
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc, 
                      [CAAF_AirBase(), CAAF_Major(), CAAF_Minor(), CAAF_NavalBase()])
     assert caa.get_unit_count() == 4, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 4"
     
