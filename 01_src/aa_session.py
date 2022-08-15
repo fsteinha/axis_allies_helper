@@ -26,6 +26,8 @@
 #
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
+from multiprocessing import reduction
+from re import I
 from aa_type import CType
 from aa_item import CAAItem
 from aa_nation import *
@@ -72,10 +74,8 @@ class CAAI_Session(CAAItem):
         self.aa_map = aa_map
 
         # check the round
-        if (i_round < 1):
+        if (self.set_round(i_round) == False):
             raise Exception (f"i_round not valid: {i_round}")
-
-        self.i_round = i_round
 
         # check nations list
         if (type(l_aa_nations) != list):
@@ -98,11 +98,70 @@ class CAAI_Session(CAAItem):
         self.aa_current_nation = aa_current_nation
 
         # check current phase
-        if (aa_current_phase < CType.S_PH1_PURCHASE_REPAIR) or (aa_current_nation > CType.S_PH6_COLLECT_INCOME):
+        if (aa_current_phase < CType.S_PH1_PURCHASE_REPAIR) or (aa_current_phase > CType.S_PH6_COLLECT_INCOME):
             raise Exception (f"aa_current_phase not valid {aa_current_phase}")
 
+        self.aa_current_phase = aa_current_phase
         pass
 
+    def set_round(self, i_round:int) -> bool:
+        """! set the round for session
+            @param i_round integer for round counter
+            @return
+                - True: Setting is successfull
+                - False: setting is not successful
+        """
+        # check the round
+        if (i_round < 1):
+            return False
+        self.i_round = i_round
+        return True
+
+    def set_next_round(self) -> bool:
+        """! Set the next round
+             Checks the phase status,
+             incremets the counter
+             sets the new phase
+             @return
+                - True: Setting is successfull
+                - False: setting is not successful
+        """
+        if (self.aa_current_phase == CType.S_PH6_COLLECT_INCOME):
+            self.i_round = self.i_round + 1
+            self.aa_current_phase = CType.S_PH1_PURCHASE_REPAIR
+            return True
+        return False
+
+    def get_round(self):
+        """! Getter for the session round
+            @return the current round counter
+        """
+        return self.i_round
+
+    def get_nations_as_str(self, s_seperator = '\n'):
+        """! Getter for nations as string
+           @param  s_seperator speartor for nations in string
+           @return nations as string
+        """
+        s_ret = ""
+        # check nation list type
+        for aa_nation in self.l_aa_nations:
+            s_ret = s_ret + aa_nation.get_name()
+            s_ret = s_ret + s_seperator
+        s_ret = s_ret[:-1]
+        return s_ret
+
+    def get_current_nation(self):
+        """! Returns the current nation which should to the turn
+           @return current nation
+        """
+        return self.aa_current_nation
+
+    def get_current_phase(self):
+        """! Returns the current nation which should to the turn
+           @return current nation
+        """
+        return CType.str(self.aa_current_phase)
 
 ##############################################################################
 # Not executable
