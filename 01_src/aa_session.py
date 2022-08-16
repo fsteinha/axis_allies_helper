@@ -26,8 +26,8 @@
 #
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
-from multiprocessing import reduction
-from re import I
+import json
+
 from aa_type import CType
 from aa_item import CAAItem
 from aa_nation import *
@@ -49,6 +49,16 @@ class CAAI_Session(CAAItem):
     """! The map class.
     The session class contains all objects of an axis and allies session
     """
+
+    JSON_SESSION_META   = "session_meta"
+
+    JSON_SESSION_NAME   = "session_name"
+    JSON_MAP            = "map"
+    JSON_ROUND          = "round"
+    JSON_NATIONS        = "nations"
+    JSON_CURRENT_NATION = "current_nation"
+    JSON_CURRENT_PHASE  = "current_phase"
+
     def __init__(self, s_name:str,
                        aa_map:CAAI_Map = C_MAP_GLOBAL_1940,
                        i_round:int = 1,
@@ -65,6 +75,7 @@ class CAAI_Session(CAAItem):
 
         @return  An instance of session class.
         """
+
         super().__init__(s_name, CType.S_SESSION)
 
         # check map type
@@ -151,6 +162,16 @@ class CAAI_Session(CAAItem):
         s_ret = s_ret[:-1]
         return s_ret
 
+    def get_nations_as_list(self):
+        """! Getter for nations as list
+           @return nations in a list
+        """
+        l_ret = []
+        # check nation list type
+        for aa_nation in self.l_aa_nations:
+            l_ret.append(aa_nation.get_name())
+        return l_ret
+
     def get_current_nation(self):
         """! Returns the current nation which should to the turn
            @return current nation
@@ -162,6 +183,24 @@ class CAAI_Session(CAAItem):
            @return current nation
         """
         return CType.str(self.aa_current_phase)
+
+    def get_json(self) -> str:
+        s_json = json.dumps({self.JSON_SESSION_META :
+                                {
+                                    self.JSON_SESSION_NAME  : self.get_name(),
+                                    self.JSON_MAP           : self.aa_map.get_name(),
+                                    self.JSON_ROUND         : self.get_round(),
+                                    self.JSON_NATIONS       : self.get_nations_as_list(),
+                                    self.JSON_CURRENT_NATION: self.get_current_nation().get_name(),
+                                    self.JSON_CURRENT_PHASE : self.get_current_phase()
+                                }
+                            }, indent=4)
+        return s_json
+
+    @staticmethod
+    def set_json(s_json:str):
+        d_json = json.loads(s_json)
+        pass
 
 ##############################################################################
 # Not executable

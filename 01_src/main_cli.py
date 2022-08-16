@@ -31,7 +31,7 @@ def main():
     args = option_parser()
 
     if (args.global_1940 == False) and (args.file != None):
-        #TODO
+        load_session(args.file)
         pass
     else:
         aa_session = CAAI_Session(s_name              = "Global game 1940",
@@ -41,10 +41,11 @@ def main():
                                     aa_current_nation = CAAN_GERMANY,
                                     aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR)
 
-
-
     if args.status == True:
         print_session_status(aa_session)
+
+    if args.out != None:
+        save_session(args.out, aa_session)
 
 
 
@@ -63,6 +64,22 @@ def print_session_status(aa_session:CAAI_Session):
     print(tabulate(table))
 
 
+def save_session(s_file_out:str, aa_session:CAAI_Session) -> bool:
+    file = open(s_file_out, 'w')
+    s_json_out = aa_session.get_json()
+
+    if s_json_out != None:
+        file.write(s_json_out)
+        return False
+
+    file.close()
+    return True
+
+def load_session(s_file_in:str) -> bool:
+    file = open (s_file_in, "r")
+    s_json = file.read()
+    print (s_json)
+    CAAI_Session.set_json(s_json)
 
 
 
