@@ -222,7 +222,7 @@ class CAAT_Sea(CAAI_Territory):
     """! The sea class.
     This is a specialication for sea of the territory class.
     """
-    def __init__(self, s_name: str, aa_region: CType, c_rules: CAAR = CAAR_Sea, l_aa_units: list = []) -> None:
+    def __init__(self, s_name: str, aa_region: CType, c_rules: CAAR = CAAR_Sea(), l_aa_units: list = []) -> None:
         """! The Teritory class initializer.
         @param  s_name     The name of the territory.
         @param  aa_region  Region from static class CType.

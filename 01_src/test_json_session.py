@@ -27,7 +27,8 @@ from aa_session import *
 
 def test_get_json():
     aa_session = CAAI_Session("test")
-    print (CJSON_Session().get_json(aa_session))
+    s_json = CJSON_Session().get_json(aa_session)
+   # print (s_json)
 
 if __name__ == "__main__":
     test_get_json()
