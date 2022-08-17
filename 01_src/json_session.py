@@ -33,52 +33,57 @@ class CJSON_Session():
     """
     KEY_GLOBAL_NATION_LIST = "global_nations"
 
-    @staticmethod
-    def get_json(aa_session:CAAI_Session):
-        d_json = {}
-        l_global_nation = []
+    def __init__(self) -> None:
+        self.d_json = {}
+        self.l_global_nation = []
 
-        def add_element(value, s_list_key = None, b_list = False):
-            if (type(value) == CAAI_Nation) and (value not in l_global_nation):
-                l_global_nation.append(value)
+        pass
 
-
-            if ((type(value) == str) or\
-                (type(value) == int) or\
-                (type(value) == NoneType)):
-                json_value = value
-            elif (type(value) == CAAI_Nation):
-                json_value = str(value)
-            else:
-                json_value = "NOT_SUPPORTED"
-                print (f"Not supporded item {s_list_key} with type {type(value)}")
-
-
-            if b_list == False:
-                d_json[s_list_key] = json_value
-            else:
-                d_json[s_list_key].append(json_value)
-            pass
-
-
+    def get_json(self, aa_session:CAAI_Session):
         # put in the class items
-        for class_item in vars(aa_session).items():
-            if (type(class_item[1]) == list):
-                d_json[class_item[0]] = []
-                for list_item in class_item[1]:
-                    add_element(list_item, class_item[0], True)
-            else:
-                add_element(class_item[1], class_item[0])
+        self.add_object(aa_session)
 
         # put in the global nation references
-        d_json[CJSON_Session.KEY_GLOBAL_NATION_LIST] = {}
-        for nation in l_global_nation:
+        self.d_json[self.KEY_GLOBAL_NATION_LIST] = {}
+        for nation in self.l_global_nation:
             d_nation = {}
-            d_json[CJSON_Session.KEY_GLOBAL_NATION_LIST][str(nation)] = d_nation
+            self.d_json[self.KEY_GLOBAL_NATION_LIST][str(nation)] = d_nation
         # #return d_json
-        return json.dumps(d_json, indent=4)
+        return json.dumps(self.d_json, indent=4)
 
 
         pass
 
+    def add_object(self, c_object):
+        for class_item in vars(c_object).items():
+            if (type(class_item[1]) == list):
+                self.d_json[class_item[0]] = []
+                for list_item in class_item[1]:
+                    self.add_element(list_item, class_item[0], True)
+            else:
+                self.add_element(class_item[1], class_item[0])
+
+        pass
+
+    def add_element(self, value, s_list_key:str, b_list = False):
+        if (type(value) == CAAI_Nation) and (value not in self.l_global_nation):
+            self.l_global_nation.append(value)
+
+
+        if ((type(value) == str) or\
+            (type(value) == int) or\
+            (type(value) == NoneType)):
+            json_value = value
+        elif (type(value) == CAAI_Nation):
+            json_value = str(value)
+        else:
+            json_value = "NOT_SUPPORTED"
+            print (f"Not supporded item {s_list_key} with type {type(value)}")
+
+
+        if b_list == False:
+            self.d_json[s_list_key] = json_value
+        else:
+            self.d_json[s_list_key].append(json_value)
+        pass
 
