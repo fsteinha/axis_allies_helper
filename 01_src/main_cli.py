@@ -17,6 +17,7 @@ from tabulate import tabulate
 
 import aa_session_def_global_1940
 from aa_session import *
+from file_session import *
 
 # constanst
 OPT_GLOBAL_1940 = 1
@@ -31,7 +32,7 @@ def main():
     args = option_parser()
 
     if (args.global_1940 == False) and (args.file != None):
-        load_session(args.file)
+        aa_session = CFILE_Session(args.file).load_session()
         pass
     else:
         aa_session = CAAI_Session(s_name              = "Global game 1940",
@@ -45,9 +46,7 @@ def main():
         print_session_status(aa_session)
 
     if args.out != None:
-        save_session(args.out, aa_session)
-
-
+        CFILE_Session(args.out).save_session(aa_session)
 
 ##############################################################################
 def print_session_status(aa_session:CAAI_Session):

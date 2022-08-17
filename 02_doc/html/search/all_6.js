@@ -1,6 +1,25 @@
 var searchData=
 [
-  ['i_5fcount_105',['i_count',['../classaa__facillities_1_1CAAI__Facillity.html#a0c1a139844ce34ec1ed55435b56eebe7',1,'aa_facillities.CAAI_Facillity.i_count()'],['../classaa__unit_1_1CAAUnit.html#a0c1a139844ce34ec1ed55435b56eebe7',1,'aa_unit.CAAUnit.i_count()']]],
-  ['i_5funit_5fmax_106',['i_unit_max',['../classaa__rules_1_1CAAR.html#a831bf450336f78928a234f6e0b311cf1',1,'aa_rules::CAAR']]],
-  ['info_107',['info',['../classaa__container_1_1CAAUnitContainer.html#a4cbc8f16a0b6cd68f685de5561a0c618',1,'aa_container.CAAUnitContainer.info()'],['../classaa__item_1_1CAAItem.html#a4cbc8f16a0b6cd68f685de5561a0c618',1,'aa_item.CAAItem.info()']]]
+  ['get_5falliance_484',['get_alliance',['../classaa__item_1_1CAAItem.html#a21496c58d012c6769b6283eb2ad70d43',1,'aa_item::CAAItem']]],
+  ['get_5fclass_485',['get_class',['../classaa__type_1_1CType.html#a8cc2ce1897f279a066392da4ea1fb5f1',1,'aa_type::CType']]],
+  ['get_5fcontainer_486',['get_container',['../classaa__container_1_1CAAUnitContainer.html#a16aa87fc238522248ac883a841913d6c',1,'aa_container::CAAUnitContainer']]],
+  ['get_5fcount_487',['get_count',['../classaa__item_1_1CAAItem.html#a660ab4b0ebefc092f2a0c86d5ce96c4c',1,'aa_item::CAAItem']]],
+  ['get_5fcurrent_5fnation_488',['get_current_nation',['../classaa__session_1_1CAAI__Session.html#a89d32d8c480fb50b70e4c20a272085cd',1,'aa_session::CAAI_Session']]],
+  ['get_5fcurrent_5fphase_489',['get_current_phase',['../classaa__session_1_1CAAI__Session.html#ab4f2c4e96f050646446fd7e8a9931dab',1,'aa_session::CAAI_Session']]],
+  ['get_5ferror_5fmessage_490',['get_error_message',['../classaa__item_1_1CAAItem.html#a0169120efae43d95f7a302c0167d5f03',1,'aa_item::CAAItem']]],
+  ['get_5fipc_491',['get_ipc',['../classaa__item_1_1CAAItem.html#a7dfeb5e144d1de63afa3f9aa51cb74c5',1,'aa_item::CAAItem']]],
+  ['get_5fjson_492',['get_json',['../classaa__session_1_1CAAI__Session.html#a1fde8fcca6aa296dfefaf45915dfd402',1,'aa_session.CAAI_Session.get_json()'],['../classjson__session_1_1CJSON__Session.html#a14b81fa8f727786bb9e3cf5941f375f3',1,'json_session.CJSON_Session.get_json()']]],
+  ['get_5fname_493',['get_name',['../classaa__item_1_1CAAItem.html#afbf5b8af83c1256daa009449e52a1660',1,'aa_item::CAAItem']]],
+  ['get_5fnation_494',['get_nation',['../classaa__item_1_1CAAItem.html#a82c093ed32d2bbf7e5fdef7326348e15',1,'aa_item.CAAItem.get_nation()'],['../classaa__nation_1_1CAAI__Nation.html#a82c093ed32d2bbf7e5fdef7326348e15',1,'aa_nation.CAAI_Nation.get_nation()']]],
+  ['get_5fnations_5fas_5flist_495',['get_nations_as_list',['../classaa__session_1_1CAAI__Session.html#a455f9c7b47101d8157e150d6c9ee4f0a',1,'aa_session::CAAI_Session']]],
+  ['get_5fnations_5fas_5fstr_496',['get_nations_as_str',['../classaa__session_1_1CAAI__Session.html#ac31dc66a576e53919959613ca847bfe7',1,'aa_session::CAAI_Session']]],
+  ['get_5fneighbore_497',['get_neighbore',['../classaa__territory_1_1CAAI__Territory.html#ac4db198e4c3732438999d314926c93af',1,'aa_territory::CAAI_Territory']]],
+  ['get_5forigin_5fnation_498',['get_origin_nation',['../classaa__item_1_1CAAItem.html#ad7d8657170b1d5ff1c82d58cb1a16e2c',1,'aa_item::CAAItem']]],
+  ['get_5fregion_499',['get_region',['../classaa__item_1_1CAAItem.html#a3ea9b115e16f046aacb5b4fbfb70196e',1,'aa_item::CAAItem']]],
+  ['get_5fround_500',['get_round',['../classaa__session_1_1CAAI__Session.html#a8e4247b2079943a0663d4a7aa52ed6af',1,'aa_session::CAAI_Session']]],
+  ['get_5fsub_5fclass_501',['get_sub_class',['../classaa__type_1_1CType.html#a1a52b26bf864b67cedc3c48d92bc851b',1,'aa_type::CType']]],
+  ['get_5fterritory_502',['get_territory',['../classaa__map_1_1CAAI__Map.html#afe8eff0d5c3ff2d9b1e4cebe3b9cbb41',1,'aa_map::CAAI_Map']]],
+  ['get_5ftype_503',['get_type',['../classaa__item_1_1CAAItem.html#a273b6aa5a814960608ceccda275504a3',1,'aa_item::CAAItem']]],
+  ['get_5funit_5fcount_504',['get_unit_count',['../classaa__container_1_1CAAUnitContainer.html#abee1e2451c7242f73aed236f5f3b5b0c',1,'aa_container.CAAUnitContainer.get_unit_count()'],['../classaa__territory_1_1CAAI__Territory.html#a03e939279b536da12103a7041b17590d',1,'aa_territory.CAAI_Territory.get_unit_count()'],['../classaa__units_1_1CAAU__Container.html#a9d3914070121acf8077730740adb9e57',1,'aa_units.CAAU_Container.get_unit_count()']]],
+  ['get_5funits_505',['get_units',['../classaa__item_1_1CAAItem.html#a002c968fb9a83c640eecc0ac5649bafe',1,'aa_item::CAAItem']]]
 ];

@@ -49,7 +49,7 @@ class CFILE_Session():
         return True
 
     def load_session(self):
-        """! load the session
+        """! Load the session
             @return
                 - Session object - sucess
                 - None - Failure
@@ -58,4 +58,4 @@ class CFILE_Session():
         if self.s_mode == self.MODE_BIN:
             file_aa_session = open(self.s_filename, 'rb')
             aa_session = pickle.load(file_aa_session)
-        return aa_session
+        return aa_sess

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['i_5fcount_342',['i_count',['../classaa__facillities_1_1CAAI__Facillity.html#a0c1a139844ce34ec1ed55435b56eebe7',1,'aa_facillities.CAAI_Facillity.i_count()'],['../classaa__unit_1_1CAAUnit.html#a0c1a139844ce34ec1ed55435b56eebe7',1,'aa_unit.CAAUnit.i_count()']]],
-  ['i_5funit_5fmax_343',['i_unit_max',['../classaa__rules_1_1CAAR.html#a831bf450336f78928a234f6e0b311cf1',1,'aa_rules::CAAR']]]
+  ['f_5fair_5fbase_1222',['F_AIR_BASE',['../classaa__type_1_1CType.html#ae94e98fd2a3fc2d152bb3d4ad6df9401',1,'aa_type::CType']]],
+  ['f_5fmajor_5ffactory_1223',['F_MAJOR_FACTORY',['../classaa__type_1_1CType.html#a53d3470af004e5342a8caaeb7450f4b7',1,'aa_type::CType']]],
+  ['f_5fminor_5ffactory_1224',['F_MINOR_FACTORY',['../classaa__type_1_1CType.html#a8024670de273b38b225877a990faab1c',1,'aa_type::CType']]],
+  ['f_5fnaval_5fbase_1225',['F_NAVAL_BASE',['../classaa__type_1_1CType.html#a2751946716eec0a882d4b729dd1acbe5',1,'aa_type::CType']]]
 ];

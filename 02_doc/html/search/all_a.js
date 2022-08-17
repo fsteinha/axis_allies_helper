@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['r_5fafrica_113',['R_AFRICA',['../classaa__type_1_1CType.html#a5f715e7c6dd6d76e41fe23b479966a3c',1,'aa_type::CType']]],
-  ['r_5fasia_5ffar_5feast_114',['R_ASIA_FAR_EAST',['../classaa__type_1_1CType.html#a61835486bd98b9d2c4948af014ba4f95',1,'aa_type::CType']]],
-  ['r_5fasia_5fmiddle_5feast_115',['R_ASIA_MIDDLE_EAST',['../classaa__type_1_1CType.html#a0fe134e013da0c7fbbb73ee6a563902b',1,'aa_type::CType']]],
-  ['r_5feurope_116',['R_EUROPE',['../classaa__type_1_1CType.html#a0d5da5400b35a2b4eefcf945f1f1734f',1,'aa_type::CType']]],
-  ['r_5fnordamerica_117',['R_NORDAMERICA',['../classaa__type_1_1CType.html#a4920c8bc962dd0f467b7168744b467cf',1,'aa_type::CType']]],
-  ['r_5fpacific_118',['R_PACIFIC',['../classaa__type_1_1CType.html#a4c1ea79dd421feaed317404bdda5d6e3',1,'aa_type::CType']]],
-  ['r_5fsouthamerica_119',['R_SOUTHAMERICA',['../classaa__type_1_1CType.html#a30f156d63d7d7f98b0796b8d1b8f4a0a',1,'aa_type::CType']]],
-  ['reset_5fcount_120',['reset_count',['../classaa__facillities_1_1CAAI__Facillity.html#a594f1cd077a086a7ccbdfabad0906644',1,'aa_facillities.CAAI_Facillity.reset_count()'],['../classaa__unit_1_1CAAUnit.html#a594f1cd077a086a7ccbdfabad0906644',1,'aa_unit.CAAUnit.reset_count()']]]
+  ['l_5faa_5fnations_520',['l_aa_nations',['../classaa__session_1_1CAAI__Session.html#ab8185c5197f502e109b79e37011d9a83',1,'aa_session::CAAI_Session']]],
+  ['l_5fglobal_5fnation_521',['l_global_nation',['../classjson__session_1_1CJSON__Session.html#aae42c29b900a0543968764dfe47b8d99',1,'json_session::CJSON_Session']]],
+  ['l_5fnation_5fsetup_5fglobal_5f1940_522',['L_NATION_SETUP_GLOBAL_1940',['../namespaceaa__session__def__global__1940.html#aed2e581d40244ccce6317be7b96968bb',1,'aa_session_def_global_1940']]],
+  ['l_5fneighbore_5fkey_523',['L_NEIGHBORE_KEY',['../namespaceaa__territory.html#a1f8a4ea81986632a570d7e97402a3e3e',1,'aa_territory']]],
+  ['l_5fsession_5fphases_524',['L_SESSION_PHASES',['../namespaceaa__session.html#a7520174d34bb1d3d77a2b7412a85cd50',1,'aa_session']]],
+  ['l_5fterritories_5fsetup_5fglobal_5f1940_525',['L_TERRITORIES_SETUP_GLOBAL_1940',['../namespaceaa__session__def__global__1940.html#a457c416fe34e144158ce3727f5ea07f4',1,'aa_session_def_global_1940']]],
+  ['load_5fsession_526',['load_session',['../classfile__session_1_1CFILE__Session.html#a8e90a8cd61b5c4ca8837e4635022632f',1,'file_session.CFILE_Session.load_session()'],['../namespacemain__cli.html#a8c8a244e542ab9e4555a7de9bda2d46f',1,'main_cli.load_session()']]]
 ];
