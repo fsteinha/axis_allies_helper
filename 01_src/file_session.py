@@ -25,10 +25,10 @@
 import pickle
 
 class CFILE_Session():
-    """! class for store and load a session to or from file"""
+    """! Class for store and load a session to or from file"""
 
-    """! Class constant for binary dump"""
     MODE_BIN = "binary_dump"
+    """! Class constant for binary dump"""
 
     def __init__(self, s_filename:str, s_mode = MODE_BIN) -> None:
         """! Constructor for the file export / import class"""
