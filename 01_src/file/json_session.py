@@ -117,8 +117,8 @@ class CJSON_Session():
             self.add_object(value, json_value)
         else:
             json_value = self.VALULE_NOT_SUPPORTED
-            #print (f"Not supporded item {s_list_key} with type {type(value)}")
-            raise Exception (f"Not supporded item {s_list_key} with type {type(value)}")
+            print (f"Not supporded item {s_list_key} with type {type(value)}")
+            #raise Exception (f"Not supporded item {s_list_key} with type {type(value)}")
 
 
 
