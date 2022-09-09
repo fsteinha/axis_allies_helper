@@ -109,3 +109,10 @@
   body.flyout-open header {
     left: 350px;
   }
+
+  .scroll {
+    overflow: auto;
+    padding: 10px;
+    width: 60%;
+    margin: auto;
+  } 

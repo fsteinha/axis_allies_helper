@@ -10,7 +10,7 @@ import glob
 
 # aa staff
 import aa_session_def_global_1940
-from aa_session import *
+from web_session import *
 from file_session import *
 
 
@@ -25,16 +25,17 @@ from werkzeug.exceptions import abort
 ##############################################################################
 
 # Loaded session
-AA_SESSION = None
 
 S_STD_SESSION_NAME = "New standard session (Global 1940)"
-S_CURRENT_SESSION_NAME = None
+
 
 # FLASK app 
 app = Flask(__name__)
 app.config.from_object(__name__) 
-app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_COOKIE_NAME"] = "axis_allies"
+#app.config["SECRET_KEY"] ='osd(99092=36&462134kjKDhuIS_d23',
 Session(app)
 
 ##############################################################################
@@ -43,13 +44,12 @@ Session(app)
 
 @app.route('/')
 def me_status():
-    if not session.get("AA_SESSION"):
-        session['AA_SESSION'] = None
-        session['S_CURRENT_SESSION_NAME'] = None
-        s_info = " !!! No session loaded !!!"
-    else:
-        s_info = session['S_CURRENT_SESSION_NAME']
-    return render_template('index.html', header=get_aa_session_status(), info=s_info)
+    aa_session = get_web_session()
+    #print (session['S_CURRENT_SESSION_NAME']) 
+    if aa_session.AA_SESSION == None:
+        return render_template('index.html', header=get_aa_session_status(), info=" !!! No session loaded !!!")
+
+    return render_template('session_status.html', header=get_aa_session_status(), aa_session=aa_session.AA_SESSION)
 
 @app.route('/me_load')
 def me_load():
@@ -70,8 +70,10 @@ def me_4():
 
 @app.route('/<string:session_str>')
 def aa_session(session_str):
-    session['AA_SESSION'] = get_aa_session(session_str)
-    session['S_CURRENT_SESSION_NAME'] = session_str
+    aa_session = get_web_session()
+    aa_session.AA_SESSION = get_aa_session(session_str)
+    aa_session.S_CURRENT_SESSION_NAME = session_str
+
     return redirect(url_for('me_status'))
 
 ##############################################################################
@@ -97,9 +99,11 @@ def get_aa_session(session):
 
 def get_aa_session_status():
     s_status = "Status"
+    aa_session = get_web_session()
     
-    if (session['S_CURRENT_SESSION_NAME'] == None):
+    if (aa_session.S_CURRENT_SESSION_NAME == None):
         s_status = s_status + ": No session"
     else:
-        s_status = s_status + f": {session['S_CURRENT_SESSION_NAME']}"
+        s_status = s_status + f": {aa_session.S_CURRENT_SESSION_NAME}"
+
     return s_status
