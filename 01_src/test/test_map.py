@@ -68,6 +68,17 @@ def test_map():
     assert (caal_sea_20 not in l_lands)
     assert (caal_sea_100 not in l_lands)
     
+    l_lands = caam.get_lands_as_list([caan_germany])
+    assert (l_lands != None)
+    assert (len(l_lands) == 1)
+    assert (caal_western_germany in l_lands)
+
+    l_lands = caam.get_lands_as_list([caan_germany, caan_japan])
+    assert (l_lands != None)
+    assert (len(l_lands) == 2)
+    assert (caal_western_germany in l_lands)
+    assert (caal_japan in l_lands)
+    
     print(caam.info())    
 
 if __name__ == "__main__":

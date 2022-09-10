@@ -149,7 +149,7 @@ class CAAI_Session(CAAItem):
         """
         return self.i_round
 
-    def get_nations_as_str(self, s_seperator = '\n'):
+    def get_nation_names_as_str(self, s_seperator = '\n'):
         """! Getter for nations as string
            @param  s_seperator speartor for nations in string
            @return nations as string
@@ -162,7 +162,7 @@ class CAAI_Session(CAAItem):
         s_ret = s_ret[:-1]
         return s_ret
 
-    def get_nations_as_list(self):
+    def get_nation_names_as_list(self):
         """! Getter for nations as list
            @return nations in a list
         """
@@ -184,6 +184,16 @@ class CAAI_Session(CAAItem):
         """
         return CType.str(self.aa_current_phase)
 
+    def get_nation_ipc(self, nation) -> int:
+        """! Collect the ipc 
+           @return current nation
+        """
+        i_IPC = 0
+        l_lands = self.aa_map.get_lands_as_list(nation)
+        for land in l_lands:
+            i_IPC = i_IPC + land.get_ipc()
+        return i_IPC
+            
     def get_json(self) -> str:
         """! Returns a json text with the status
            @return json with status
