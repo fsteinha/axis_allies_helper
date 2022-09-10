@@ -83,17 +83,17 @@ class CAAI_Map(CAAItem):
         
         return None
     
-    def get_territory_lands_as_list(self, l_filter_nation = None) -> list:
+    def get_lands_as_list(self, l_filter_nation = None) -> list:
         """! Returns all territorys as list 
         @param l_filter_nation list with nations with should be exclusive in the list
         @return 
         - list with territories (lands)
         """
         l_ret = []
-        for territory in self.d_territories:
-            if (self.d_territories[territory].get_type() == CType.T_LAND) and \
-                ((l_filter_nation == None) or (self.d_territories[territory].get_nation() in l_filter_nation)):
-                l_ret.append(territory)
+        for s_land_name in self.d_territories:
+            if (self.d_territories[s_land_name].get_type() == CType.T_LAND) and \
+                ((l_filter_nation == None) or (self.d_territories[s_land_name].get_nation() in l_filter_nation)):
+                l_ret.append(self.d_territories[s_land_name])
         return l_ret
                 
         

@@ -54,8 +54,19 @@ def test_map():
 
     assert (caam.add_territory(caal_sea_102) == True)
     assert caam.get_territory("102") == caal_sea_102
-    
+    # double set test
     assert (caam.add_territory(caal_western_germany) == False)
+    
+    # test the gettin territorie list
+    l_lands = caam.get_lands_as_list()
+    assert (l_lands != None)
+    assert (len(l_lands) == 3)
+    assert (caal_western_germany in l_lands)
+    assert (caal_japan in l_lands)
+    assert (caal_great_britain in l_lands)
+    assert (caal_sea_80 not in l_lands)
+    assert (caal_sea_20 not in l_lands)
+    assert (caal_sea_100 not in l_lands)
     
     print(caam.info())    
 
