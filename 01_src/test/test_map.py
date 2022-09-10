@@ -55,6 +55,8 @@ def test_map():
     assert (caam.add_territory(caal_sea_102) == True)
     assert caam.get_territory("102") == caal_sea_102
     
+    assert (caam.add_territory(caal_western_germany) == False)
+    
     print(caam.info())    
 
 if __name__ == "__main__":

@@ -24,7 +24,6 @@
 
 import json
 from this import d
-from types import NoneType
 from aa_session import *
 from aa_nation import *
 from aa_map import *
@@ -87,7 +86,7 @@ class CJSON_Session():
 
         if ((type(value) == str) or\
             (type(value) == int) or\
-            (type(value) == NoneType)):
+            (type(value) == None)):
             json_value = value
         elif (type(value) == CAAI_Nation):
             json_value = str(value)

@@ -185,6 +185,10 @@ class CAAI_Session(CAAItem):
         return CType.str(self.aa_current_phase)
 
     def get_json(self) -> str:
+        """! Returns a json text with the status
+           @return json with status
+        """
+        
         s_json = json.dumps({self.JSON_SESSION_META :
                                 {
                                     self.JSON_SESSION_NAME  : self.get_name(),

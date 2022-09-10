@@ -193,15 +193,22 @@ class CAAT_Land(CAAI_Territory):
     """! The land class.
     This is a specialication for land of the territory class.
     """
-    def __init__(self, s_name: str, aa_region: CType, aa_nation: CAAI_Nation, aa_ipc: int, l_aa_units: list = [], aa_origin_nation: CAAI_Nation = None, c_rules: CAAR = CAAR_Land()) -> None:
+    def __init__(self, 
+                 s_name: str, 
+                 aa_region: CType,
+                 aa_nation: CAAI_Nation, 
+                 aa_ipc: int, 
+                 l_aa_units: list = [], 
+                 aa_origin_nation: CAAI_Nation = None, 
+                 c_rules: CAAR = CAAR_Land()) -> None:
         """! The Teritory class initializer.
         @param  s_name           The name of the territory.
         @param  aa_region        Region from static class CType.
         @param  aa_nation        Owner nation of the land territory.
         @param  aa_ipc           Ipc value of the land.
         @param  c_rules          Rules for the territory (land or sea), class CAAR.
-        @param  l_aa_units       List with preset units.
         @param  aa_origin_nation Origin nation (some land are occupied at default).
+        @param  l_aa_units       List with preset units.
         @return An instance of land territory class.
         """
 
