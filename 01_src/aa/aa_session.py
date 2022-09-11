@@ -103,11 +103,18 @@ class CAAI_Session(CAAItem):
         if (type(aa_current_nation) != CAAI_Nation):
             raise Exception (f"Given aa_current_nation object is not an nation object {type(aa_current_nation)}")
 
+        #check is current nation in l_aa_nations
         if (aa_current_nation not in l_aa_nations):
             raise Exception (f"Given aa_current_nation object is not in l_aa_nations")
-
+        
         self.aa_current_nation = aa_current_nation
 
+        #check is are nations l_aa_nations all in map
+        l_map_nations = aa_map.get_nations()
+        for aa_nation in l_aa_nations:
+            if aa_nation not in l_map_nations:
+                raise Exception (f"given nation {aa_nation.get_name()} in play list is not placed in map")
+        
         # check current phase
         if (aa_current_phase < CType.S_PH1_PURCHASE_REPAIR) or (aa_current_phase > CType.S_PH6_COLLECT_INCOME):
             raise Exception (f"aa_current_phase not valid {aa_current_phase}")

@@ -62,10 +62,27 @@ class CAAUnitContainer():
                  
         return i_count
     
+    def get_nations(self) -> list:
+        """! Returns all nations which placed in the container 
+        @param 
+        @return list with all nations 
+        """
+        l_ret = []
+
+        for t_unit in self.d_aa_units:
+            for s_nation in self.d_aa_units[t_unit]:
+                aa_nation = self.d_aa_units[t_unit][s_nation].get_nation()
+                if aa_nation not in l_ret:
+                    l_ret.append(aa_nation)
+        return l_ret
+                
+    
     def info(self):
+        """! Info tab  
+        """
         l_tab = [['Unit', 'Nation' 'Count']]
         for t_unit in self.d_aa_units:
-            for  s_nation in self.d_aa_units[t_unit]:
+            for s_nation in self.d_aa_units[t_unit]:
                 l_tab.append([CType.str(t_unit), s_nation, self.d_aa_units[t_unit][s_nation].get_count()])
         return tabulate(l_tab, headers="firstrow", tablefmt="grid")
         pass

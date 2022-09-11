@@ -96,7 +96,22 @@ class CAAI_Map(CAAItem):
                 l_ret.append(self.d_territories[s_land_name])
         return l_ret
                 
+    def get_nations(self) -> list:
+        """! Returns all nations which place in the map 
+        @param 
+        @return list with all nations 
+        """
         
+        l_ret = []
+        for s_land_name in self.d_territories:
+            l_nations = self.d_territories[s_land_name].get_nations()
+            for aa_nation in l_nations:
+                if aa_nation not in l_ret:
+                    l_ret.append(aa_nation)
+
+        return l_ret
+        
+        return super().get_nation()    
     
 ##############################################################################
 # Not executable

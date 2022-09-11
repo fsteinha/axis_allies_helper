@@ -188,6 +188,18 @@ class CAAI_Territory(CAAItem):
         # Never reached
         return None
 
+    def get_nations(self) -> list:
+        """! Returns all nations which placed in the territorie 
+        @param 
+        @return list with all nations 
+        """
+        l_ret = self.c_container.get_nations()
+        if self.get_nation() not in l_ret:
+            l_ret.append(self.get_nation())
+        
+        return l_ret
+
+
 ##############################################################################
 class CAAT_Land(CAAI_Territory):
     """! The land class.

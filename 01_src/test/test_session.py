@@ -61,7 +61,6 @@ caam = CAAI_Map("Map",[ caal_western_germany,
                         caal_sea_100])
 
 caam_allien = CAAI_Map("Map with alien",[ 
-                        caal_allien_land,
                         caal_western_germany, 
                         caal_eastern_germany,
                         caal_south_germany,
@@ -94,6 +93,7 @@ def test_session_basic():
     assert (aa_session.get_current_nation() == caan_germany)
     assert (aa_session.get_current_phase() == CType.str(CType.S_PH1_PURCHASE_REPAIR))
 
+##############################################################################
 def test_session_check_nation_map():
     # assert expected
     b_assert = True
@@ -101,7 +101,7 @@ def test_session_check_nation_map():
         aa_session = CAAI_Session(s_name            = "Global game 1940",
                                   aa_map            = caam_allien,
                                   i_round           = 1,
-                                  l_aa_nations      = [caan_germany, caan_japan, caan_gb_europe],
+                                  l_aa_nations      = [caan_germany, caan_japan, caan_gb_europe, caan_allien],
                                   aa_current_nation = caan_germany,
                                   aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR)
         b_assert = False
@@ -109,4 +109,4 @@ def test_session_check_nation_map():
         pass
 
     if b_assert == False:
-        assert (False) 
+        assert (False), f"In nations list of allien map match not with given nations list - check in constuctor of session failed" 
