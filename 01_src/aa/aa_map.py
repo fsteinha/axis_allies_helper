@@ -26,6 +26,7 @@
 #
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
+from ast import Or
 from aa_type import CType
 from aa_item import CAAItem
 from aa_territory import *
@@ -49,7 +50,7 @@ class CAAI_Map(CAAItem):
         if l_aa_territories != None:
             for territory in l_aa_territories:
                 if self.add_territory(territory) == False:
-                    raise Exception (f"Add territorie fail {territory}")
+                    raise Exception (f"Add territory fail {territory.get_name()}")
         pass
 
     def add_territory(self, aa_territory:CAAI_Territory) -> bool:
@@ -61,7 +62,7 @@ class CAAI_Map(CAAItem):
          - False 
             - territory could not add.
         """
-        if (aa_territory not in self.d_territories) and \
+        if (aa_territory.get_name() not in self.d_territories) and \
             ((aa_territory.get_type() == CType.T_LAND) or \
              (aa_territory.get_type() == CType.T_SEA)):
             self.d_territories[aa_territory.get_name()] = aa_territory
@@ -81,6 +82,36 @@ class CAAI_Map(CAAItem):
             return self.d_territories[s_territory]
         
         return None
+    
+    def get_lands_as_list(self, l_filter_nation = None) -> list:
+        """! Returns all territorys as list 
+        @param l_filter_nation list with nations with should be exclusive in the list
+        @return 
+        - list with territories (lands)
+        """
+        l_ret = []
+        for s_land_name in self.d_territories:
+            if (self.d_territories[s_land_name].get_type() == CType.T_LAND) and \
+                ((l_filter_nation == None) or (self.d_territories[s_land_name].get_nation() in l_filter_nation)):
+                l_ret.append(self.d_territories[s_land_name])
+        return l_ret
+                
+    def get_nations(self) -> list:
+        """! Returns all nations which place in the map 
+        @param 
+        @return list with all nations 
+        """
+        
+        l_ret = []
+        for s_land_name in self.d_territories:
+            l_nations = self.d_territories[s_land_name].get_nations()
+            for aa_nation in l_nations:
+                if aa_nation not in l_ret:
+                    l_ret.append(aa_nation)
+
+        return l_ret
+        
+        return super().get_nation()    
     
 ##############################################################################
 # Not executable

@@ -11,6 +11,12 @@
 # Copyright (c) 2022 Fred Steinhaeuser.  All rights reserved.
 
 # imports
+
+# sys path
+import sys
+sys.path.insert(0, "./aa")
+sys.path.insert(0, "./file")
+
 import argparse
 from pyfiglet import Figlet
 from tabulate import tabulate
@@ -60,6 +66,8 @@ def print_session_status(aa_session:CAAI_Session):
              ['Current nation', aa_session.get_current_nation().get_name()],
              ['Current phase',  aa_session.get_current_phase()]
              ]
+    for nation in aa_session.get_nations_as_list():
+        table.append([nation, aa_session.get_nation_ipc(nation)])
     print(tabulate(table))
 
 

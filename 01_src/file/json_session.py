@@ -24,7 +24,6 @@
 
 import json
 from this import d
-from types import NoneType
 from aa_session import *
 from aa_nation import *
 from aa_map import *
@@ -87,7 +86,7 @@ class CJSON_Session():
 
         if ((type(value) == str) or\
             (type(value) == int) or\
-            (type(value) == NoneType)):
+            (type(value) == None)):
             json_value = value
         elif (type(value) == CAAI_Nation):
             json_value = str(value)
@@ -117,8 +116,8 @@ class CJSON_Session():
             self.add_object(value, json_value)
         else:
             json_value = self.VALULE_NOT_SUPPORTED
-            #print (f"Not supporded item {s_list_key} with type {type(value)}")
-            raise Exception (f"Not supporded item {s_list_key} with type {type(value)}")
+            print (f"Not supporded item {s_list_key} with type {type(value)}")
+            #raise Exception (f"Not supporded item {s_list_key} with type {type(value)}")
 
 
 

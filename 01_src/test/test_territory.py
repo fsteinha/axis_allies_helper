@@ -235,6 +235,31 @@ def test_land(s_name, aa_region, aa_nation, aa_ipc):
     print(caa.info())
 
 ##############################################################################
+@pytest.mark.parametrize("s_name, aa_region, aa_nation, aa_ipc", [
+   ("Western Germany",CType.R_EUROPE, caan_germany, 3)
+])
+def test_land_get_nations(s_name, aa_region, aa_nation, aa_ipc):
+    sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caa = CAAT_Land(s_name,aa_region, aa_nation, aa_ipc)
+    
+    caan_nordpol = CAAI_Nation("Nordpol", CType.A_ALLIES)
+    caan_australia = CAAI_Nation("australia", CType.A_ALLIES)
+    
+    caa.add_unit(CAAU_Inf(aa_nation, 1))
+    caa.add_unit(CAAU_Inf(caan_nordpol, 1)) 
+    caa.add_unit(CAAU_Inf(caan_australia, 1)) 
+    
+    l_nations = caa.get_nations()
+    assert (aa_nation in l_nations)
+    assert (caan_nordpol in l_nations)
+    assert (caan_australia in l_nations)
+
+    caa.sub_unit(CAAU_Inf(caan_australia, 1)) 
+    l_nations = caa.get_nations()
+    assert (caan_australia not in l_nations)
+
+
+##############################################################################
 @pytest.mark.parametrize("s_name, aa_region", [
     ("78",CType.R_PACIFIC)
     ])
@@ -439,3 +464,29 @@ def test_sea(s_name:str, aa_region:int):
     assert caa.get_unit_count() == 7
 
     print(caa.info())
+
+
+##############################################################################
+@pytest.mark.parametrize("s_name, aa_region", [
+    ("80",CType.R_PACIFIC)
+    ])
+def test_sea_get_nations(s_name:str, aa_region:int):
+    sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
+    caa = CAAT_Sea(s_name,aa_region)
+    
+    caan_germany = CAAI_Nation("Germany", CType.A_ALLIES)
+    caan_nordpol = CAAI_Nation("Nordpol", CType.A_ALLIES)
+    caan_australia = CAAI_Nation("australia", CType.A_ALLIES)
+    
+    caa.add_unit(CAAU_Figther(caan_germany, 1))
+    caa.add_unit(CAAU_Figther(caan_nordpol, 1)) 
+    caa.add_unit(CAAU_Figther(caan_australia, 1)) 
+    
+    l_nations = caa.get_nations()
+    assert (caan_germany in l_nations)
+    assert (caan_nordpol in l_nations)
+    assert (caan_australia in l_nations)
+
+    caa.sub_unit(CAAU_Figther(caan_australia, 1)) 
+    l_nations = caa.get_nations()
+    assert (caan_australia not in l_nations)

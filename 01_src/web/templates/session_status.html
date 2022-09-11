@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Status {% endblock %}</h1>
+      <table id="data" class="table table-striped">
+      <tbody>
+          <tr>
+            <td>Session name</td><td>{{ aa_session.get_name() }}</td>
+          <tr>
+            <td>Map</td><td>{{ aa_session.aa_map.get_name() }}</td>
+          <tr>
+            <td>Round</td><td>{{ aa_session.get_round() }}</td>
+          <tr>
+            <td>Nations</td><td>
+              {% for nation in aa_session.get_nation_names_as_list()%}
+                  {{nation}} ({{aa_session.get_nation_ipc(nation)}})<br/>
+              {% endfor %}  
+            </td>
+          <tr>
+            <td>Current nation</td><td>{{ aa_session.get_current_nation().get_name() }}</td>
+          <tr>
+            <td>Current phase</td><td>{{ aa_session.get_current_phase() }}</td>
+          </tr>
+      </tbody>
+    </table>
+{% endblock %}

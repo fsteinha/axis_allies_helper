@@ -103,11 +103,18 @@ class CAAI_Session(CAAItem):
         if (type(aa_current_nation) != CAAI_Nation):
             raise Exception (f"Given aa_current_nation object is not an nation object {type(aa_current_nation)}")
 
+        #check is current nation in l_aa_nations
         if (aa_current_nation not in l_aa_nations):
             raise Exception (f"Given aa_current_nation object is not in l_aa_nations")
-
+        
         self.aa_current_nation = aa_current_nation
 
+        #check is are nations l_aa_nations all in map
+        l_map_nations = aa_map.get_nations()
+        for aa_nation in l_aa_nations:
+            if aa_nation not in l_map_nations:
+                raise Exception (f"given nation {aa_nation.get_name()} in play list is not placed in map")
+        
         # check current phase
         if (aa_current_phase < CType.S_PH1_PURCHASE_REPAIR) or (aa_current_phase > CType.S_PH6_COLLECT_INCOME):
             raise Exception (f"aa_current_phase not valid {aa_current_phase}")
@@ -149,7 +156,7 @@ class CAAI_Session(CAAItem):
         """
         return self.i_round
 
-    def get_nations_as_str(self, s_seperator = '\n'):
+    def get_nation_names_as_str(self, s_seperator = '\n'):
         """! Getter for nations as string
            @param  s_seperator speartor for nations in string
            @return nations as string
@@ -162,7 +169,7 @@ class CAAI_Session(CAAItem):
         s_ret = s_ret[:-1]
         return s_ret
 
-    def get_nations_as_list(self):
+    def get_nation_names_as_list(self):
         """! Getter for nations as list
            @return nations in a list
         """
@@ -184,7 +191,41 @@ class CAAI_Session(CAAItem):
         """
         return CType.str(self.aa_current_phase)
 
+    def get_nation_ipc(self, nation) -> int:
+        """! Collect the ipc 
+           @return current nation as object or string
+        """
+        aa_nation = None
+        if (type(nation) == str):
+            aa_nation = self.get_nation_obj(nation)
+        elif (type(nation) == CAAI_Nation):
+            aa_nation = nation
+        
+        if aa_nation == None:
+            i_IPC =-1
+        else:
+            i_IPC = 0
+            l_lands = self.aa_map.get_lands_as_list([aa_nation])
+            for land in l_lands:
+                i_IPC = i_IPC + land.get_ipc()
+        
+        return i_IPC
+    
+    def get_nation_obj(self, s_nation):
+        """! Return the nation object from self.l_aa_nations as aa_object
+            @param nation as string
+            @return nation as object
+        """ 
+        for aa_nation in self.l_aa_nations:
+            if s_nation == aa_nation.get_name():
+                return aa_nation
+        return None
+
     def get_json(self) -> str:
+        """! Returns a json text with the status
+           @return json with status
+        """
+        
         s_json = json.dumps({self.JSON_SESSION_META :
                                 {
                                     self.JSON_SESSION_NAME  : self.get_name(),
