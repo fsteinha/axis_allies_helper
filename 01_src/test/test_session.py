@@ -121,7 +121,12 @@ def test_session_sum_ipc():
                               aa_current_nation = caan_germany,
                               aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR)
     
-
+    # shall work with the object
     assert(aa_session.get_nation_ipc(caan_germany) == 26)
     assert(aa_session.get_nation_ipc(caan_japan) == 3)
     assert(aa_session.get_nation_ipc(caan_gb_europe) == 1)
+
+    # shall work with the name
+    assert(aa_session.get_nation_ipc(caan_germany.get_name()) == 26)
+    assert(aa_session.get_nation_ipc(caan_japan.get_name()) == 3)
+    assert(aa_session.get_nation_ipc(caan_gb_europe.get_name()) == 1)

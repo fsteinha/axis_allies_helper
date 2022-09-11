@@ -193,14 +193,34 @@ class CAAI_Session(CAAItem):
 
     def get_nation_ipc(self, nation) -> int:
         """! Collect the ipc 
-           @return current nation
+           @return current nation as object or string
         """
-        i_IPC = 0
-        l_lands = self.aa_map.get_lands_as_list([nation])
-        for land in l_lands:
-            i_IPC = i_IPC + land.get_ipc()
+        aa_nation = None
+        if (type(nation) == str):
+            aa_nation = self.get_nation_obj(nation)
+        elif (type(nation) == CAAI_Nation):
+            aa_nation = nation
+        
+        if aa_nation == None:
+            i_IPC =-1
+        else:
+            i_IPC = 0
+            l_lands = self.aa_map.get_lands_as_list([aa_nation])
+            for land in l_lands:
+                i_IPC = i_IPC + land.get_ipc()
+        
         return i_IPC
-            
+    
+    def get_nation_obj(self, s_nation):
+        """! Return the nation object from self.l_aa_nations as aa_object
+            @param nation as string
+            @return nation as object
+        """ 
+        for aa_nation in self.l_aa_nations:
+            if s_nation == aa_nation.get_name():
+                return aa_nation
+        return None
+
     def get_json(self) -> str:
         """! Returns a json text with the status
            @return json with status
