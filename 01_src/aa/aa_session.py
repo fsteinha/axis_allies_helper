@@ -196,7 +196,7 @@ class CAAI_Session(CAAItem):
            @return current nation
         """
         i_IPC = 0
-        l_lands = self.aa_map.get_lands_as_list(nation)
+        l_lands = self.aa_map.get_lands_as_list([nation])
         for land in l_lands:
             i_IPC = i_IPC + land.get_ipc()
         return i_IPC

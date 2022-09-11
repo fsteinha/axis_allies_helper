@@ -36,10 +36,10 @@ caan_gb_europe = CAAI_Nation("Great Britain Europe", CType.A_ALLIES)
 
 caan_allien = CAAI_Nation("Great allien nation", CType.A_ALLIES)
 
-caal_western_germany = CAAT_Land("Western Germany", CType.R_EUROPE, caan_germany, 10)
-caal_eastern_germany = CAAT_Land("Eastern Germany", CType.R_EUROPE, caan_germany, 15)
-caal_south_germany   = CAAT_Land("South Germany", CType.R_EUROPE, caan_germany, 20)
-caal_north_germany   = CAAT_Land("North Germany", CType.R_EUROPE, caan_germany, 25)
+caal_western_germany = CAAT_Land("Western Germany", CType.R_EUROPE, caan_germany, 5)
+caal_eastern_germany = CAAT_Land("Eastern Germany", CType.R_EUROPE, caan_germany, 6)
+caal_south_germany   = CAAT_Land("South Germany", CType.R_EUROPE, caan_germany, 7)
+caal_north_germany   = CAAT_Land("North Germany", CType.R_EUROPE, caan_germany, 8)
 caal_japan           = CAAT_Land("Japan", CType.R_ASIA_FAR_EAST, caan_japan, 3)
 caal_great_britain   = CAAT_Land("Great Britain", CType.R_EUROPE, caan_gb_europe, 1)
 caal_sea_80          = CAAT_Sea("80", CType.R_ATLANTIC)
@@ -110,3 +110,18 @@ def test_session_check_nation_map():
 
     if b_assert == False:
         assert (False), f"In nations list of allien map match not with given nations list - check in constuctor of session failed" 
+
+##############################################################################
+def test_session_sum_ipc():
+
+    aa_session = CAAI_Session(s_name            = "Global game 1940",
+                              aa_map            = caam,
+                              i_round           = 1,
+                              l_aa_nations      = [caan_germany, caan_japan, caan_gb_europe],
+                              aa_current_nation = caan_germany,
+                              aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR)
+    
+
+    assert(aa_session.get_nation_ipc(caan_germany) == 26)
+    assert(aa_session.get_nation_ipc(caan_japan) == 3)
+    assert(aa_session.get_nation_ipc(caan_gb_europe) == 1)
