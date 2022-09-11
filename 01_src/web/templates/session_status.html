@@ -12,8 +12,8 @@
             <td>Round</td><td>{{ aa_session.get_round() }}</td>
           <tr>
             <td>Nations</td><td>
-              {% for nation in aa_session.get_nations_as_list()%}
-                  {{nation}}<br/>
+              {% for nation in aa_session.get_nation_names_as_list()%}
+                  {{nation}} ({{aa_session.get_nation_ipc(nation)}})<br/>
               {% endfor %}  
             </td>
           <tr>
