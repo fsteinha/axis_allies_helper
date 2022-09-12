@@ -113,6 +113,11 @@
   .scroll {
     overflow: auto;
     padding: 10px;
-    width: 60%;
+    width: 95%;
     margin: auto;
+    padding-top: 80px;
   } 
+  
+  h1 {
+    text-align: center;
+  }

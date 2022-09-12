@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Menu Entry 2 {% endblock %}</h1>
-    {% block info %}  {{info}} {% endblock %}
+    <form method="POST">
+        <input name="save_file" value="{{ s_save_name }}" >
+        <input type="submit">
+
+    </form>
 {% endblock %}
