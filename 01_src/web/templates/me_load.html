@@ -3,7 +3,7 @@
 {% block content %}
     <h1>{% block title %} Sessions {% endblock %}</h1>
     {% for session in sessions %}
-        <a href="{{ url_for('aa_session', session_str=session) }}">
+        <a href="{{ url_for('aa_session', session_str=session.replace(sessions_dir,'')) }}">
             <h2>{{session}}</h2>
         </a>
         <hr>
