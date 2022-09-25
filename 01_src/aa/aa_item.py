@@ -14,7 +14,7 @@ class CAAItem():
         self.s_error_message = None
 
     def set_error_message(self, s_error_msg: str) -> None:
-        #print(f"Error: {s_error_msg}")
+        print(f"Error: {s_error_msg}")
         self.s_error_message = s_error_msg
 
     def get_error_message(self) -> None:

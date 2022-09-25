@@ -27,11 +27,13 @@
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
 import json
+import collections
 
 from aa_type import CType
 from aa_item import CAAItem
 from aa_nation import *
 from aa_map import *
+from aa_relnation import *
 
 from aa_session_def_global_1940 import *
 
@@ -46,7 +48,7 @@ L_SESSION_PHASES = [
 
 ##############################################################################
 class CAAI_Session(CAAItem):
-    """! The map class.
+    """! The session class.
     The session class contains all objects of an axis and allies session
     """
 
@@ -64,7 +66,8 @@ class CAAI_Session(CAAItem):
                        i_round:int = 1,
                        l_aa_nations = L_NATION_SETUP_GLOBAL_1940,
                        aa_current_nation:CAAI_Nation = CAAN_GERMANY,
-                       aa_current_phase:int = CType.S_PH1_PURCHASE_REPAIR) -> None:
+                       aa_current_phase:int = CType.S_PH1_PURCHASE_REPAIR,
+                       l_aa_relnations:list = []) -> None:
         """! The session class initializer.
         @param s_name               Name of the session
         @param aa_map               aa_map object (default = None).
@@ -72,6 +75,7 @@ class CAAI_Session(CAAItem):
         @param l_aa_nations         List with playing nations ((default = [])).
         @param aa_current_nation    Nation which is active (default = None)
         @param aa_current_phase     Active phase (default = None)
+        @param l_aa_relations       list with active relations
 
         @return  An instance of session class.
         """
@@ -119,6 +123,14 @@ class CAAI_Session(CAAItem):
         if (aa_current_phase < CType.S_PH1_PURCHASE_REPAIR) or (aa_current_phase > CType.S_PH6_COLLECT_INCOME):
             raise Exception (f"aa_current_phase not valid {aa_current_phase}")
 
+        # check nation relations
+        self.l_aa_relnations = l_aa_relnations
+        if (len(self.l_aa_relnations) > 0):
+            for aa_relnation in self.l_aa_relnations:
+                if self.check_relnations(aa_relnation) == False:
+                    raise Exception (f"check_relnations failes with {aa_relnation}")
+            pass
+            
         self.aa_current_phase = aa_current_phase
         pass
 
@@ -242,6 +254,12 @@ class CAAI_Session(CAAItem):
     def set_json(s_json:str):
         d_json = json.loads(s_json)
         pass
+
+    def check_relnations(self, aa_relnation:CAAI_RelNation) -> bool:
+        """! Checker for plausiblity for nations in relnation list"""
+        if collections.Counter(self.l_aa_nations) != collections.Counter(aa_relnation.get_nations()):
+            return False
+        return True
 
 ##############################################################################
 # Not executable

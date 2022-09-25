@@ -21,9 +21,10 @@
 #
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
-from json_session import *
-from aa_session import *
-from aa_type import *
+from aa.aa_relnation import CAAI_RelNation
+from file.json_session import *
+from aa.aa_session import *
+from aa.aa_type import *
 
 
 ##############################################################################
@@ -130,3 +131,65 @@ def test_session_sum_ipc():
     assert(aa_session.get_nation_ipc(caan_germany.get_name()) == 26)
     assert(aa_session.get_nation_ipc(caan_japan.get_name()) == 3)
     assert(aa_session.get_nation_ipc(caan_gb_europe.get_name()) == 1)
+
+##############################################################################
+def test_session_rel_nation():
+    # positive test
+    aa_rel_nation_in_war = CAAI_RelNation("RelationInWar", 
+                                            [caan_germany, caan_japan, caan_gb_europe], 
+                                            [CType.REL_IN_PEACE, CType.REL_IN_WAR],
+                                            CType.REL_IN_PEACE)
+
+    aa_session = CAAI_Session(s_name            = "Global game 1940",
+                              aa_map            = caam,
+                              i_round           = 1,
+                              l_aa_nations      = [caan_germany, caan_japan, caan_gb_europe],
+                              aa_current_nation = caan_germany,
+                              aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR,
+                              l_aa_relnations   = [aa_rel_nation_in_war])
+
+    # negative test
+    aa_rel_nation_in_war = CAAI_RelNation("RelationInWar", 
+                                          [caan_germany, caan_japan, caan_gb_europe, caan_allien], 
+                                          [CType.REL_IN_PEACE, CType.REL_IN_WAR],
+                                           CType.REL_IN_PEACE)
+
+    b_assert = False
+    try:
+        aa_session = CAAI_Session(s_name            = "Global game 1940",
+                                  aa_map            = caam,
+                                  i_round           = 1,
+                                  l_aa_nations      = [caan_germany, caan_japan, caan_gb_europe],
+                                  aa_current_nation = caan_germany,
+                                  aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR,
+                                  l_aa_relnations   = [aa_rel_nation_in_war])
+        b_assert = True
+    except:
+        pass
+    
+    assert (b_assert == False), f"Expection not released with unequal nation set in relation {aa_rel_nation_in_war.get_name()}"
+        
+
+
+    # negative test
+    aa_rel_nation_in_war = CAAI_RelNation("RelationInWar", 
+                                          [caan_germany, caan_japan, caan_gb_europe], 
+                                          [CType.REL_IN_PEACE, CType.REL_IN_WAR],
+                                           CType.REL_IN_PEACE)
+
+    b_assert = False
+    try:
+        aa_session = CAAI_Session(s_name            = "Global game 1940",
+                                  aa_map            = caam,
+                                  i_round           = 1,
+                                  l_aa_nations      = [caan_germany, caan_japan, caan_gb_europe, caan_allien],
+                                  aa_current_nation = caan_germany,
+                                  aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR,
+                                  l_aa_relnations   = [aa_rel_nation_in_war])
+        b_assert = True
+    except:
+        pass
+    
+    assert (b_assert == False), f"Expection not released with unequal nation set in relation {aa_rel_nation_in_war.get_name()}"
+        
+

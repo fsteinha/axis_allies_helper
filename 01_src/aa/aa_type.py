@@ -1,6 +1,7 @@
 
 class CType():
 
+    # main types
     C_SESSION           = 0
     C_TERRITORY         = 10
     C_UNIT              = 11
@@ -12,7 +13,9 @@ class CType():
     C_ALLIANCE          = 17
     C_FACILITY          = 18
     C_REGION            = 19
+    C_RELATION          = 20
 
+    # session subtypes
     S_MAP                    = 100
     S_SESSION                = 101
     S_PH1_PURCHASE_REPAIR    = 110
@@ -22,7 +25,7 @@ class CType():
     S_PH5_MOBILIZE_NEW_UNITS = 114
     S_PH6_COLLECT_INCOME     = 115
 
-
+    # Unit subtypes 
     T_LAND              = 210
     T_SEA               = 211
 
@@ -52,6 +55,7 @@ class CType():
     F_AIR_BASE          = 502
     F_NAVAL_BASE        = 503
 
+    # Region subtypes 
     R_EUROPE            = 600
     R_ASIA_FAR_EAST     = 601
     R_NORDAMERICA       = 602
@@ -69,7 +73,10 @@ class CType():
     R_ASIA_CENTRAL      = 614
     R_AUSTRALIA         = 615
 
-
+    # Relation subtypes
+    REL_IN_PEACE        = 700
+    REL_IN_WAR          = 701
+    
     NA                  = 1000
 
     d_Str = {
@@ -80,6 +87,7 @@ class CType():
         C_ALLIANCE         : "Alliance",
         C_FACILITY         : "Facility",
         C_REGION           : "Region",
+        C_REGION           : "Relation",
 
         S_MAP                    : "Map",
         S_SESSION                : "Session",
@@ -135,6 +143,10 @@ class CType():
         R_BLACK_SEA        : "Black sea",
         R_ASIA_CENTRAL     : "Asia central",
         R_AUSTRALIA        : "Australia",
+
+        REL_IN_PEACE       : "Peace",
+        REL_IN_WAR         : "War",
+
         NA                 : "N/A"
     }
 
@@ -146,6 +158,7 @@ class CType():
         C_ALLIANCE         : C_ALLIANCE ,
         C_FACILITY         : C_FACILITY ,
         C_REGION           : C_REGION   ,
+        C_RELATION         : C_RELATION ,
 
         S_MAP                    : C_SESSION,
         S_SESSION                : C_SESSION,
@@ -202,6 +215,9 @@ class CType():
         R_ASIA_CENTRAL     : C_REGION,
         R_AUSTRALIA        : C_REGION,
 
+        REL_IN_PEACE       : C_RELATION,
+        REL_IN_WAR         : C_RELATION,
+        
         NA                 : NA
     }
 

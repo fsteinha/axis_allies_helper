@@ -33,7 +33,11 @@ class CAAI_RelNation(CAAItem):
     """! The relation nation class.
     This class contains the nations and the state of the relation
     """
-    def __init__(self, s_name, l_aa_nations, l_aa_relations) -> None:
+    KEY_NATION_1 = "Nation_1"
+    KEY_NATION_2 = "Nation_2"
+    KEY_VALUE    = "Value"
+    
+    def __init__(self, s_name, l_aa_nations, l_aa_relations, default_relation) -> None:
         """! The relation nation class.
             @param s_name name of the relation
             @param l_aa_nations list of the involved nations
@@ -51,9 +55,11 @@ class CAAI_RelNation(CAAItem):
         self.l_aa_nations = []
         for aa_nation in l_aa_nations:
             if not isinstance(aa_nation, CAAI_Nation):
-                raise Exception (f"{aa_nation} is not a CAAI_Nation type")
+                raise Exception (f"{aa_nation} ({aa_nation.get_name()}) is not a CAAI_Nation type, is {type(aa_nation)}")
             if aa_nation not in self.l_aa_nations:
                 self.l_aa_nations.append(aa_nation)
+            else:
+                raise Exception (f"{aa_nation} is double")
         
         # Check is value in list and append
         self.l_aa_rel_values = []
@@ -64,13 +70,18 @@ class CAAI_RelNation(CAAItem):
                 self.l_aa_rel_values.append(aa_rel_value)
         
         # Check are names in list double
-        l_nation_names = []
+        self.l_nation_names = []
         for aa_nation in self.l_aa_nations:
-            l_nation_names.append(aa_nation.get_name())
+            self.l_nation_names.append(aa_nation.get_name())
         
-        for s_nation_name in l_nation_names:
-            if l_nation_names.count(s_nation_name) > 1:
+        for s_nation_name in self.l_nation_names:
+            if self.l_nation_names.count(s_nation_name) > 1:
                 raise Exception (f"multiple nation name {s_nation_name}")
+        
+        # Check default relation
+        self.default_relation = default_relation
+        if self.default_relation not in self.l_aa_rel_values:
+            raise Exception (f"{self.default_relation} not in {self.l_aa_rel_values}")
         
 
 
@@ -81,33 +92,53 @@ class CAAI_RelNation(CAAItem):
             @param aa_rel_value  list of the involved nations
         """
 
-        b_ret = self.check_parameter(aa_nation_1:CAAI_Nation, aa_nation_2:CAAI_Nation, aa_rel_value)        
+        b_ret = self.check_parameter(aa_nation_1, aa_nation_2, aa_rel_value)        
         
         # Build the hash and set relation
         if b_ret == True:
             s_hash = self.build_hash(aa_nation_1, aa_nation_2)
-            self.d_relations[s_hash] = (aa_nation_1, aa_nation_2, aa_rel_value)
+            self.d_relations[s_hash] = {self.KEY_NATION_1: aa_nation_1, self.KEY_NATION_2: aa_nation_2, self.KEY_VALUE: aa_rel_value}
 
         return b_ret
 
     def get_relation(self, aa_nation_1:CAAI_Nation, aa_nation_2:CAAI_Nation):
         """! Method for setting the relation for two nations.
-            @param aa_nation_1 name of the one nation
-            @param aa_nation_2 name of the second nation
+            @param  aa_nation_1 name of the one nation
+            @param  aa_nation_2 name of the second nation
+            @return dictionary with {KEY_NATION_1: {aa_nation_1}, KEY_NATION_2:{aa_nation_2}, KEY_VALUE: stored value} 
         """
 
-        b_check = self.check_parameter(aa_nation_1:CAAI_Nation, aa_nation_2:CAAI_Nation, aa_rel_value) 
+        b_check = self.check_parameter(aa_nation_1, aa_nation_2, None, False) 
         
         # Build the hash and set relation
         if b_check == True:
             s_hash = self.build_hash(aa_nation_1, aa_nation_2)
             if s_hash in self.d_relations:
-                return self.d_relations[s_hash] 
+                return self.d_relations[s_hash][self.KEY_VALUE]
+            else:
+                return self.default_relation 
 
         return None
+    
+    def get_relations(self) -> list:
+        """! Method for getting all relations.
+        """
+        l_ret = []
+        for key in self.d_relations:
+            l_ret.append(self.d_relations[key])
+        return l_ret
 
+    def get_default(self):
+        """! Method for getting default relation.
+        """
+        return self.default_relation
 
-    def check_parameter(self, aa_nation_1:CAAI_Nation, aa_nation_2:CAAI_Nation, aa_rel_value) -> bool:
+    def get_nations(self):
+        """! Getter for the nation list.
+        """
+        return self.l_aa_nations
+        
+    def check_parameter(self, aa_nation_1:CAAI_Nation, aa_nation_2:CAAI_Nation, aa_rel_value, b_check_value = True) -> bool:
         """! Check the parameter for methods set_relation / get_relation .
             @param aa_nation_1 name of the one nation
             @param aa_nation_2 name of the second nation
@@ -124,9 +155,11 @@ class CAAI_RelNation(CAAItem):
             return False
         
         # Check is value listed
-        if aa_rel_value not in self.l_aa_rel_values:
+        if b_check_value and (aa_rel_value not in self.l_aa_rel_values):
             self.set_error_message(f"Value {aa_rel_value} not listed")
             return False
+        
+        return True
 
         
     def build_hash(self, aa_nation_1:CAAI_Nation, aa_nation_2:CAAI_Nation) -> str:
@@ -135,6 +168,6 @@ class CAAI_RelNation(CAAItem):
             @param aa_nation_2 name of the second nation
         """
         l_temp = [aa_nation_1.get_name(), aa_nation_2.get_name()]
-        l_temp = l_temp.sort()
+        l_temp.sort()
         return (l_temp[0] + l_temp[1])
                 
