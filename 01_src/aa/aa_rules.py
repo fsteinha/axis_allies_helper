@@ -7,12 +7,15 @@ class CAAR:
         self.aa_conditinal_units = aa_conditinal_units
         self.i_unit_max = i_units_max
         self.d_exlusive_limits = d_exlusive_limits
+        self.s_error_message = ""
         pass
 
     def check_add(self, t_container:CAAUnitContainer, aa_unit:CType) -> bool:    
         b_ret = True
+        
         # check the overall limit
         if (self.i_unit_max != None) and t_container.get_unit_count() >= self.i_unit_max:
+            self.s_error_message = "CAAR_ERROR,check_add: check the overall limit failed"
             b_ret = False
             pass
 
@@ -20,6 +23,7 @@ class CAAR:
         if (b_ret == True) and \
              ((aa_unit not in self.aa_allowed_units) and 
                 (CType.get_sub_class(aa_unit) not in self.aa_allowed_units)):
+            self.s_error_message = "CAAR_ERROR,check_add: check for allowness failed"
             b_ret = False
             pass
 
@@ -33,6 +37,7 @@ class CAAR:
                     i_cond_unit = i_cond_unit + 1
                 pass
             if (i_cond_unit == 0):
+                self.s_error_message = "CAAR_ERROR,check_add: check is there an contional unit failed"
                 b_ret = False     
                 pass
             pass
@@ -41,8 +46,9 @@ class CAAR:
             if (b_ret == True) and \
                 (aa_unit in self.d_exlusive_limits) and \
                     (t_container.get_unit_count(aa_unit) >= self.d_exlusive_limits[aa_unit]):
+                self.s_error_message = "CAAR_ERROR,check_add: check for limitations failed"
                 b_ret = False     
-                pass
+            pass
 
         return b_ret
     

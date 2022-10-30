@@ -22,9 +22,10 @@
 # Copyright (c) 2022 Fred Steinhäuser.  All rights reserved.
 
 
-from aa_relnation import *
+from aa.aa_relnation import *
+# TODO
 from aa_nation import CAAI_Nation
-from aa_type import *
+from aa.aa_type import *
 
 
 ##############################################################################
@@ -102,7 +103,7 @@ def test_relnation_init():
     if b_assert == True:
         assert(False), f"wrong value for relation is possible"
 
-    # check wrong defualt
+    # check wrong default
     b_assert = False
     try:
         aa_relation = CAAI_RelNation("RelationInWar", 

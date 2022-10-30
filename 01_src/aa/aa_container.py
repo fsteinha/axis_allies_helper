@@ -1,6 +1,6 @@
 from aa_type import CType
 from aa_unit import CAAUnit
-from aa_facillities import CAAI_Facillity
+from aa_facillities import *
 from tabulate import tabulate
 
 ##############################################################################
@@ -26,7 +26,7 @@ class CAAUnitContainer():
                 self.d_aa_units[unit.get_type()] = {CType.str(CType.C_FACILITY):unit}
             else:
                 self.d_aa_units[unit.get_type()][CType.str(CType.C_FACILITY)].add(unit.get_count())
-            return True    
+            return True
         return False
 
     def sub(self, unit) -> bool:

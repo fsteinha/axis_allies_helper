@@ -1,6 +1,6 @@
-from aa_nation import *
-from aa_units import *
-from aa_type import *
+from aa.aa_nation import *
+from aa.aa_units import *
+from aa.aa_type import *
 from test_common import *
 import inspect
 

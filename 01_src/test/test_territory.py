@@ -1,9 +1,11 @@
 from test_common import *
-from aa_territory import *
-from aa_nation import *
-from aa_facillities import *
-from aa_units import *
+from aa.aa_territory import *
+from aa.aa_nation import *
+from aa.aa_facillities import *
+from aa.aa_units import *
 import inspect
+
+
 
 ##############################################################################
 # GLOBALS
@@ -266,7 +268,7 @@ def test_land_get_nations(s_name, aa_region, aa_nation, aa_ipc):
 def test_sea_init(s_name:str, aa_region:int):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caan_test = CAAI_Nation("Germany", CType.A_AXIS)
-    caa = CAAT_Sea(s_name,aa_region, CAAR_Sea, [])
+    caa = CAAT_Sea(s_name,aa_region, [])
 
     assert caa.get_name() == s_name
     assert caa.get_region() == aa_region
@@ -274,7 +276,7 @@ def test_sea_init(s_name:str, aa_region:int):
 
     b_assert = False
     try:
-        caa = CAAT_Sea(s_name, aa_region, CAAR_Sea(),
+        caa = CAAT_Sea(s_name, aa_region, 
                      [CAAF_AirBase(), CAAF_Major(), CAAF_Minor(), CAAF_NavalBase()])
         b_assert = True
     except:
@@ -284,19 +286,19 @@ def test_sea_init(s_name:str, aa_region:int):
         assert (False), "Initialisation with not allowed unit succeed (see last CAAT_Land init)"
     assert caa.get_unit_count() == 0, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 0"
 
-    caa = CAAT_Sea(s_name,aa_region, CAAR_Sea(),
+    caa = CAAT_Sea(s_name,aa_region,
                       [CAAU_SBomb(caan_test)])
     assert caa.get_unit_count() == 1, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 1"
 
-    caa = CAAT_Sea(s_name,aa_region, CAAR_Sea(),
+    caa = CAAT_Sea(s_name,aa_region, 
                      [CAAU_SBomb(caan_test),CAAU_Cruiser(caan_test,10)])
     assert caa.get_unit_count() == 11, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 11"
 
     # try to bind not allowed rules in the territory
     b_assert = False
     try:
-        caa = CAAT_Sea(s_name, aa_region, CAAR_Land(),
-                         [CAAU_SBomb(caan_test),CAAU_Cruiser(caan_test,10)])
+        caa = CAAT_Sea(s_name, aa_region,
+                         [CAAU_SBomb(caan_test),CAAU_Cruiser(caan_test,10)], CAAR_Land())
         b_assert = True
     except:
         pass
@@ -307,49 +309,49 @@ def test_sea_init(s_name:str, aa_region:int):
     #test the neigbores
 
     s_neighbore = 'n'
-    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, CAAR_Sea(), [])
+    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, [])
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'ne'
-    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, CAAR_Sea(), [])
+    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, [])
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'e'
-    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, CAAR_Sea(), [])
+    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, [])
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'se'
-    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, CAAR_Sea(), [])
+    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, [])
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 's'
-    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, CAAR_Sea(), [])
+    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, [])
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'sw'
-    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, CAAR_Sea(), [])
+    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, [])
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'w'
-    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, CAAR_Sea(), [])
+    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, [])
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
 
     s_neighbore = 'nw'
-    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, CAAR_Sea(), [])
+    caa_test = CAAT_Sea(f"{s_name}_{s_neighbore}",aa_region, [])
     assert caa.set_neighbore(s_neighbore, caa_test) == True
     assert caa.get_neighbore(s_neighbore) == caa_test
     assert caa.set_neighbore(s_neighbore, caa_test) == False
@@ -390,12 +392,12 @@ def test_sea_init(s_name:str, aa_region:int):
 def test_sea(s_name:str, aa_region:int):
     sub_test_header(inspect.currentframe().f_code.co_name, inspect.getargvalues(inspect.currentframe()))
     caan_test = CAAI_Nation("Germany", CType.A_AXIS)
-    caa = CAAT_Sea(s_name,aa_region, CAAR_Sea, [])
+    caa = CAAT_Sea(s_name,aa_region, [])
     assert caa.get_name() == s_name
     assert caa.get_region() == aa_region
     assert caa.get_type() == CType.T_SEA
 
-    caa = CAAT_Sea(s_name,aa_region, CAAR_Sea(), [])
+    caa = CAAT_Sea(s_name,aa_region, [])
     assert caa.get_unit_count() == 0, f"caa.get_unit_count() returns {caa.get_unit_count()} NOT 0"
 
     assert caa.add_unit(CAAU_AAA(caan_germany)) == False

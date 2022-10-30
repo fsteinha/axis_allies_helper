@@ -76,7 +76,7 @@ class CAAI_Territory(CAAItem):
         if l_aa_units != None:
             for unit in l_aa_units:
                 if self.add_unit(unit) == False:
-                    raise Exception (f"Add unit fail {unit}")
+                    raise Exception (f"Add unit fail {unit} in {self.c_container}: {self.c_container.s_error_message}")
         pass
 
     def add_unit(self, aa_unit:CAAUnit) -> bool:
@@ -241,7 +241,7 @@ class CAAT_Sea(CAAI_Territory):
     """! The sea class.
     This is a specialication for sea of the territory class.
     """
-    def __init__(self, s_name: str, aa_region: CType, c_rules: CAAR = CAAR_Sea(), l_aa_units: list = []) -> None:
+    def __init__(self, s_name: str, aa_region: CType, l_aa_units: list = [], c_rules: CAAR = CAAR_Sea()) -> None:
         """! The Teritory class initializer.
         @param  s_name     The name of the territory.
         @param  aa_region  Region from static class CType.
