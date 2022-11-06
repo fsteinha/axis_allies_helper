@@ -20,6 +20,22 @@
           <tr>
             <td>Current phase</td><td>{{ aa_session.get_current_phase() }}</td>
           </tr>
+          <tr>
+            <td>Nation in war</td><td>
+              {% if (aa_session.get_relnation("RelationInWar")) != None %}
+                {% for relnation in aa_session.get_relnation("RelationInWar").get_relations() %}
+                  <table id="data" style="background-color:rgba(0, 0, 0, 0);">
+                    <tr>
+                      <td>{{relnation[rel_key_nat_1].get_name()}}</td> <td>{{relnation[rel_key_nat_2].get_name()}}</td>
+                    </tr>
+                  </table>    
+                {% endfor %}
+
+              {% else %}
+
+              {% endif %} 
+            </td>
+          </tr>
       </tbody>
     </table>
 {% endblock %}

@@ -19,6 +19,7 @@ from flask import Flask, render_template, redirect, url_for, request, session
 from flask_session import Session
 from werkzeug.exceptions import abort
 
+from aa_relnation import *
 
 ##############################################################################
 # globals
@@ -49,7 +50,8 @@ def me_status():
     if web_session.AA_SESSION == None:
         return render_template('index.html', header=get_web_session_status(), info=" !!! No session loaded !!!")
 
-    return render_template('session_status.html', header=get_web_session_status(), aa_session=web_session.AA_SESSION)
+    return render_template('session_status.html', header=get_web_session_status(), aa_session=web_session.AA_SESSION, 
+                           rel_key_nat_1 = CAAI_RelNation.KEY_NATION_1, rel_key_nat_2 = CAAI_RelNation.KEY_NATION_2, rel_key_val = CAAI_RelNation.KEY_VALUE)
 
 @app.route('/me_load')
 def me_load():
@@ -120,7 +122,8 @@ def get_aa_session(session):
                                   i_round           = 1,
                                   l_aa_nations      = L_NATION_SETUP_GLOBAL_1940,
                                   aa_current_nation = CAAN_GERMANY,
-                                  aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR)
+                                  aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR,
+                                  l_aa_relnations   = [C_REL_NATION])
     return aa_session
 
 def get_web_session_status():

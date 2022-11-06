@@ -1,3 +1,3 @@
 .PHONY: test
 test:
-	pytest --import-mode append
+	pytest --import-mode append 

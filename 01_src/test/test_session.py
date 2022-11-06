@@ -134,7 +134,7 @@ def test_session_sum_ipc():
 
 ##############################################################################
 def test_session_rel_nation():
-    # positive test
+    # positive test - init
     aa_rel_nation_in_war = CAAI_RelNation("RelationInWar", 
                                             [caan_germany, caan_japan, caan_gb_europe], 
                                             [CType.REL_IN_PEACE, CType.REL_IN_WAR],
@@ -148,7 +148,11 @@ def test_session_rel_nation():
                               aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR,
                               l_aa_relnations   = [aa_rel_nation_in_war])
 
-    # negative test
+    assert (aa_session.get_relnation("RelationInWar") != None) 
+    assert (aa_session.get_relnation("RelationInWar") == aa_rel_nation_in_war) 
+    assert (aa_session.get_relnation("Not defined") == None) 
+    
+    # negative test - init
     aa_rel_nation_in_war = CAAI_RelNation("RelationInWar", 
                                           [caan_germany, caan_japan, caan_gb_europe, caan_allien], 
                                           [CType.REL_IN_PEACE, CType.REL_IN_WAR],
@@ -171,7 +175,7 @@ def test_session_rel_nation():
         
 
 
-    # negative test
+    # negative test -init
     aa_rel_nation_in_war = CAAI_RelNation("RelationInWar", 
                                           [caan_germany, caan_japan, caan_gb_europe], 
                                           [CType.REL_IN_PEACE, CType.REL_IN_WAR],

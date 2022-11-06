@@ -67,7 +67,7 @@ class CAAI_Session(CAAItem):
                        l_aa_nations = L_NATION_SETUP_GLOBAL_1940,
                        aa_current_nation:CAAI_Nation = CAAN_GERMANY,
                        aa_current_phase:int = CType.S_PH1_PURCHASE_REPAIR,
-                       l_aa_relnations:list = []) -> None:
+                       l_aa_relnations:list = [C_REL_NATION]) -> None:
         """! The session class initializer.
         @param s_name               Name of the session
         @param aa_map               aa_map object (default = None).
@@ -81,13 +81,12 @@ class CAAI_Session(CAAItem):
         """
 
         super().__init__(s_name, CType.S_SESSION)
-
         # check map type
         if (type(aa_map) != CAAI_Map):
             raise Exception (f"Given map is unvalid {type(aa_map)}")
 
         self.aa_map = aa_map
-
+     
         # check the round
         if (self.set_round(i_round) == False):
             raise Exception (f"i_round not valid: {i_round}")
@@ -232,6 +231,14 @@ class CAAI_Session(CAAItem):
             if s_nation == aa_nation.get_name():
                 return aa_nation
         return None
+
+    def get_relnation(self, s_relnation_name):
+        
+        for relnation in self.l_aa_relnations:
+            if relnation.get_name() == s_relnation_name:
+                return relnation
+        return None
+
 
     def get_json(self) -> str:
         """! Returns a json text with the status

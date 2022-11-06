@@ -137,6 +137,9 @@ class CAAI_RelNation(CAAItem):
         """! Getter for the nation list.
         """
         return self.l_aa_nations
+
+    def str_value(self, value):
+        return CType.str(value)
         
     def check_parameter(self, aa_nation_1:CAAI_Nation, aa_nation_2:CAAI_Nation, aa_rel_value, b_check_value = True) -> bool:
         """! Check the parameter for methods set_relation / get_relation .

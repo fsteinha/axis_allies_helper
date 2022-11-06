@@ -46,7 +46,8 @@ def main():
                                     i_round           = 1,
                                     l_aa_nations      = L_NATION_SETUP_GLOBAL_1940,
                                     aa_current_nation = CAAN_GERMANY,
-                                    aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR)
+                                    aa_current_phase  = CType.S_PH1_PURCHASE_REPAIR
+                                    l_aa_relnations   = [C_REL_NATION])
 
     if args.status == True:
         print_session_status(aa_session)
